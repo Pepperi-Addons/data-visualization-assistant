@@ -1,0 +1,26 @@
+{
+  "AddonUUID": "948219c4-b9a6-4fb2-814d-153d3b359a70",
+  "AddonVersion": "0.0.4",
+  "DebugPort": 4500,
+  "WebappBaseUrl": "https://app.sandbox.pepperi.com",
+  "DefaultEditor": "main",
+  "Endpoints": [
+    "installation.ts",
+    "api.ts"
+  ],
+  "Editors": [
+    "main"
+  ],
+  "PublishConfig": {
+    "ClientStack": "ng14",
+    "Editors": [
+      {
+        "ParentPackageName": "Data Analytics",
+        "PackageName": "configuration_assistant",
+        "Description": "Configuration Assistant"
+      }
+    ],
+    "Dependencies": {},
+    "CPISide": []
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "Block_Title": "Block title",
+    "SUBTITLE1": "At this Data analytics configuration assistant you'll create all the configuration you need to start using data analytics.",
+    "SUBTITLE2": "Once executed, the data index fields will be defined and a new set of queries, page and slug will be created.",
+    "SUBTITLE3": "The first step in using the data analytics is to index your data. You can do it via the Data Index settings screen.",
+    "SUBTITLE4": "Makes sure to define the following:",
+    "LINE1": "* Transaction total price and quantity fields, such as Grand Total and Quantities Total.",
+    "LINE2": "* Transaction lines total price and quantity fields, such as Total Unit Price After Discount and Units Quantity.",
+    "LINE3": "* Additional fields you wish to run aggregation on.",
+    "LINE4": "After you define the fields and published your configuration, return to this screen to continue with the configuration (you might need to refresh this page).",
+    "SUBTITLE5": "Define the slugs that will be created. You can add them to the home page or account dashboard tabs."
+    
+}
