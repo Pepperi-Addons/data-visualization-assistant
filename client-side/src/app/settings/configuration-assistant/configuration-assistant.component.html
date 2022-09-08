@@ -32,26 +32,20 @@
             </div>
         </div>
         <div *ngIf="dataIsIndexedFlag">
-            <!-- <pep-top-bar title="Slugs & pages to Create">
-            </pep-top-bar>
-            <div class="pageExplanation">
-                <span class="body-md">{{ 'SUBTITLE5' | translate }}</span>
-            </div>
-            <pep-textbox
-                [(value)]="configuration.genericSlug"
-                [label]="'Generic dashboard slug' | translate"
-                type="text"
-                class="goToButton"
-                [mandatory]="true"
-                [disabled]="false">
-            </pep-textbox> -->
             <pep-generic-form class="generic-form"
                 [title] = "'edit' | translate"
-                [showTopBar]="false"
                 [dataSource]="dataSource"
                 [dataView]="dataView"
-                [inline]="true">
+                [inline]="false">
             </pep-generic-form>
+            <div class="runButton">
+                <pep-button
+                    [sizeType]="'md'"
+                    [value]="'Run'"
+                    [styleType]="'strong'"
+                    (buttonClick)="onRun()"
+                ></pep-button>
+            </div>
         </div>
     </ng-container>
 

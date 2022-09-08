@@ -9,7 +9,7 @@ const routes: Routes = [
         children: [
             {
                 path: '**',
-                loadChildren: () => import('./editor-list/editor-list.module').then(m => m.EditorListModule),
+                loadChildren: () => import('./configuration-assistant/configuration-assistant.module').then(m => m.ConfigurationAssistantModule),
             }
         ]
     }
