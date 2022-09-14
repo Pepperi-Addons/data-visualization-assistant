@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
-import { PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
+import { PepAddonService, PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
 
@@ -16,13 +16,17 @@ export class ConfigurationAssistantComponent implements OnInit {
     configuration;
     dataView;// = this.getDataView()
     dataSource;// = this.getDataSource()
+    allActivitiesFieldsOptions = [];
+    transactionLinesFieldsOptions = [];
+    imagePath;
 
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
         public layoutService: PepLayoutService,
         public translate: TranslateService,
-        public addonService: AddonService
+        public addonService: AddonService,
+        private pepAddonService: PepAddonService
     ) {
         this.layoutService.onResize$.subscribe(size => {
             this.screenSize = size;
@@ -30,11 +34,12 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.addonService.addonUUID = config.AddonUUID;
         this.dataIsIndexedFlag = this.dataIsIndexed();
         this.configuration = this.emptyConfiguration();
         this.dataView = this.getDataView()
         this.dataSource = this.getDataSource()
+        this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
+        this.addonService.addonUUID = config.AddonUUID;
     }
 
     openDialog() {
@@ -42,16 +47,21 @@ export class ConfigurationAssistantComponent implements OnInit {
 
     navigateToDataIndexSettings() {
         // navigate to data index settings
-        this.router.navigate(['../../../settings/10979a11-d7f4-41df-8993-f06bfd778304/data_index'], {
-            relativeTo: this.activatedRoute,
-            queryParamsHandling: 'preserve'
-        })
+        window.location.href = '/settings/10979a11-d7f4-41df-8993-f06bfd778304/data_index';
     }
 
     async dataIsIndexed() {
-        const all_activities_scheme = await this.addonService.getDataIndexSchemes();
-        if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {}
-            return true;
+        const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
+        if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {
+          const transaction_lines_scheme = await this.addonService.getDataIndexScheme('transaction_lines');
+          for(const name in all_activities_scheme.Fields) {
+            this.allActivitiesFieldsOptions.push({ key: name, value: name });
+          }
+          for(const name in transaction_lines_scheme.Fields) {
+            this.transactionLinesFieldsOptions.push({ key: name, value: name });
+          }
+          return true;
+        }
 
         return false;
     }
@@ -185,6 +195,7 @@ export class ConfigurationAssistantComponent implements OnInit {
           {
             FieldID: "transactionTotalPrice",
             Type: "TextBox",
+            // Type: "ComboBox",
             Title: "Transaction total price",
             Mandatory: false,
             ReadOnly: false,
@@ -204,8 +215,7 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'},
-                             {Key: 'test1', Value: 'test1'}]
+            OptionalValues: this.allActivitiesFieldsOptions
           },
           {
             FieldID: "transactionTotalQuantity",
@@ -229,7 +239,7 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'}]
+            OptionalValues: this.allActivitiesFieldsOptions
           },
           {
             FieldID: "transactionLineTotalPrice",
@@ -253,8 +263,7 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'},
-                             {Key: 'test1', Value: 'test1'}]
+            OptionalValues: this.transactionLinesFieldsOptions
           },
           {
             FieldID: "transactionLineTotalQuantity",
@@ -278,7 +287,7 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'}]
+            OptionalValues: this.transactionLinesFieldsOptions
           },
           {
             FieldID: "",
@@ -380,6 +389,9 @@ export class ConfigurationAssistantComponent implements OnInit {
        };
    }
 
-   onRun() {
+   async onRunClicked() {
+    console.log(this.configuration)
+    await this.addonService.createSlugAndMapping(this.configuration.genericSlug);
+    await this.addonService.createSlugAndMapping(this.configuration.accountSlug);
    }
 }
