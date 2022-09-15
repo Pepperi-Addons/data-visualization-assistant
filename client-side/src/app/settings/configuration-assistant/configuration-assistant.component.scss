@@ -1,16 +1,27 @@
 @use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables';
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker:200,300,400,500,600,700,800');
 
-.pageExplanation{
+// ::ng-deep .pep-main-area {
+//     display: grid !important;
+//     grid-template-rows: min-content 1fr;
+//     max-width: 60rem;
+// }
+
+.pageExplanation {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: variables.$spacing-lg 0 1.25rem 0;
     gap: 1rem;
-
+    .list {
+        li {
+            line-height: 2rem;
+        }
+    }
     span{
         max-width: 34rem;
         display: block;
+        line-height: 1.75rem;
     }
     div{
         p{
@@ -38,4 +49,23 @@
 
 .goToButton{
     display: flex;
+}
+
+.runButton{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.information-page {
+    display: flex;
+    flex-direction: row;
+    min-height: 80%;
+    max-height: 100%;
+    gap: 2rem;
+    #imgCont {
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 }

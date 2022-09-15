@@ -1,17 +1,10 @@
 import { DoBootstrap, Injector, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PepAddonService } from '@pepperi-addons/ngx-lib';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
-
 import { SettingsComponent, SettingsModule } from './settings';
-
-// import { BlockModule, BlockComponent } from './block';
-// import { BlockEditorModule, BlockEditorComponent } from './block-editor';
-
 import { config } from './app.config';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -21,8 +14,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     ],
     imports: [
         BrowserModule,
-        // BlockModule,
-        // BlockEditorModule,
         MatDialogModule,
         SettingsModule,
         TranslateModule.forRoot({
@@ -36,9 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         AppRoutingModule,
     ],
     providers: [],
-    bootstrap: [
-        // AppComponent
-    ]
+    bootstrap: []
 })
 export class AppModule implements DoBootstrap {
     constructor(

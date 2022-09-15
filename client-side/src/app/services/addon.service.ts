@@ -40,37 +40,21 @@ export class AddonService {
         return await this.papiClient.post(endpoint, body);
     }
 
-    async executeQuery(queryID, body = {}) {
-        //return this.papiClient.post(`/data_queries/${queryID}/execute`, null);
-        return this.papiClient.addons.api.uuid(this.addonUUID).file('elastic').func('execute').post({key: queryID},body)
-    }
-
-    async getDataQueryByKey(Key: string) {
-        //return this.papiClient.get(`/data_queries?where=Key='${Key}'`);
-        return this.papiClient.addons.api.uuid(this.addonUUID).file('api').func('queries').get({where: `Key='${Key}'`})
-
-    }
-
-    async getAllQueries(){
-        //return this.papiClient.get(`/data_queries`);
-        return this.papiClient.addons.api.uuid(this.addonUUID).file('api').func('queries').get()
-    }
-
-    async upsertDataQuery(body) {
-        //return this.papiClient.post(`/data_queries`,body)
-        return this.papiClient.addons.api.uuid(this.addonUUID).file('api').func('queries').post({},body);
-    }
-
-    async getCharts() {
-        return this.papiClient.get(`/charts`);
-    }
-
-    async getResourceTypesFromRelation() {
-        return this.papiClient.addons.data.relations.find({where: 'RelationName=DataQueries'});
-    }
-
-    async getDataIndexSchemes() {
+    async getDataIndexScheme(scheme) {
         this.addonUUID = '10979a11-d7f4-41df-8993-f06bfd778304'; // papi-data-index uuid
-        return this.papiClient.get('/addons/data/schemes/all_activities')
+        return this.papiClient.get(`/addons/data/schemes/${scheme}`)
+    }
+
+    //TODO: add slug to page mapping
+    async createSlugAndMapping(slugName) {
+        const slugBody = {
+            slug : {
+                Key: slugName,
+                Name: slugName,
+                Description: "created by configuration-assistant",
+                Slug: slugName
+            }
+        }
+        return this.papiClient.post('/slugs',slugBody)
     }
 }

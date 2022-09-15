@@ -1,0 +1,64 @@
+<pep-page-layout [addPadding]="true">
+    <ng-container pep-top-area>
+        <pep-top-bar title="Configuration Assistant">
+        </pep-top-bar>
+    </ng-container>
+
+    <ng-container pep-main-area>
+        <div class="pageExplanation">
+            <span class="body-md">{{ 'SUBTITLE1' | translate }}</span>
+            <span class="body-md">{{ 'SUBTITLE2' | translate }}</span>
+        </div>
+        <div *ngIf="!dataIsIndexedFlag">
+            <pep-top-bar title="Index your data">
+            </pep-top-bar>
+            <div class="information-page">
+                <div>
+                    <div class="pageExplanation">
+                        <span class="body-md">{{ 'SUBTITLE3' | translate }}</span>
+                    </div>
+                    <div class="goToButton">
+                    <pep-button
+                        [sizeType]="'md'"
+                        [value]="'Go to Data Index settings' | translate"
+                        [styleType]="'strong'" 
+                        (buttonClick)="navigateToDataIndexSettings()"
+                    ></pep-button>
+                    </div>
+                    <div class="pageExplanation">
+                        <span class="body-md">{{ 'SUBTITLE4' | translate }}</span>
+                        <ul class="list">
+                            <li>{{ 'LINE1' | translate }}</li>
+                            <li>{{ 'LINE2' | translate }}</li>
+                            <li>{{ 'LINE3' | translate }}</li>
+                        </ul>
+                        <br>
+                        <span >{{ 'LINE4' | translate }}</span>
+                    </div>
+                </div>
+                <div id="imgCont" [style.background-image]="'url(' + imagePath + ')'">
+                </div>
+            </div>
+            
+        </div>
+        <div *ngIf="dataIsIndexedFlag">
+            <pep-generic-form class="generic-form"
+                [title] = "'edit' | translate"
+                [dataSource]="dataSource"
+                [dataView]="dataView"
+                [inline]="false">
+            </pep-generic-form>
+            <div class="runButton">
+                <pep-button
+                    [sizeType]="'md'"
+                    [value]="'Run'"
+                    [styleType]="'strong'"
+                    (buttonClick)="onRunClicked()"
+                ></pep-button>
+            </div>
+        </div>
+    </ng-container>
+
+</pep-page-layout>
+
+<pep-size-detector></pep-size-detector>
