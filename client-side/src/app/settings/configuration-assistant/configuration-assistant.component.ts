@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PepAddonService, PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
+import { PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
 
 @Component({
     selector: 'configuration-assistant',
@@ -14,11 +15,14 @@ export class ConfigurationAssistantComponent implements OnInit {
     screenSize: PepScreenSizeType;
     dataIsIndexedFlag;
     configuration;
-    dataView;// = this.getDataView()
-    dataSource;// = this.getDataSource()
+    dataView;
+    dataSource;
     allActivitiesFieldsOptions = [];
     transactionLinesFieldsOptions = [];
+    typeValuesOptions = [];
+    statusValuesOptions = [];
     imagePath;
+    dataLoaded = false;
 
     constructor(
         public router: Router,
@@ -26,6 +30,7 @@ export class ConfigurationAssistantComponent implements OnInit {
         public layoutService: PepLayoutService,
         public translate: TranslateService,
         public addonService: AddonService,
+        public dialogService: PepDialogService,
         private pepAddonService: PepAddonService
     ) {
         this.layoutService.onResize$.subscribe(size => {
@@ -33,13 +38,28 @@ export class ConfigurationAssistantComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.dataIsIndexedFlag = this.dataIsIndexed();
+        const savedConf = await this.addonService.getConfiguration();
         this.configuration = this.emptyConfiguration();
-        this.dataView = this.getDataView()
-        this.dataSource = this.getDataSource()
+        const values = await this.addonService.getValuesForQueriesFilter();
+        for(const v of values.typeValues) {
+          this.typeValuesOptions.push({ key: v, value: v });
+        }
+        for(const v of values.statusValues) {
+          this.statusValuesOptions.push({ key: v, value: v });
+        }
+        if(savedConf) {
+          this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
+          this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
+          this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
+          this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
+        }
+        this.dataView = this.getDataView();
+        this.dataSource = this.getDataSource();
         this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
         this.addonService.addonUUID = config.AddonUUID;
+        this.dataLoaded = true;
     }
 
     openDialog() {
@@ -73,13 +93,16 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionTotalPrice: "",
             transactionTotalQuantity: "",
             transactionLineTotalPrice: "",
-            transactionLineTotalQuantity: ""
+            transactionLineTotalQuantity: "",
+            slugsText: this.translate.instant('SLUGS_TEXT'),
+            fieldsText: this.translate.instant('FIELDS_TEXT'),
+            queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
         }
     }
 
-    getDataSource(){
+    getDataSource() {
         return this.configuration
-   }
+    }
 
    getDataView() {
        return {
@@ -124,9 +147,13 @@ export class ConfigurationAssistantComponent implements OnInit {
              },
            },
            {
-            FieldID: "genericSlug",
-            Type: "TextBox",
-            Title: "Generic dashboard slug",
+            FieldID: 'slugsText',
+            Type: "RichTextHTML",
+            Title: "",
+            AdditionalProps: {
+              renderTitle: false,
+              renderEnlargeButton: false
+            },
             Mandatory: false,
             ReadOnly: false,
             Layout: {
@@ -147,9 +174,9 @@ export class ConfigurationAssistantComponent implements OnInit {
             },
           },
           {
-            FieldID: "accountSlug",
+            FieldID: "genericSlug",
             Type: "TextBox",
-            Title: "Account dashboard slug",
+            Title: "Generic dashboard slug",
             Mandatory: false,
             ReadOnly: false,
             Layout: {
@@ -168,6 +195,37 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
+            AdditionalProps: {
+              regex: /^\S*$/,
+              regexError: "White spaces are not allowed"
+            }
+          },
+          {
+            FieldID: "accountSlug",
+            Type: "TextBox",
+            Title: "Account dashboard slug",
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+              Origin: {
+                X: 0,
+                Y: 3,
+              },
+              Size: {
+                Width: 1,
+                Height: 0,
+              },
+            },
+            Style: {
+              Alignment: {
+                Horizontal: "Stretch",
+                Vertical: "Stretch",
+              },
+            },
+            AdditionalProps: {
+              regex: /^\S*$/,
+              regexError: "White spaces are not allowed"
+            }
           },
           {
             FieldID: "",
@@ -178,7 +236,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 3,
+                Y: 4,
               },
               Size: {
                 Width: 2,
@@ -193,6 +251,33 @@ export class ConfigurationAssistantComponent implements OnInit {
             },
           },
           {
+            FieldID: 'fieldsText',
+            Type: "RichTextHTML",
+            Title: "",
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+              Origin: {
+                X: 0,
+                Y: 5,
+              },
+              Size: {
+                Width: 1,
+                Height: 0,
+              },
+            },
+            Style: {
+              Alignment: {
+                Horizontal: "Stretch",
+                Vertical: "Stretch",
+              },
+            },
+            AdditionalProps: {
+              renderTitle: false,
+              renderEnlargeButton: false
+            }
+          },
+          {
             FieldID: "transactionTotalPrice",
             Type: "TextBox",
             // Type: "ComboBox",
@@ -201,8 +286,9 @@ export class ConfigurationAssistantComponent implements OnInit {
             ReadOnly: false,
             Layout: {
               Origin: {
+
                 X: 0,
-                Y: 4,
+                Y: 6,
               },
               Size: {
                 Width: 1,
@@ -226,7 +312,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 1,
-                Y: 4,
+                Y: 6,
               },
               Size: {
                 Width: 1,
@@ -250,7 +336,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 5,
+                Y: 7,
               },
               Size: {
                 Width: 1,
@@ -274,7 +360,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 1,
-                Y: 5,
+                Y: 7,
               },
               Size: {
                 Width: 1,
@@ -298,7 +384,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 6,
+                Y: 8,
               },
               Size: {
                 Width: 2,
@@ -313,7 +399,35 @@ export class ConfigurationAssistantComponent implements OnInit {
             },
           },
           {
+            FieldID: 'queriesText',
+            Type: "RichTextHTML",
+            Title: "",
+            AdditionalProps: {
+              renderTitle: false,
+              renderEnlargeButton: false
+            },
+            Mandatory: false,
+            ReadOnly: false,
+            Layout: {
+              Origin: {
+                X: 0,
+                Y: 9,
+              },
+              Size: {
+                Width: 1,
+                Height: 0,
+              },
+            },
+            Style: {
+              Alignment: {
+                Horizontal: "Stretch",
+                Vertical: "Stretch",
+              },
+            },
+          },
+          {
             FieldID: "transactionType",
+            // Type: "MultiTickBox",
             Type: "TextBox",
             Title: "Transaction type",
             Mandatory: false,
@@ -321,7 +435,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 7,
+                Y: 10,
               },
               Size: {
                 Width: 1,
@@ -334,11 +448,11 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'},
-                             {Key: 'test1', Value: 'test1'}]
+            OptionalValues: this.typeValuesOptions
           },
           {
             FieldID: "transactionStatus",
+            // Type: "MultiTickBox",
             Type: "TextBox",
             Title: "Transaction status",
             Mandatory: false,
@@ -346,7 +460,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 8,
+                Y: 11,
               },
               Size: {
                 Width: 1,
@@ -359,7 +473,7 @@ export class ConfigurationAssistantComponent implements OnInit {
                 Vertical: "Stretch",
               },
             },
-            OptionalValues: [{Key: 'test', Value: 'test'}]
+            OptionalValues: this.statusValuesOptions
           },
           {
             FieldID: "",
@@ -370,7 +484,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 9,
+                Y: 12,
               },
               Size: {
                 Width: 2,
@@ -391,7 +505,19 @@ export class ConfigurationAssistantComponent implements OnInit {
 
    async onRunClicked() {
     console.log(this.configuration)
-    await this.addonService.createSlugAndMapping(this.configuration.genericSlug);
-    await this.addonService.createSlugAndMapping(this.configuration.accountSlug);
+    // TODO: add validation
+    if(this.configuration.genericSlug.includes(' ') || this.configuration.accountSlug.includes(' ')) {
+      const dataMsg = new PepDialogData({
+        title: this.translate.instant('SLUG_NAME_ERROR_TITLE'),
+        actionsType: 'close',
+        content: this.translate.instant('SLUG_NAME_ERROR')
+      });
+      this.dialogService.openDefaultDialog(dataMsg);
+    }
+    else {
+      const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
+      const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
+      const savedConf = await this.addonService.saveConfiguration(this.configuration);
+    }
    }
 }

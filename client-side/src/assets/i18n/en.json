@@ -8,6 +8,12 @@
     "LINE2": "Transaction lines total price and quantity fields, such as Total Unit Price After Discount and Units Quantity.",
     "LINE3": "Additional fields you wish to run aggregation on.",
     "LINE4": "After you define the fields and published your configuration, return to this screen to continue with the configuration (you might need to refresh this page).",
-    "SUBTITLE5": "Define the slugs that will be created. You can add them to the home page or account dashboard tabs."
+    "SLUGS_TEXT": "Define the slugs that will be created. <br/> You can add them to the home page or account dashboard tabs.",
+    "FIELDS_TEXT": "Define the fields which will be used in the data aggregation queries. <br/> Only indexed fields can be used. If you don't see your field in the list, then return to the data index editor and define it.",
+    "QUERIES_FILTER_TEXT": "Define filter which should be applied to all the generated queries. <br/> You can change the filter later on per query in the Query Manager settings screen.",
+    "SLUG_NAME_ERROR_TITLE": "Slug name is not valid",
+    "SLUG_NAME_ERROR": "White spaces are not allowed"
+
+
     
 }

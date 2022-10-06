@@ -21,6 +21,7 @@ import { ConfigurationAssistantComponent } from './configuration-assistant.compo
 import { AddonService } from 'src/app/services/addon.service';
 import { PepGenericFormModule } from '@pepperi-addons/ngx-composite-lib/generic-form';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PepSelectComponent, PepSelectModule } from '@pepperi-addons/ngx-lib/select';
 
 const pepIcons = [
     pepIconSystemClose,
@@ -51,6 +52,7 @@ export const routes: Routes = [
         PepTextboxModule,
         MatDialogModule,
         PepGenericFormModule,
+        PepSelectModule,
         PepGenericListModule,
         TranslateModule.forChild(),
         RouterModule.forChild(routes)
