@@ -41,7 +41,7 @@
             </div>
             
         </div>
-        <div *ngIf="dataIsIndexedFlag">
+        <div *ngIf="dataIsIndexedFlag && dataLoaded">
             <pep-generic-form class="generic-form"
                 [title] = "'edit' | translate"
                 [dataSource]="dataSource"

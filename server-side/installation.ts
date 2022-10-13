@@ -15,6 +15,20 @@ export async function install(client: Client, request: Request): Promise<any> {
     try {
         const service = new MyService(client);
         service.upsertRelations();
+        await service.papiClient.addons.data.schemes.post({
+            Name: "configurationAssistant",
+            Type: 'data',
+            Fields: {
+                Key: {
+                    Type: "String"
+                },
+                Configuration: {
+                    Type: "Object",
+                    Fields: {}
+                }
+            }
+        });
+
     } catch (err) {
         throw new Error(`Failed to create ADAL Tables. error - ${err}`);
     }

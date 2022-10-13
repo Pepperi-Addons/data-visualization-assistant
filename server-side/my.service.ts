@@ -1,5 +1,6 @@
 import { PapiClient, InstalledAddon, Relation } from '@pepperi-addons/papi-sdk'
 import { Client } from '@pepperi-addons/debug-server';
+import config from '../addon.config.json'
 
 class MyService {
 
@@ -21,6 +22,20 @@ class MyService {
     // For page block template
     private upsertRelation(relation): Promise<any> {
         return this.papiClient.post('/addons/data/relations', relation);
+    }
+
+    async updateConfiguration(conf) {
+        const confTable = this.papiClient.addons.data.uuid(config.AddonUUID).table("configurationAssistant");
+        const savedConf = await confTable.upsert({Key: "1", Configuration: conf});
+        return savedConf;
+    }
+
+    async getConfiguration() {
+        const confTable = this.papiClient.addons.data.uuid(config.AddonUUID).table("configurationAssistant");
+        const conf = await confTable.find();
+        if(conf.length > 0)
+            return conf[0].Configuration;
+        return null;
     }
 
     private getCommonRelationProperties(
