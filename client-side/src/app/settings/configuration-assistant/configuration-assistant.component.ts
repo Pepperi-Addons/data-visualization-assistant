@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { PepAddonService, PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
-import { PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
+import { PepDialogActionButton, PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
 
 @Component({
     selector: 'configuration-assistant',
@@ -12,6 +12,7 @@ import { PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog"
     styleUrls: ['./configuration-assistant.component.scss']
 })
 export class ConfigurationAssistantComponent implements OnInit {
+  @ViewChild ('dialog', {read: TemplateRef}) dialog: TemplateRef<any>;
     screenSize: PepScreenSizeType;
     dataIsIndexedFlag;
     configuration;
@@ -36,29 +37,29 @@ export class ConfigurationAssistantComponent implements OnInit {
         this.layoutService.onResize$.subscribe(size => {
             this.screenSize = size;
         });
-    }
-
-    async ngOnInit() {
         this.dataIsIndexedFlag = this.dataIsIndexed();
-        const savedConf = await this.addonService.getConfiguration();
         this.configuration = this.emptyConfiguration();
-        const values = await this.addonService.getValuesForQueriesFilter();
-        for(const v of values.typeValues) {
-          this.typeValuesOptions.push({ key: v, value: v });
-        }
-        for(const v of values.statusValues) {
-          this.statusValuesOptions.push({ key: v, value: v });
-        }
-        if(savedConf) {
-          this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
-          this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
-          this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
-          this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
-        }
         this.dataView = this.getDataView();
         this.dataSource = this.getDataSource();
-        this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
         this.addonService.addonUUID = config.AddonUUID;
+        this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
+    }
+
+    ngOnInit() {
+        // const savedConf = await this.addonService.getConfiguration();
+        // const values = await this.addonService.getValuesForQueriesFilter();
+        // for(const v of values.typeValues) {
+        //   this.typeValuesOptions.push({ key: v, value: v });
+        // }
+        // for(const v of values.statusValues) {
+        //   this.statusValuesOptions.push({ key: v, value: v });
+        // }
+        // if(savedConf) {
+        //   this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
+        //   this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
+        //   this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
+        //   this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
+        // }
         this.dataLoaded = true;
     }
 
@@ -94,6 +95,8 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionTotalQuantity: "",
             transactionLineTotalPrice: "",
             transactionLineTotalQuantity: "",
+            transactionType: [],
+            transactionStatus: [],
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -279,14 +282,13 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionTotalPrice",
-            Type: "TextBox",
-            // Type: "ComboBox",
+            // Type: "TextBox",
+            Type: "ComboBox",
             Title: "Transaction total price",
             Mandatory: false,
             ReadOnly: false,
             Layout: {
               Origin: {
-
                 X: 0,
                 Y: 6,
               },
@@ -505,19 +507,32 @@ export class ConfigurationAssistantComponent implements OnInit {
 
    async onRunClicked() {
     console.log(this.configuration)
-    // TODO: add validation
-    if(this.configuration.genericSlug.includes(' ') || this.configuration.accountSlug.includes(' ')) {
+    const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
+    const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
+    if(genericSlugExists || accountSlugExists) {
+      const badName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
       const dataMsg = new PepDialogData({
-        title: this.translate.instant('SLUG_NAME_ERROR_TITLE'),
-        actionsType: 'close',
-        content: this.translate.instant('SLUG_NAME_ERROR')
+        title: this.translate.instant('SLUG_EXISTS_ERROR_TITLE',{name: badName}),
+        // actionsType: 'close',
+        content: this.translate.instant('SLUG_EXISTS_ERROR')
       });
-      this.dialogService.openDefaultDialog(dataMsg);
+      const config = this.dialogService.getDialogConfig({ minWidth: '30rem' }, 'regular');
+      const refd = this.dialogService.openDefaultDialog(dataMsg,config);
+      // refd.afterClosed().subscribe(res => {
+      //   console.log('dialog', res);
+      // })
     }
     else {
       const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
       const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
+      const gSlugDataView = await this.addonService.upsertSlugDataView();
       const savedConf = await this.addonService.saveConfiguration(this.configuration);
+      const dataMsg = new PepDialogData({
+        title: this.translate.instant('SUCCESS_TITLE'),
+        actionsType: 'close',
+        content: this.translate.instant('SUCCESS_CONTENT')
+      });
+      this.dialogService.openDefaultDialog(dataMsg);
     }
    }
 }

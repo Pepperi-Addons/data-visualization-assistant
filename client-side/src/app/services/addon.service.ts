@@ -65,8 +65,34 @@ export class AddonService {
         return this.papiClient.post(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/slugs`,slugBody)
     }
 
-    private upsertSlugDataView(dataView: MenuDataView) {
-        return this.httpService.postPapiApiCall('/meta_data/data_views', dataView).toPromise();
+    async slugExists(slugName) {
+        const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/slugs?where=Slug=${slugName}`);
+        return res.length > 0;
+    }
+
+    async upsertSlugDataView() {
+        //get rep data view, then update it
+        const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`)
+        const allDataViews = await this.papiClient.get('/meta_data/data_views');
+        const repProfile = res.profiles.find(profile => profile.name?.toLowerCase() === 'rep');
+        const defaultProfileId = repProfile?.id || '';
+        const fields = []
+
+        // const dataView: MenuDataView = {
+        //     Type: 'Menu',
+        //     Hidden: false,
+        //     Context: {
+        //         Name: 'Slugs',
+        //         Profile: {
+        //             InternalID: 42
+        //         },
+        //         ScreenSize: 'Tablet'
+        //     },
+        //     Fields: []
+        // }
+
+        // dataView.Fields = fields;
+        // return this.papiClient.post('/meta_data/data_views', dataView);
     }
 
     async saveConfiguration(configuration) {
@@ -75,5 +101,14 @@ export class AddonService {
 
     async getConfiguration() {
         return this.papiClient.get("/addons/api/948219c4-b9a6-4fb2-814d-153d3b359a70/api/configuration");
+    }
+
+    replaceFields(configuration) {
+        const body = {
+            Configuration: configuration,
+            Path: ''
+        };
+        return this.papiClient.post("/addons/api/948219c4-b9a6-4fb2-814d-153d3b359a70/api/replace_fields", configuration);
+
     }
 }

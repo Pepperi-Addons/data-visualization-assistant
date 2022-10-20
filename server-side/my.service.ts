@@ -38,6 +38,107 @@ class MyService {
         return null;
     }
 
+    async replaceFields(configuration, assetsBaseUrl) {
+        // const path = `${assetsBaseUrl}/assets/queries-to-import/queriy-to-import1.json`
+        const debugPath = `../publish/assets/queries-to-import/query-to-import1.json`
+        const pageAndQueryFilesNames = [{page: 'page1', queries: 'queries1'}]
+        var fs = require('fs')
+        for(const files of pageAndQueryFilesNames) {
+            await fs.readFile(debugPath, 'utf8', async (err,data) => {
+                if (err) {
+                    return console.log(err);
+                }
+                var result = data.replace(this.toRegex('GrandTotal'), configuration.transactionTotalPrice)
+                            .replace(this.toRegex('QuantitiesTotal'), configuration.transactionTotalQuantity)
+                            .replace(this.toRegex('UnitsQuantity'), configuration.transactionLineTotalPrice)
+                            .replace(this.toRegex('TotalUnitsPriceAfterDiscount'), configuration.transactionLineTotalQuantity)
+                            .replace(this.toRegex('"Submitted"'), this.arrayToString(configuration.transactionType))
+                            .replace(this.toRegex('"Sales Order"'), this.arrayToString(configuration.transactionStatus));
+                const stringifiedFile = JSON.stringify(JSON.parse(result));
+                const base64File = btoa(stringifiedFile);
+                // console.log(JSON.parse(result));
+                let file: any = {
+                    Name: 'query-to-import1',
+                    Description: '',
+                    MIME: "text/javascript",
+                    URI: base64File,
+                    Cache: false
+                };
+                const pfsFile = await this.papiClient.post(`/addons/pfs/${this.client.AddonUUID}/confAssistantFiles`,file);
+                const url = pfsFile.URL;
+                const body = {
+                    URI: "https://pfs.pepperi.com/ef30ec4a-475c-4127-8734-423df5261155/44c97115-6d14-4626-91dc-83f176e9a0fc/DIMXUploadedFiles/9668a957-69b9-42bc-bb0f-21c48f40bb89.json",
+                    Resources: [
+                        {
+                            URI: "https://pfs.pepperi.com/ef30ec4a-475c-4127-8734-423df5261155/44c97115-6d14-4626-91dc-83f176e9a0fc/DIMXUploadedFiles/1196c89e-1594-4c2d-ab4d-a5dc4c5e01e6.json",
+                            AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
+                            Resource: "DataQueries"
+                        }
+                    ]
+                }
+                console.log(pfsFile)
+                return pfsFile;
+            });
+        }
+        
+
+
+        // let file: any = {
+        //     Name: 'query-to-import1',
+        //     Description: '',
+        //     MIME: "text/javascript",
+        //     URI: base64File,
+        //     Cache: false
+        // }
+        // return this.papiClient.post(`/addons/pfs/${this.client.AddonUUID}/confAssistantFiles`,file);
+
+    }
+
+    toRegex(str) {
+        return new RegExp(str,"g");
+    }
+
+    tmp(){
+        //     const replace = require('replace-in-file');
+    //     const options = {
+    //         files: [
+    //             `${filesPath}/query-to-import1.json`,
+    //             `${filesPath}/query-to-import2.json`,
+    //             `${filesPath}/query-to-import3.json`
+    //         ],
+    //         //Replacement to make (string or regex)
+    //         from: [
+    //             this.toRegex('GrandTotal'),
+    //             this.toRegex('QuantitiesTotal'),
+    //             this.toRegex('UnitsQuantity'),
+    //             this.toRegex('TotalUnitsPriceAfterDiscount'),
+    //             this.toRegex('"Submitted"'),
+    //             this.toRegex('"Sales Order"')
+    //         ],
+    //         to: [
+    //             configuration.transactionTotalPrice,
+    //             configuration.transactionTotalQuantity,
+    //             configuration.transactionLineTotalPrice,
+    //             configuration.transactionLineTotalQuantity,
+    //             this.arrayToString(configuration.transactionType),
+    //             this.arrayToString(configuration.transactionStatus)
+    //         ],
+    //     };
+    //     replace(options).then(changedFiles => {
+    //         console.log('Modified files:', changedFiles.join(', '));
+    //     }).catch(error => {
+    //         console.error('Error occurred:', error);
+    //     });
+    }
+    arrayToString(arr) {
+        let str = ''
+        for(let obj of arr) {
+            str += `"${obj}",`
+        }
+        str = str.slice(0, -1);
+        return str;
+    }
+
     private getCommonRelationProperties(
         relationName: 'SettingsBlock' | 'PageBlock' | 'AddonBlock', 
         blockRelationName: string,

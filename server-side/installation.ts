@@ -10,6 +10,7 @@ The error Message is importent! it will be written in the audit log and help the
 
 import { Client, Request } from '@pepperi-addons/debug-server';
 import MyService from './my.service';
+import { AddonVersion, AddonUUID } from '../addon.config.json'
 
 export async function install(client: Client, request: Request): Promise<any> {
     try {
@@ -28,7 +29,10 @@ export async function install(client: Client, request: Request): Promise<any> {
                 }
             }
         });
-
+        await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
+            Name: 'confAssistantFiles',
+            Type: 'pfs'
+        });
     } catch (err) {
         throw new Error(`Failed to create ADAL Tables. error - ${err}`);
     }

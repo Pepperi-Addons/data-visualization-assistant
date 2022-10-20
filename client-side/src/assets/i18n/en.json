@@ -12,7 +12,11 @@
     "FIELDS_TEXT": "Define the fields which will be used in the data aggregation queries. <br/> Only indexed fields can be used. If you don't see your field in the list, then return to the data index editor and define it.",
     "QUERIES_FILTER_TEXT": "Define filter which should be applied to all the generated queries. <br/> You can change the filter later on per query in the Query Manager settings screen.",
     "SLUG_NAME_ERROR_TITLE": "Slug name is not valid",
-    "SLUG_NAME_ERROR": "White spaces are not allowed"
+    "SLUG_NAME_ERROR": "White spaces are not allowed",
+    "SLUG_EXISTS_ERROR_TITLE": "Slug '{{name}}' already exists",
+    "SLUG_EXISTS_ERROR": "Please select a different name.",
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_CONTENT": "The data queries, pages and slugs were created. <br/> You can change them using the relevant settings screens. <br/> To see the dashboards, you need to: <br/> * Publish the pages <br/> * Add the slugs to the home screen or to the account dashboard tabs. <br/> You will now be redirected to the dashboard page so you can review and publish it."
 
 
     
