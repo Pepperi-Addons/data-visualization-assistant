@@ -46,8 +46,8 @@ export class AddonService {
     }
 
     async getValuesForQueriesFilter() {
-        const schemaData = await this.papiClient.get(`/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema`)
-        return { typeValues: schemaData.Fields["Type"].OptionalValues, statusValues: schemaData.Fields["StatusName"].OptionalValues }
+        const schemaData = await this.papiClient.get(`/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema`);
+        return { typeValues: schemaData.Fields["Type"].OptionalValues, statusValues: schemaData.Fields["StatusName"].OptionalValues };
     }
 
     //TODO: add slug to page mapping
@@ -61,8 +61,8 @@ export class AddonService {
             },
             isDelete: false,
             selectedObj: null
-        }
-        return this.papiClient.post(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/slugs`,slugBody)
+        };
+        return this.papiClient.post(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/slugs`,slugBody);
     }
 
     async slugExists(slugName) {
@@ -70,29 +70,13 @@ export class AddonService {
         return res.length > 0;
     }
 
-    async upsertSlugDataView() {
+    async upsertSlugsDataViews(configuration) {
         //get rep data view, then update it
-        const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`)
-        const allDataViews = await this.papiClient.get('/meta_data/data_views');
-        const repProfile = res.profiles.find(profile => profile.name?.toLowerCase() === 'rep');
-        const defaultProfileId = repProfile?.id || '';
-        const fields = []
-
-        // const dataView: MenuDataView = {
-        //     Type: 'Menu',
-        //     Hidden: false,
-        //     Context: {
-        //         Name: 'Slugs',
-        //         Profile: {
-        //             InternalID: 42
-        //         },
-        //         ScreenSize: 'Tablet'
-        //     },
-        //     Fields: []
-        // }
-
-        // dataView.Fields = fields;
-        // return this.papiClient.post('/meta_data/data_views', dataView);
+        const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`);
+        const repDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
+        repDataView.Fields.push({FieldID: configuration.genericSlug, Title: "uuid of the imported page"});
+        repDataView.Fields.push({FieldID: configuration.accountSlug, Title: "uuid of the imported page"});
+        return this.papiClient.post('/meta_data/data_views', repDataView);
     }
 
     async saveConfiguration(configuration) {

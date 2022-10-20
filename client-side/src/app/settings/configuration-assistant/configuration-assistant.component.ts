@@ -525,7 +525,7 @@ export class ConfigurationAssistantComponent implements OnInit {
     else {
       const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
       const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
-      const gSlugDataView = await this.addonService.upsertSlugDataView();
+      const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
       const savedConf = await this.addonService.saveConfiguration(this.configuration);
       const dataMsg = new PepDialogData({
         title: this.translate.instant('SUCCESS_TITLE'),

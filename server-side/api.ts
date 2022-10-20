@@ -16,6 +16,6 @@ export async function configuration(client: Client, request: Request) {
 export async function replace_fields(client: Client, request: Request) {
     const service = new MyService(client);
     if (request.method == 'POST') {
-        return await service.replaceFields(request.body, client.AssetsBaseUrl);
+        return await service.replaceFieldsAndImportFiles(request.body, client.AssetsBaseUrl);
     }
 };
