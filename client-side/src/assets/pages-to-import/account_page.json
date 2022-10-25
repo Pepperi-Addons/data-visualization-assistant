@@ -1,0 +1,243 @@
+[{
+        "Blocks": [{
+                "Key": "17654c75-6925-e081-e98e-36a042b9fc7d",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Scorecards",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "scorecards",
+                    "ModuleName": "ScorecardsModule",
+                    "ComponentName": "ScorecardsComponent"
+                },
+                "Configuration": {
+                    "Resource": "Scorecards",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "scorecardsConfig": {
+                            "groupTitleAndDescription": "ungrouped",
+                            "useRoundCorners": false,
+                            "titleSize": "xl",
+                            "maxColumns": 1,
+                            "useTitle": true,
+                            "cardTextColor": "system-primary",
+                            "horizontalAlign": "center",
+                            "gap": 0.5,
+                            "useDescription": true,
+                            "roundCornersSize": "md",
+                            "useDropShadow": true,
+                            "descriptionSize": "sm",
+                            "dropShadow": {
+                                "type": "Regular",
+                                "intensity": 5
+                            },
+                            "border": {
+                                "color": "hsl(0, 0%, 57%)",
+                                "opacity": "50"
+                            },
+                            "verticalAlign": "center",
+                            "textPosition": "overlyed",
+                            "overlay": {
+                                "opacity": 50,
+                                "value": "hsl(0, 0%, 57%)",
+                                "use": false
+                            },
+                            "useBorder": false,
+                            "cardHeight": 16,
+                            "descriptionMaxNumOfLines": 1,
+                            "useText": true,
+                            "gradientOverlay": {
+                                "opacity": 50,
+                                "value": "hsl(0, 0%, 57%)",
+                                "use": false
+                            },
+                            "editSlideIndex": 0,
+                            "titleWeight": "normal"
+                        },
+                        "cards": [{
+                                "imageURL": "",
+                                "query": "0bc14d7e-3dab-45be-8afb-afa8df09fc65",
+                                "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/value_c2cc9af4d7ad.js",
+                                "description": "Description",
+                                "id": 0,
+                                "title": "orders today",
+                                "chart": "Value_c2cc9af4d7ad.js",
+                                "variablesData": {
+                                    "account": {
+                                        "value": "AccountUUID",
+                                        "source": "Variable"
+                                    }
+                                }
+                            }, {
+                                "imageURL": "",
+                                "query": "427e1502-3b1e-4175-9782-d539b00353c7",
+                                "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/value_c2cc9af4d7ad.js",
+                                "description": "Description",
+                                "id": 1,
+                                "title": "orders this month",
+                                "chart": "Value_c2cc9af4d7ad.js",
+                                "variablesData": {
+                                    "account": {
+                                        "value": "AccountUUID",
+                                        "source": "Variable"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "676131d0-429e-4a69-9002-288bf1f5db67",
+                        "useBorder": false,
+                        "label": "Account sales by brand in the last month",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/pie_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Pie_c2cc9af4d7ad.js",
+                        "variablesData": {
+                            "account": {
+                                "value": "AccountUUID",
+                                "source": "Variable"
+                            }
+                        },
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "4be77d49-b98e-9315-38b6-f4f06bb74e7c",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "76213dab-8865-436c-b7d8-306ecd77629c",
+                        "useBorder": false,
+                        "label": "Account sales by brand in the last year",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/pie_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Pie_c2cc9af4d7ad.js",
+                        "variablesData": {
+                            "account": {
+                                "value": "AccountUUID",
+                                "source": "Variable"
+                            }
+                        },
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "Layout": {
+            "Sections": [{
+                    "Key": "8ae61b30-ee07-3425-0ef4-96943d8827f1",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "17654c75-6925-e081-e98e-36a042b9fc7d"
+                            }
+                        }
+                    ],
+                    "Hide": []
+                }, {
+                    "Key": "a3ed8a67-4a88-b949-6aa4-653fcaee8fb0",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7"
+                            }
+                        }, {
+                            "BlockContainer": {
+                                "BlockKey": "4be77d49-b98e-9315-38b6-f4f06bb74e7c"
+                            }
+                        }
+                    ],
+                    "Name": "",
+                    "Height": 0,
+                    "Split": "1/2 1/2",
+                    "Hide": []
+                }
+            ],
+            "SectionsGap": "sm",
+            "ColumnsGap": "sm",
+            "HorizontalSpacing": "sm",
+            "VerticalSpacing": "sm",
+            "MaxWidth": 1536
+        },
+        "Hidden": true,
+        "CreationDateTime": "2022-08-14T09:06:01.107Z",
+        "Key": "00000000-0000-0001-0acc-0da5iib0a12d",
+        "Name": "Account Dashboard",
+        "Description": "Account Dashboard"
+    }
+]

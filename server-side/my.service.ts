@@ -41,47 +41,58 @@ class MyService {
     async replaceFieldsAndImportFiles(configuration, assetsBaseUrl) {
         const basePath = `${assetsBaseUrl}/assets`
         const debugPath = `../publish/assets`
-        const pageAndQueryFilesNames = [{page: 'page1', query: 'query-to-import1'}]
+        var importedPages: any[] = [];
+        const pageAndQueryFilesNames = [{page: 'account_page', query: 'account_queries'},
+                                        {page: 'manager_page', query: 'manager_queries'},
+                                        {page: 'rep_page', query: 'rep_queries'}];
         var fs = require('fs')
         for(const names of pageAndQueryFilesNames) {
-            await fs.readFile(`${debugPath}/queries-to-import/${names.query}`, 'utf8', async (err,data) => {
+            await fs.readFile(`${debugPath}/queries-to-import/${names.query}.json`, 'utf8', async (err,data) => {
                 if (err) {
                     return console.log(err);
                 }
-                const pageData = await fs.readFile(`${debugPath}/pages-to-import/${names.page}`, 'utf8');
-                const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
+                await fs.readFile(`${debugPath}/pages-to-import/${names.page}.json`, 'utf8', async (err,pageData) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
 
-                var result = data.replace(this.toRegex('GrandTotal'), configuration.transactionTotalPrice)
-                            .replace(this.toRegex('QuantitiesTotal'), configuration.transactionTotalQuantity)
-                            .replace(this.toRegex('UnitsQuantity'), configuration.transactionLineTotalPrice)
-                            .replace(this.toRegex('TotalUnitsPriceAfterDiscount'), configuration.transactionLineTotalQuantity)
-                            .replace(this.toRegex('"Submitted"'), this.arrayToString(configuration.transactionType))
-                            .replace(this.toRegex('"Sales Order"'), this.arrayToString(configuration.transactionStatus));
+                    var result = data.replace(this.toRegex('GrandTotal'), configuration.transactionTotalPrice)
+                                .replace(this.toRegex('QuantitiesTotal'), configuration.transactionTotalQuantity)
+                                .replace(this.toRegex('UnitsQuantity'), configuration.transactionLineTotalPrice)
+                                .replace(this.toRegex('TotalUnitsPriceAfterDiscount'), configuration.transactionLineTotalQuantity)
+                                .replace(this.toRegex('"Submitted"'), this.arrayToString(configuration.transactionType))
+                                .replace(this.toRegex('"Sales Order"'), this.arrayToString(configuration.transactionStatus));
 
-                const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
-                const body = {
-                    URI: pfsPageFile.URL,
-                    Resources: [
-                        {
-                            URI: pfsQueryFile.URL,
-                            AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
-                            Resource: "DataQueries"
-                        }
-                    ]
-                }
-                console.log(body)
+                    const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
+                    const body = {
+                        URI: pfsPageFile.URL,
+                        Resources: [
+                            {
+                                URI: pfsQueryFile.URL,
+                                AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
+                                Resource: "DataQueries"
+                            }
+                        ]
+                    }
+                    console.log(body);
+                    const importedPage = await this.papiClient.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body);
+                    importedPages.push(importedPage);
+                });
             });
         }
+        return importedPages;
     }
 
     async uploadDataToPFS(data, fileName) {
-        const stringifiedQueryFile = JSON.stringify(JSON.parse(data));
-        const base64QueryFile = btoa(stringifiedQueryFile);
+        const base64QueryFile = btoa(data);
+        const base64URI = `data:application/json;base64,${base64QueryFile}`
         let file: any = {
+            Key: `${fileName}.json`,
             Name: fileName,
             Description: '',
-            MIME: "text/javascript",
-            URI: base64QueryFile,
+            MIME: "application/json",
+            URI: base64URI,
             Cache: false
         };
         return this.papiClient.post(`/addons/pfs/${this.client.AddonUUID}/confAssistantFiles`,file);

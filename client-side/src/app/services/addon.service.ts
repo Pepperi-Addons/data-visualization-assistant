@@ -73,10 +73,22 @@ export class AddonService {
     async upsertSlugsDataViews(configuration) {
         //get rep data view, then update it
         const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`);
-        const repDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
-        repDataView.Fields.push({FieldID: configuration.genericSlug, Title: "uuid of the imported page"});
-        repDataView.Fields.push({FieldID: configuration.accountSlug, Title: "uuid of the imported page"});
-        return this.papiClient.post('/meta_data/data_views', repDataView);
+        let repDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
+        let adminDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
+        const accountPageUUID = "00000000-0000-0001-0acc-0da5iib0a12d";
+        const managerPageUUID = "00000000-0000-0001-3912-0da5iib0a12d";
+        const repPageUUID = "00000000-0000-0001-12e9-0da5iib0a12d";
+
+        //updating rep data view
+        repDataView.Fields.push({FieldID: configuration.genericSlug, Title: repPageUUID});
+        repDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});
+        //updating admin data view
+        adminDataView.Fields.push({FieldID: configuration.genericSlug, Title: managerPageUUID});
+        adminDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});
+
+        repDataView = await this.papiClient.post('/meta_data/data_views', repDataView);
+        adminDataView = await this.papiClient.post('/meta_data/data_views', adminDataView);
+        return {repDataView, adminDataView};
     }
 
     async saveConfiguration(configuration) {

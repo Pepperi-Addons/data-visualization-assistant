@@ -9,7 +9,7 @@
             <span class="body-md">{{ 'SUBTITLE1' | translate }}</span>
             <span class="body-md">{{ 'SUBTITLE2' | translate }}</span>
         </div>
-        <div *ngIf="!dataIsIndexedFlag">
+        <div *ngIf="dataIsIndexedFlag==false">
             <pep-top-bar title="Index your data">
             </pep-top-bar>
             <div class="information-page">
@@ -21,7 +21,7 @@
                     <pep-button
                         [sizeType]="'md'"
                         [value]="'Go to Data Index settings' | translate"
-                        [styleType]="'strong'" 
+                        [styleType]="'strong'"
                         (buttonClick)="navigateToDataIndexSettings()"
                     ></pep-button>
                     </div>
@@ -46,13 +46,15 @@
                 [title] = "'edit' | translate"
                 [dataSource]="dataSource"
                 [dataView]="dataView"
-                [inline]="false">
+                [inline]="false"
+                (formValidationChange)="formValidationChange($event)">
             </pep-generic-form>
             <div class="runButton">
                 <pep-button
                     [sizeType]="'md'"
                     [value]="'Run'"
                     [styleType]="'strong'"
+                    [disabled]="!formValid"
                     (buttonClick)="onRunClicked()"
                 ></pep-button>
             </div>
