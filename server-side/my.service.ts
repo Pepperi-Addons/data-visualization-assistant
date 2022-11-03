@@ -1,10 +1,12 @@
 import { PapiClient, InstalledAddon, Relation } from '@pepperi-addons/papi-sdk'
 import { Client } from '@pepperi-addons/debug-server';
 import config from '../addon.config.json'
+import fetch from 'node-fetch';
 
 class MyService {
 
     papiClient: PapiClient
+    papiClientForImport: PapiClient
     bundleFileName = '';
 
     constructor(private client: Client) {
@@ -15,7 +17,13 @@ class MyService {
             addonSecretKey: client.AddonSecretKey,
             actionUUID: client.ActionUUID
         });
-        
+        this.papiClientForImport = new PapiClient({
+            baseURL: client.BaseURL,
+            token: client.OAuthAccessToken,
+            addonUUID: '50062e0c-9967-4ed4-9102-f2bc50602d41', // pages addon uuid
+            addonSecretKey: client.AddonSecretKey,
+            actionUUID: client.ActionUUID
+        });
         this.bundleFileName = `file_${this.client.AddonUUID}`;
     }
     
@@ -39,48 +47,49 @@ class MyService {
     }
 
     async replaceFieldsAndImportFiles(configuration, assetsBaseUrl) {
-        const basePath = `${assetsBaseUrl}/assets`
-        const debugPath = `../publish/assets`
+        const basePath = `${assetsBaseUrl}/assets`;
+        // const basePath = `../publish/assets` // for debugging
+        console.log(`ASSETS BASE URL: ${basePath}`);
         var importedPages: any[] = [];
-        const pageAndQueryFilesNames = [{page: 'account_page', query: 'account_queries'},
-                                        {page: 'manager_page', query: 'manager_queries'},
-                                        {page: 'rep_page', query: 'rep_queries'}];
-        var fs = require('fs')
+        const pageAndQueryFilesNames = [
+            {page: 'account_page', query: 'account_queries'},
+            {page: 'manager_page', query: 'manager_queries'},
+            {page: 'rep_page', query: 'rep_queries'}
+        ];
+        
         for(const names of pageAndQueryFilesNames) {
-            await fs.readFile(`${debugPath}/queries-to-import/${names.query}.json`, 'utf8', async (err,data) => {
-                if (err) {
-                    return console.log(err);
-                }
-                await fs.readFile(`${debugPath}/pages-to-import/${names.page}.json`, 'utf8', async (err,pageData) => {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
+            const queryResponse = await fetch(`${basePath}/queries-to-import/${names.query}.json`);
+            const queryData = await queryResponse.text();
+            const pageResponse = await fetch(`${basePath}/pages-to-import/${names.page}.json`);
+            const pageData = await pageResponse.text();
 
-                    var result = data.replace(this.toRegex('GrandTotal'), configuration.transactionTotalPrice)
-                                .replace(this.toRegex('QuantitiesTotal'), configuration.transactionTotalQuantity)
-                                .replace(this.toRegex('UnitsQuantity'), configuration.transactionLineTotalPrice)
-                                .replace(this.toRegex('TotalUnitsPriceAfterDiscount'), configuration.transactionLineTotalQuantity)
-                                .replace(this.toRegex('"Submitted"'), this.arrayToString(configuration.transactionType))
-                                .replace(this.toRegex('"Sales Order"'), this.arrayToString(configuration.transactionStatus));
+            var result = queryData.replace(this.toRegex('GrandTotal_Placeholder'), configuration.transactionTotalPrice)
+                        .replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
+                        .replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
+                        .replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
+                        .replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
+                        .replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
 
-                    const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
-                    const body = {
-                        URI: pfsPageFile.URL,
-                        Resources: [
-                            {
-                                URI: pfsQueryFile.URL,
-                                AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
-                                Resource: "DataQueries"
-                            }
-                        ]
+            const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
+            console.log("PFS QUERY FILE: " + JSON.stringify(pfsQueryFile));
+            const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
+            console.log("PFS PAGE FILE: " + JSON.stringify(pfsPageFile));
+
+            const body = {
+                URI: pfsPageFile.URL,
+                Resources: [
+                    {
+                        URI: pfsQueryFile.URL,
+                        AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
+                        Resource: "DataQueries"
                     }
-                    console.log(body);
-                    const importedPage = await this.papiClient.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body);
-                    importedPages.push(importedPage);
-                });
-            });
+                ]
+            }
+            console.log(body);
+            const importedPage = await this.papiClientForImport.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body); // , {'X-Pepperi-OwnerID': '50062e0c-9967-4ed4-9102-f2bc50602d41'}
+            importedPages.push(importedPage);
         }
+        console.log("DVAS IMPORTED PAGES RESPONSES: " + importedPages);
         return importedPages;
     }
 

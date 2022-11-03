@@ -38,7 +38,7 @@
                         },
                         "RightNode": {
                             "Values": [
-                                "Sales Order"
+                                "SalesOrder_Placeholder"
                             ],
                             "Operation": "IsEqual",
                             "ApiName": "Type",
@@ -48,7 +48,7 @@
                     },
                     "RightNode": {
                         "Values": [
-                            "Submitted"
+                            "Submitted_Placeholder"
                         ],
                         "Operation": "IsEqual",
                         "ApiName": "StatusName",
@@ -73,7 +73,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal"
+                        "FieldID": "GrandTotal_Placeholder"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -120,7 +120,7 @@
                         },
                         "RightNode": {
                             "Values": [
-                                "Sales Order"
+                                "SalesOrder_Placeholder"
                             ],
                             "Operation": "IsEqual",
                             "ApiName": "Type",
@@ -130,7 +130,7 @@
                     },
                     "RightNode": {
                         "Values": [
-                            "Submitted"
+                            "Submitted_Placeholder"
                         ],
                         "Operation": "IsEqual",
                         "ApiName": "StatusName",
@@ -155,7 +155,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal"
+                        "FieldID": "GrandTotal_Placeholder"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -202,7 +202,7 @@
                         },
                         "RightNode": {
                             "Values": [
-                                "Sales Order"
+                                "SalesOrder_Placeholder"
                             ],
                             "Operation": "IsEqual",
                             "ApiName": "Type",
@@ -212,7 +212,7 @@
                     },
                     "RightNode": {
                         "Values": [
-                            "Submitted"
+                            "Submitted_Placeholder"
                         ],
                         "Operation": "IsEqual",
                         "ApiName": "StatusName",
@@ -237,7 +237,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal"
+                        "FieldID": "GrandTotal_Placeholder"
                     }
                 ],
                 "DynamicFilterFields": [],

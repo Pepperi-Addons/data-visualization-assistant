@@ -41,8 +41,11 @@ export class AddonService {
     }
 
     async getDataIndexScheme(scheme) {
+        const originalUUID = this.addonUUID;
         this.addonUUID = '10979a11-d7f4-41df-8993-f06bfd778304'; // papi-data-index uuid
-        return this.papiClient.get(`/addons/data/schemes/${scheme}`)
+        const schemeObject = await this.papiClient.get(`/addons/data/schemes/${scheme}`)
+        this.addonUUID = originalUUID;
+        return schemeObject;
     }
 
     async getValuesForQueriesFilter() {
@@ -75,9 +78,9 @@ export class AddonService {
         const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`);
         let repDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
         let adminDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
-        const accountPageUUID = "00000000-0000-0001-0acc-0da5iib0a12d";
-        const managerPageUUID = "00000000-0000-0001-3912-0da5iib0a12d";
-        const repPageUUID = "00000000-0000-0001-12e9-0da5iib0a12d";
+        const accountPageUUID = "00000000-0000-0001-0acc-0da511b0a12d";
+        const managerPageUUID = "00000000-0000-0001-3912-0da511b0a12d";
+        const repPageUUID = "00000000-0000-0001-12e9-0da511b0a12d";
 
         //updating rep data view
         repDataView.Fields.push({FieldID: configuration.genericSlug, Title: repPageUUID});
@@ -100,11 +103,6 @@ export class AddonService {
     }
 
     replaceFields(configuration) {
-        const body = {
-            Configuration: configuration,
-            Path: ''
-        };
         return this.papiClient.post("/addons/api/948219c4-b9a6-4fb2-814d-153d3b359a70/api/replace_fields", configuration);
-
     }
 }

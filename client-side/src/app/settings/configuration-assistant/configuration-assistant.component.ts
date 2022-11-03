@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
-import { PepAddonService, PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
+import { PepAddonService, PepLayoutService, PepLoaderService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
 import { PepDialogActionButton, PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
@@ -32,7 +32,8 @@ export class ConfigurationAssistantComponent implements OnInit {
         public translate: TranslateService,
         public addonService: AddonService,
         public dialogService: PepDialogService,
-        private pepAddonService: PepAddonService
+        private pepAddonService: PepAddonService,
+        public loaderService: PepLoaderService
     ) {
         this.layoutService.onResize$.subscribe(size => {
             this.screenSize = size;
@@ -78,15 +79,22 @@ export class ConfigurationAssistantComponent implements OnInit {
         window.location.href = '/settings/10979a11-d7f4-41df-8993-f06bfd778304/data_index';
     }
 
+    navigateToPages() {
+      // navigate to pages manager
+      window.location.href = '/settings_block/50062e0c-9967-4ed4-9102-f2bc50602d41/pages';
+  }
+
     async dataIsIndexed() {
         const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
         if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {
           const transaction_lines_scheme = await this.addonService.getDataIndexScheme('transaction_lines');
           for(const name in all_activities_scheme.Fields) {
-            this.allActivitiesFieldsOptions.push({ Key: name, Value: name });
+            if(all_activities_scheme.Fields[name].Type == 'Integer' || all_activities_scheme.Fields[name].Type == 'Double')
+              this.allActivitiesFieldsOptions.push({ Key: name, Value: name });
           }
           for(const name in transaction_lines_scheme.Fields) {
-            this.transactionLinesFieldsOptions.push({ Key: name, Value: name });
+            if(transaction_lines_scheme.Fields[name].Type == 'Integer' || transaction_lines_scheme.Fields[name].Type == 'Double')
+              this.transactionLinesFieldsOptions.push({ Key: name, Value: name });
           }
           return true;
         }
@@ -510,6 +518,7 @@ export class ConfigurationAssistantComponent implements OnInit {
    }
 
    async onRunClicked() {
+    this.loaderService.show();
     console.log(this.configuration)
     const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
     const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
@@ -519,21 +528,33 @@ export class ConfigurationAssistantComponent implements OnInit {
         title: this.translate.instant('SLUG_EXISTS_ERROR_TITLE',{name: badName}),
         content: this.translate.instant('SLUG_EXISTS_ERROR')
       });
-      const config = this.dialogService.getDialogConfig({ minWidth: '30rem' }, 'regular');
-      this.dialogService.openDefaultDialog(dataMsg,config);
+      this.loaderService.hide();
+      this.dialogService.openDefaultDialog(dataMsg);
     }
     else {
-      const importedpages = await this.addonService.replaceFields(this.configuration);
-      const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
-      const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
-      const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
-      const savedConf = await this.addonService.saveConfiguration(this.configuration);
-      const dataMsg = new PepDialogData({
-        title: this.translate.instant('SUCCESS_TITLE'),
-        actionsType: 'close',
-        content: this.translate.instant('SUCCESS_CONTENT')
-      });
-      this.dialogService.openDefaultDialog(dataMsg);
+      try {
+        const importedPages = await this.addonService.replaceFields(this.configuration);
+        const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
+        const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
+        const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
+        const savedConf = await this.addonService.saveConfiguration(this.configuration);
+        const dataMsg = new PepDialogData({
+          title: this.translate.instant('SUCCESS_TITLE'),
+          actionsType: 'close',
+          content: this.translate.instant('SUCCESS_CONTENT')
+        });
+        this.loaderService.hide();
+        this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(res => {
+          this.navigateToPages();
+        });
+      } catch(err) {
+          const dataMsg = new PepDialogData({
+          title: this.translate.instant('Run failed'),
+          content: this.translate.instant(err)
+        });
+        this.loaderService.hide();
+        this.dialogService.openDefaultDialog(dataMsg);
+      }
     }
    }
 

@@ -234,9 +234,9 @@
             "VerticalSpacing": "sm",
             "MaxWidth": 1536
         },
-        "Hidden": true,
+        "Hidden": false,
         "CreationDateTime": "2022-08-14T09:06:01.107Z",
-        "Key": "00000000-0000-0001-0acc-0da5iib0a12d",
+        "Key": "00000000-0000-0001-0acc-0da511b0a12d",
         "Name": "Account Dashboard",
         "Description": "Account Dashboard"
     }
