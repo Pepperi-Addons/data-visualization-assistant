@@ -42,6 +42,7 @@ export class AddonService {
 
     async getDataIndexScheme(scheme) {
         const originalUUID = this.addonUUID;
+        // assignment of this.addonUUID allows us to get the schemes of another addon
         this.addonUUID = '10979a11-d7f4-41df-8993-f06bfd778304'; // papi-data-index uuid
         const schemeObject = await this.papiClient.get(`/addons/data/schemes/${scheme}`)
         this.addonUUID = originalUUID;

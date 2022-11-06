@@ -58,23 +58,26 @@ class MyService {
         ];
         
         for(const names of pageAndQueryFilesNames) {
-            const queryResponse = await fetch(`${basePath}/queries-to-import/${names.query}.json`);
-            const queryData = await queryResponse.text();
+            // uploading the page file to PFS
             const pageResponse = await fetch(`${basePath}/pages-to-import/${names.page}.json`);
             const pageData = await pageResponse.text();
+            const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
+            console.log("PFS PAGE FILE: " + JSON.stringify(pfsPageFile));
 
+            // manipulating the queries of the page 
+            const queryResponse = await fetch(`${basePath}/queries-to-import/${names.query}.json`);
+            const queryData = await queryResponse.text();
             var result = queryData.replace(this.toRegex('GrandTotal_Placeholder'), configuration.transactionTotalPrice)
                         .replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
                         .replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
                         .replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
                         .replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
                         .replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
-
+            // then uploading the queries file to PFS
             const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
             console.log("PFS QUERY FILE: " + JSON.stringify(pfsQueryFile));
-            const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
-            console.log("PFS PAGE FILE: " + JSON.stringify(pfsPageFile));
-
+            
+            // building the body for the recursive-import request
             const body = {
                 URI: pfsPageFile.URL,
                 Resources: [
@@ -86,7 +89,7 @@ class MyService {
                 ]
             }
             console.log(body);
-            const importedPage = await this.papiClientForImport.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body); // , {'X-Pepperi-OwnerID': '50062e0c-9967-4ed4-9102-f2bc50602d41'}
+            const importedPage = await this.papiClientForImport.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body);
             importedPages.push(importedPage);
         }
         console.log("DVAS IMPORTED PAGES RESPONSES: " + importedPages);
