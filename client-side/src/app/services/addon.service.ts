@@ -79,7 +79,7 @@ export class AddonService {
         //get rep data view, then update it
         const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`);
         let repDataView: MenuDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
-        let adminDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
+        let adminDataView: MenuDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
         if(!adminDataView) {
             const adminProfile = res.profiles.find(p => p.name?.toLowerCase() === 'admin');
             adminDataView = {
