@@ -86,7 +86,7 @@ export class ConfigurationAssistantComponent implements OnInit {
 
     async dataIsIndexed() {
         const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
-        if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {
+        if(all_activities_scheme && all_activities_scheme.Fields && (Object.keys(all_activities_scheme.Fields)).length > 0) {
           const transaction_lines_scheme = await this.addonService.getDataIndexScheme('transaction_lines');
           for(const name in all_activities_scheme.Fields) {
             if(all_activities_scheme.Fields[name].Type == 'Integer' || all_activities_scheme.Fields[name].Type == 'Double')
@@ -538,6 +538,7 @@ export class ConfigurationAssistantComponent implements OnInit {
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
         const savedConf = await this.addonService.saveConfiguration(this.configuration);
+        console.log('pages and queries imported, slugs created and mapped successfully')
         const dataMsg = new PepDialogData({
           title: this.translate.instant('SUCCESS_TITLE'),
           actionsType: 'close',
