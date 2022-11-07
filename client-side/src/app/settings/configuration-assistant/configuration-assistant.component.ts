@@ -45,31 +45,33 @@ export class ConfigurationAssistantComponent implements OnInit {
     ngOnInit() {
       this.dataIsIndexed().then(dataIsIndexedFlag => {
         this.dataIsIndexedFlag = dataIsIndexedFlag;
-        this.addonService.getValuesForQueriesFilter().then(values => {
-          for(const v of values.typeValues) {
-            this.typeValuesOptions.push({ Key: v, Value: v });
-          }
-          for(const v of values.statusValues) {
-            this.statusValuesOptions.push({ Key: v, Value: v });
-          }
-          this.translate.get('SLUGS_TEXT').toPromise().then(res => {
-            this.configuration = this.emptyConfiguration();
-            this.addonService.getConfiguration().then(savedConf => {
-              if(savedConf) {
-                this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
-                this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
-                this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
-                this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
-                this.configuration.transactionType = savedConf.transactionType;
-                this.configuration.transactionStatus = savedConf.transactionStatus;
-                this.formValid = true;
-              }
-              this.dataView = this.getDataView();
-              this.dataSource = this.getDataSource();
-              this.dataLoaded = true;
+        if(dataIsIndexedFlag) {
+          this.addonService.getValuesForQueriesFilter().then(values => {
+            for(const v of values.typeValues) {
+              this.typeValuesOptions.push({ Key: v, Value: v });
+            }
+            for(const v of values.statusValues) {
+              this.statusValuesOptions.push({ Key: v, Value: v });
+            }
+            this.translate.get('SLUGS_TEXT').toPromise().then(res => {
+              this.configuration = this.emptyConfiguration();
+              this.addonService.getConfiguration().then(savedConf => {
+                if(savedConf) {
+                  this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
+                  this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
+                  this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
+                  this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
+                  this.configuration.transactionType = savedConf.transactionType;
+                  this.configuration.transactionStatus = savedConf.transactionStatus;
+                  this.formValid = true;
+                }
+                this.dataView = this.getDataView();
+                this.dataSource = this.getDataSource();
+                this.dataLoaded = true;
+              });
             });
           });
-        });
+        }
       });
         
     }
