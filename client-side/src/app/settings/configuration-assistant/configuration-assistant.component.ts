@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
-import { PepAddonService, PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
+import { PepAddonService, PepLayoutService, PepLoaderService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
-import { PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
+import { PepDialogActionButton, PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
 
 @Component({
     selector: 'configuration-assistant',
@@ -23,6 +23,7 @@ export class ConfigurationAssistantComponent implements OnInit {
     statusValuesOptions = [];
     imagePath;
     dataLoaded = false;
+    formValid;
 
     constructor(
         public router: Router,
@@ -31,38 +32,46 @@ export class ConfigurationAssistantComponent implements OnInit {
         public translate: TranslateService,
         public addonService: AddonService,
         public dialogService: PepDialogService,
-        private pepAddonService: PepAddonService
+        private pepAddonService: PepAddonService,
+        public loaderService: PepLoaderService
     ) {
         this.layoutService.onResize$.subscribe(size => {
             this.screenSize = size;
         });
-    }
-
-    async ngOnInit() {
-        this.dataIsIndexedFlag = this.dataIsIndexed();
-        const savedConf = await this.addonService.getConfiguration();
-        this.configuration = this.emptyConfiguration();
-        const values = await this.addonService.getValuesForQueriesFilter();
-        for(const v of values.typeValues) {
-          this.typeValuesOptions.push({ key: v, value: v });
-        }
-        for(const v of values.statusValues) {
-          this.statusValuesOptions.push({ key: v, value: v });
-        }
-        if(savedConf) {
-          this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
-          this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
-          this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
-          this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
-        }
-        this.dataView = this.getDataView();
-        this.dataSource = this.getDataSource();
-        this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
         this.addonService.addonUUID = config.AddonUUID;
-        this.dataLoaded = true;
+        this.imagePath = this.pepAddonService.getAddonStaticFolder(config.AddonUUID) + 'assets/images/conf-preview.png';
     }
 
-    openDialog() {
+    ngOnInit() {
+      this.dataIsIndexed().then(dataIsIndexedFlag => {
+        this.dataIsIndexedFlag = dataIsIndexedFlag;
+        this.addonService.getValuesForQueriesFilter().then(values => {
+          for(const v of values.typeValues) {
+            this.typeValuesOptions.push({ Key: v, Value: v });
+          }
+          for(const v of values.statusValues) {
+            this.statusValuesOptions.push({ Key: v, Value: v });
+          }
+          this.translate.get('SLUGS_TEXT').toPromise().then(res => {
+            this.configuration = this.emptyConfiguration();
+            this.addonService.getConfiguration().then(savedConf => {
+              if(savedConf) {
+                this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
+                this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
+                this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
+                this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
+                this.configuration.transactionType = savedConf.transactionType;
+                this.configuration.transactionStatus = savedConf.transactionStatus;
+                this.formValid = true;
+              }
+              this.dataView = this.getDataView();
+              this.dataSource = this.getDataSource();
+              this.dataLoaded = true;
+            });
+          });
+        });
+      });
+        
     }
 
     navigateToDataIndexSettings() {
@@ -70,15 +79,22 @@ export class ConfigurationAssistantComponent implements OnInit {
         window.location.href = '/settings/10979a11-d7f4-41df-8993-f06bfd778304/data_index';
     }
 
+    navigateToPages() {
+      // navigate to pages manager
+      window.location.href = '/settings_block/50062e0c-9967-4ed4-9102-f2bc50602d41/pages';
+  }
+
     async dataIsIndexed() {
         const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
         if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {
           const transaction_lines_scheme = await this.addonService.getDataIndexScheme('transaction_lines');
           for(const name in all_activities_scheme.Fields) {
-            this.allActivitiesFieldsOptions.push({ key: name, value: name });
+            if(all_activities_scheme.Fields[name].Type == 'Integer' || all_activities_scheme.Fields[name].Type == 'Double')
+              this.allActivitiesFieldsOptions.push({ Key: name, Value: name });
           }
           for(const name in transaction_lines_scheme.Fields) {
-            this.transactionLinesFieldsOptions.push({ key: name, value: name });
+            if(transaction_lines_scheme.Fields[name].Type == 'Integer' || transaction_lines_scheme.Fields[name].Type == 'Double')
+              this.transactionLinesFieldsOptions.push({ Key: name, Value: name });
           }
           return true;
         }
@@ -94,6 +110,8 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionTotalQuantity: "",
             transactionLineTotalPrice: "",
             transactionLineTotalQuantity: "",
+            transactionType: [],
+            transactionStatus: [],
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -177,7 +195,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             FieldID: "genericSlug",
             Type: "TextBox",
             Title: "Generic dashboard slug",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -204,7 +222,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             FieldID: "accountSlug",
             Type: "TextBox",
             Title: "Account dashboard slug",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -279,14 +297,12 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionTotalPrice",
-            Type: "TextBox",
-            // Type: "ComboBox",
+            Type: "ComboBox",
             Title: "Transaction total price",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
-
                 X: 0,
                 Y: 6,
               },
@@ -305,9 +321,9 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionTotalQuantity",
-            Type: "TextBox",
+            Type: "ComboBox",
             Title: "Transaction total quantity",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -329,9 +345,9 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionLineTotalPrice",
-            Type: "TextBox",
+            Type: "ComboBox",
             Title: "Transaction line total price",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -353,9 +369,9 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionLineTotalQuantity",
-            Type: "TextBox",
+            Type: "ComboBox",
             Title: "Transaction line total quantity",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -427,10 +443,9 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionType",
-            // Type: "MultiTickBox",
-            Type: "TextBox",
+            Type: "MultiTickBox",
             Title: "Transaction type",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -452,10 +467,9 @@ export class ConfigurationAssistantComponent implements OnInit {
           },
           {
             FieldID: "transactionStatus",
-            // Type: "MultiTickBox",
-            Type: "TextBox",
+            Type: "MultiTickBox",
             Title: "Transaction status",
-            Mandatory: false,
+            Mandatory: true,
             ReadOnly: false,
             Layout: {
               Origin: {
@@ -504,20 +518,47 @@ export class ConfigurationAssistantComponent implements OnInit {
    }
 
    async onRunClicked() {
+    this.loaderService.show();
     console.log(this.configuration)
-    // TODO: add validation
-    if(this.configuration.genericSlug.includes(' ') || this.configuration.accountSlug.includes(' ')) {
+    const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
+    const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
+    if(genericSlugExists || accountSlugExists) {
+      const badName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
       const dataMsg = new PepDialogData({
-        title: this.translate.instant('SLUG_NAME_ERROR_TITLE'),
-        actionsType: 'close',
-        content: this.translate.instant('SLUG_NAME_ERROR')
+        title: this.translate.instant('SLUG_EXISTS_ERROR_TITLE',{name: badName}),
+        content: this.translate.instant('SLUG_EXISTS_ERROR')
       });
+      this.loaderService.hide();
       this.dialogService.openDefaultDialog(dataMsg);
     }
     else {
-      const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
-      const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
-      const savedConf = await this.addonService.saveConfiguration(this.configuration);
+      try {
+        const importedPages = await this.addonService.replaceFields(this.configuration);
+        const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
+        const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
+        const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
+        const savedConf = await this.addonService.saveConfiguration(this.configuration);
+        const dataMsg = new PepDialogData({
+          title: this.translate.instant('SUCCESS_TITLE'),
+          actionsType: 'close',
+          content: this.translate.instant('SUCCESS_CONTENT')
+        });
+        this.loaderService.hide();
+        this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(res => {
+          this.navigateToPages();
+        });
+      } catch(err) {
+          const dataMsg = new PepDialogData({
+          title: this.translate.instant('Run failed'),
+          content: this.translate.instant(err)
+        });
+        this.loaderService.hide();
+        this.dialogService.openDefaultDialog(dataMsg);
+      }
     }
+   }
+
+   formValidationChange(e) {
+    this.formValid = e;
    }
 }

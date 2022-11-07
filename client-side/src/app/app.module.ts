@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { SettingsComponent, SettingsModule } from './settings';
 import { config } from './app.config';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -14,7 +13,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     ],
     imports: [
         BrowserModule,
-        MatDialogModule,
         SettingsModule,
         TranslateModule.forRoot({
             loader: {

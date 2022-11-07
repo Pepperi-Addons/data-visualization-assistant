@@ -1,0 +1,502 @@
+[{
+        "Blocks": [{
+                "Key": "a1a35c58-d9db-5e4c-7200-8106318b3131",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Scorecards",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "scorecards",
+                    "ModuleName": "ScorecardsModule",
+                    "ComponentName": "ScorecardsComponent"
+                },
+                "Configuration": {
+                    "Resource": "Scorecards",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "scorecardsConfig": {
+                            "groupTitleAndDescription": "ungrouped",
+                            "useRoundCorners": false,
+                            "titleSize": "xl",
+                            "maxColumns": 1,
+                            "useTitle": true,
+                            "cardTextColor": "system-primary",
+                            "horizontalAlign": "center",
+                            "gap": 0.5,
+                            "useDescription": true,
+                            "roundCornersSize": "md",
+                            "useDropShadow": true,
+                            "descriptionSize": "sm",
+                            "dropShadow": {
+                                "type": "Regular",
+                                "intensity": 5
+                            },
+                            "border": {
+                                "color": "hsl(0, 0%, 57%)",
+                                "opacity": "50"
+                            },
+                            "verticalAlign": "center",
+                            "textPosition": "overlyed",
+                            "overlay": {
+                                "opacity": 50,
+                                "value": "hsl(0, 0%, 57%)",
+                                "use": false
+                            },
+                            "useBorder": false,
+                            "cardHeight": 16,
+                            "descriptionMaxNumOfLines": 1,
+                            "useText": true,
+                            "gradientOverlay": {
+                                "opacity": 50,
+                                "value": "hsl(0, 0%, 57%)",
+                                "use": false
+                            },
+                            "editSlideIndex": 2,
+                            "titleWeight": "normal"
+                        },
+                        "chart": {
+                            "Key": "Gauge_c2cc9af4d7ad.js",
+                            "ScriptURI": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/gauge_c2cc9af4d7ad.js"
+                        },
+                        "cards": [{
+                                "imageURL": "",
+                                "query": "21ef3802-4850-4e21-a92e-2e3f3fbe617b",
+                                "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/value_c2cc9af4d7ad.js",
+                                "description": "Description",
+                                "id": 0,
+                                "title": "Orders today",
+                                "chart": "Value_c2cc9af4d7ad.js",
+                                "variablesData": {}
+                            }, {
+                                "imageURL": "",
+                                "query": "3f3d6ae0-a9ab-488f-a122-6d3cdec70b48",
+                                "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/value_c2cc9af4d7ad.js",
+                                "description": "Description",
+                                "id": 1,
+                                "title": "Orders this month",
+                                "chart": "Value_c2cc9af4d7ad.js",
+                                "variablesData": {}
+                            }, {
+                                "imageURL": "",
+                                "query": "b7c2b6d7-e7b0-4296-b370-60cce6d4d12a",
+                                "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/value_c2cc9af4d7ad.js",
+                                "description": "Description",
+                                "id": 2,
+                                "title": "Orders this year",
+                                "chart": "Value_c2cc9af4d7ad.js",
+                                "variablesData": {}
+                            }
+                        ]
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "4e12249f-4465-dd7b-5d8d-5bf86bbdd8e7",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "50eb92d7-3671-488c-b585-ca4900d0eabb",
+                        "useBorder": false,
+                        "label": "Year Over Year",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/column_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Column_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "ed7408e4-aa00-6f59-ef9c-6ff820141efb",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "2fb835c7-d356-4f35-b153-5ff001e76bad",
+                        "useBorder": false,
+                        "label": "Year Over Year (QTY)",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/column_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Column_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "233d91e8-9f58-8bb2-ebbf-4d08f4f28cbe",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "4fedbcab-02df-41c5-9dc6-8abcbb1c9286",
+                        "useBorder": false,
+                        "label": "Orders by reps this month",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/column_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Column_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "f2512087-b047-17dc-e437-7c4f3c5fb706",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "f1721774-9d35-4aec-85b2-96942719bdf5",
+                        "useBorder": false,
+                        "label": "Orders by reps this year",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/column_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Column_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "340b29e1-139e-d30e-cdd9-02b89631365e",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "f5ba275b-ccc7-40cd-b68b-43db0c4fd12b",
+                        "useBorder": false,
+                        "label": "Orders by category in the last year",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/pie_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Pie_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "f6b28d54-eb2c-6d19-58e8-14bdd791e9ec",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "27f826c2-e280-4b76-b705-4d655a8f1185",
+                        "useBorder": false,
+                        "label": "Orders by category in the last year (QTY)",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/pie_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Pie_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }, {
+                "Key": "4a5718ed-f09f-67f2-aa26-a8a9bb20690c",
+                "Relation": {
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "RelationName": "PageBlock",
+                    "Type": "NgComponent",
+                    "Name": "Chart",
+                    "SubType": "NG14",
+                    "AddonRelativeURL": "chart",
+                    "ModuleName": "ChartModule",
+                    "ComponentName": "ChartComponent"
+                },
+                "Configuration": {
+                    "Resource": "Chart",
+                    "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+                    "Data": {
+                        "dropShadow": {
+                            "type": "Regular",
+                            "intensity": 5
+                        },
+                        "border": {
+                            "color": "hsl(0, 0%, 57%)",
+                            "opacity": "50"
+                        },
+                        "useLabel": true,
+                        "query": "0a35d282-27b3-458b-b48b-6e2be63bcb2d",
+                        "useBorder": false,
+                        "label": "# activities by type",
+                        "horizontalAlign": "left",
+                        "chartCache": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/stacked column_c2cc9af4d7ad.js",
+                        "secondQuery": null,
+                        "useDropShadow": true,
+                        "chart": "Stacked column_c2cc9af4d7ad.js",
+                        "variablesData": {},
+                        "height": 22
+                    }
+                },
+                "PageConfiguration": {
+                    "Parameters": [{
+                            "Type": "String",
+                            "Consume": true,
+                            "Key": "AccountUUID",
+                            "Produce": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "Layout": {
+            "Sections": [{
+                    "Key": "cd7840ff-8f86-a728-e6ff-8b4ddc242de7",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "a1a35c58-d9db-5e4c-7200-8106318b3131"
+                            }
+                        }
+                    ],
+                    "Hide": []
+                }, {
+                    "Key": "292d911e-921d-0a66-97d0-a66be9169d4f",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "4e12249f-4465-dd7b-5d8d-5bf86bbdd8e7"
+                            }
+                        }, {
+                            "BlockContainer": {
+                                "BlockKey": "ed7408e4-aa00-6f59-ef9c-6ff820141efb"
+                            }
+                        }
+                    ],
+                    "Name": "",
+                    "Height": 0,
+                    "Split": "1/2 1/2",
+                    "Hide": []
+                }, {
+                    "Key": "db8e093c-204c-9647-1a22-14f0647ee919",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "233d91e8-9f58-8bb2-ebbf-4d08f4f28cbe"
+                            }
+                        }, {
+                            "BlockContainer": {
+                                "BlockKey": "f2512087-b047-17dc-e437-7c4f3c5fb706"
+                            }
+                        }
+                    ],
+                    "Name": "",
+                    "Height": 0,
+                    "Split": "1/2 1/2",
+                    "Hide": []
+                }, {
+                    "Key": "5fb178ca-81e0-3274-6cf1-fada0e8ea402",
+                    "Columns": [{
+                            "BlockContainer": {
+                                "BlockKey": "340b29e1-139e-d30e-cdd9-02b89631365e"
+                            }
+                        }, {
+                            "BlockContainer": {
+                                "BlockKey": "f6b28d54-eb2c-6d19-58e8-14bdd791e9ec"
+                            }
+                        }, {
+                            "BlockContainer": {
+                                "BlockKey": "4a5718ed-f09f-67f2-aa26-a8a9bb20690c"
+                            }
+                        }
+                    ],
+                    "Name": "",
+                    "Height": 0,
+                    "Split": "1/3 1/3 1/3",
+                    "Hide": []
+                }
+            ],
+            "SectionsGap": "sm",
+            "ColumnsGap": "sm",
+            "HorizontalSpacing": "sm",
+            "VerticalSpacing": "sm",
+            "MaxWidth": 1536
+        },
+        "Hidden": false,
+        "CreationDateTime": "2022-07-31T14:43:52.025Z",
+        "Key": "00000000-0000-0001-3912-0da511b0a12d",
+        "Name": "Manager Dashboard",
+        "Description": "Manager Dashboard"
+    }
+]
