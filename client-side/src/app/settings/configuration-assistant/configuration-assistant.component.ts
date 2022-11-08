@@ -45,31 +45,33 @@ export class ConfigurationAssistantComponent implements OnInit {
     ngOnInit() {
       this.dataIsIndexed().then(dataIsIndexedFlag => {
         this.dataIsIndexedFlag = dataIsIndexedFlag;
-        this.addonService.getValuesForQueriesFilter().then(values => {
-          for(const v of values.typeValues) {
-            this.typeValuesOptions.push({ Key: v, Value: v });
-          }
-          for(const v of values.statusValues) {
-            this.statusValuesOptions.push({ Key: v, Value: v });
-          }
-          this.translate.get('SLUGS_TEXT').toPromise().then(res => {
-            this.configuration = this.emptyConfiguration();
-            this.addonService.getConfiguration().then(savedConf => {
-              if(savedConf) {
-                this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
-                this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
-                this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
-                this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
-                this.configuration.transactionType = savedConf.transactionType;
-                this.configuration.transactionStatus = savedConf.transactionStatus;
-                this.formValid = true;
-              }
-              this.dataView = this.getDataView();
-              this.dataSource = this.getDataSource();
-              this.dataLoaded = true;
+        if(dataIsIndexedFlag) {
+          this.addonService.getValuesForQueriesFilter().then(values => {
+            for(const v of values.typeValues) {
+              this.typeValuesOptions.push({ Key: v, Value: v });
+            }
+            for(const v of values.statusValues) {
+              this.statusValuesOptions.push({ Key: v, Value: v });
+            }
+            this.translate.get('SLUGS_TEXT').toPromise().then(res => {
+              this.configuration = this.emptyConfiguration();
+              this.addonService.getConfiguration().then(savedConf => {
+                if(savedConf) {
+                  this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
+                  this.configuration.transactionTotalQuantity = savedConf.transactionTotalQuantity;
+                  this.configuration.transactionLineTotalPrice = savedConf.transactionLineTotalPrice;
+                  this.configuration.transactionLineTotalQuantity = savedConf.transactionLineTotalQuantity;
+                  this.configuration.transactionType = savedConf.transactionType;
+                  this.configuration.transactionStatus = savedConf.transactionStatus;
+                  this.formValid = true;
+                }
+                this.dataView = this.getDataView();
+                this.dataSource = this.getDataSource();
+                this.dataLoaded = true;
+              });
             });
           });
-        });
+        }
       });
         
     }
@@ -86,7 +88,7 @@ export class ConfigurationAssistantComponent implements OnInit {
 
     async dataIsIndexed() {
         const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
-        if(all_activities_scheme && (Object.keys(all_activities_scheme.Fields)).length > 0) {
+        if(all_activities_scheme && all_activities_scheme.Fields && (Object.keys(all_activities_scheme.Fields)).length > 0) {
           const transaction_lines_scheme = await this.addonService.getDataIndexScheme('transaction_lines');
           for(const name in all_activities_scheme.Fields) {
             if(all_activities_scheme.Fields[name].Type == 'Integer' || all_activities_scheme.Fields[name].Type == 'Double')
@@ -538,6 +540,7 @@ export class ConfigurationAssistantComponent implements OnInit {
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
         const savedConf = await this.addonService.saveConfiguration(this.configuration);
+        console.log('pages and queries imported, slugs created and mapped successfully')
         const dataMsg = new PepDialogData({
           title: this.translate.instant('SUCCESS_TITLE'),
           actionsType: 'close',

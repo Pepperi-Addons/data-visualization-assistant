@@ -2,6 +2,7 @@ import jwt from 'jwt-decode';
 import { MenuDataView, PapiClient } from '@pepperi-addons/papi-sdk';
 import { Injectable } from '@angular/core';
 import { PepDataConvertorService, PepHttpService, PepSessionService } from '@pepperi-addons/ngx-lib';
+import { throwError } from 'rxjs';
 
 
 @Injectable()
@@ -77,8 +78,24 @@ export class AddonService {
     async upsertSlugsDataViews(configuration) {
         //get rep data view, then update it
         const res = await this.papiClient.get(`/addons/api/4ba5d6f9-6642-4817-af67-c79b68c96977/api/get_slugs_data_views_data`);
-        let repDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
-        let adminDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
+        let repDataView: MenuDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'rep');
+        let adminDataView: MenuDataView = res.dataViews.find(data => data.Context?.Profile?.Name?.toLowerCase() === 'admin');
+        if(!adminDataView) {
+            const adminProfile = res.profiles.find(p => p.name?.toLowerCase() === 'admin');
+            adminDataView = {
+                Type: 'Menu',
+                Hidden: false,
+                Context: {
+                    Name: 'Slugs',
+                    Profile: {
+                        InternalID: Number(adminProfile.id),
+                        Name: adminProfile.name
+                    },
+                    ScreenSize: 'Tablet'
+                },
+                Fields: [],
+            }
+        }
         const accountPageUUID = "00000000-0000-0001-0acc-0da511b0a12d";
         const managerPageUUID = "00000000-0000-0001-3912-0da511b0a12d";
         const repPageUUID = "00000000-0000-0001-12e9-0da511b0a12d";
@@ -90,8 +107,9 @@ export class AddonService {
         adminDataView.Fields.push({FieldID: configuration.genericSlug, Title: managerPageUUID});
         adminDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});
 
-        repDataView = await this.papiClient.post('/meta_data/data_views', repDataView);
-        adminDataView = await this.papiClient.post('/meta_data/data_views', adminDataView);
+        repDataView = await this.httpService.postPapiApiCall('/meta_data/data_views', repDataView).toPromise();
+        debugger
+        adminDataView = await this.httpService.postPapiApiCall('/meta_data/data_views', adminDataView).toPromise();
         return {repDataView, adminDataView};
     }
 
