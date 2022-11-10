@@ -1,6 +1,6 @@
 {
   "AddonUUID": "948219c4-b9a6-4fb2-814d-153d3b359a70",
-  "AddonVersion": "0.0.70",
+  "AddonVersion": "0.0.74",
   "DebugPort": 4500,
   "WebappBaseUrl": "https://app.sandbox.pepperi.com",
   "DefaultEditor": "main",
@@ -22,7 +22,7 @@
     ],
     "Dependencies": {
       "papi_data_index": "1.0.11",
-      "data_visualization": "0.6.147",
+      "data_visualization": "0.7.3",
       "slugs": "1.0.22"
     },
     "CPISide": []

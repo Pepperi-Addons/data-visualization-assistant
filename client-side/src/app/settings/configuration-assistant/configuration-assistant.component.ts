@@ -54,7 +54,7 @@ export class ConfigurationAssistantComponent implements OnInit {
               this.statusValuesOptions.push({ Key: v, Value: v });
             }
             this.translate.get('SLUGS_TEXT').toPromise().then(res => {
-              this.configuration = this.emptyConfiguration();
+              this.configuration = this.defaultConfiguration();
               this.addonService.getConfiguration().then(savedConf => {
                 if(savedConf) {
                   this.configuration.transactionTotalPrice = savedConf.transactionTotalPrice;
@@ -84,7 +84,7 @@ export class ConfigurationAssistantComponent implements OnInit {
     navigateToPages() {
       // navigate to pages manager
       window.location.href = '/settings_block/50062e0c-9967-4ed4-9102-f2bc50602d41/pages';
-  }
+    }
 
     async dataIsIndexed() {
         const all_activities_scheme = await this.addonService.getDataIndexScheme('all_activities');
@@ -104,16 +104,16 @@ export class ConfigurationAssistantComponent implements OnInit {
         return false;
     }
 
-    emptyConfiguration() {
+    defaultConfiguration() {
         return {
             genericSlug: "dashboard",
             accountSlug: "account_dashboard",
-            transactionTotalPrice: "",
-            transactionTotalQuantity: "",
-            transactionLineTotalPrice: "",
-            transactionLineTotalQuantity: "",
-            transactionType: [],
-            transactionStatus: [],
+            transactionTotalPrice: this.getDefaultValue(this.allActivitiesFieldsOptions, "GrandTotal"),
+            transactionTotalQuantity: this.getDefaultValue(this.allActivitiesFieldsOptions, "QuantitiesTotal"),
+            transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
+            transactionLineTotalQuantity: this.getDefaultValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
+            transactionType: this.createMultiSelectString(this.typeValuesOptions),
+            transactionStatus: this.createMultiSelectString(this.statusValuesOptions),
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -121,10 +121,10 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
 
     getDataSource() {
-        return this.configuration
+        return this.configuration;
     }
 
-   getDataView() {
+    getDataView() {
        return {
          Type: "Form",
          Hidden: false,
@@ -517,7 +517,7 @@ export class ConfigurationAssistantComponent implements OnInit {
          ],
          Rows: [],
        };
-   }
+    }
 
    async onRunClicked() {
     this.loaderService.show();
@@ -561,7 +561,20 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
    }
 
-   formValidationChange(e) {
-    this.formValid = e;
-   }
+    formValidationChange(e) {
+      this.formValid = e;
+    }
+
+    createMultiSelectString(optionsArray) {
+      let str = '';
+      for(const op of optionsArray)
+        str = str+op.Value+';'
+      str = str.slice(0, -1);
+      return str;
+    }
+
+    getDefaultValue(options, defaultValue) {
+      const res = (options.filter(op => op.Value==defaultValue)).length > 0 ? defaultValue : "";
+      return res;
+    }
 }
