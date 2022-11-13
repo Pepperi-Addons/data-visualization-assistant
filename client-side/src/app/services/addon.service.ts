@@ -108,7 +108,6 @@ export class AddonService {
         adminDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});
 
         repDataView = await this.httpService.postPapiApiCall('/meta_data/data_views', repDataView).toPromise();
-        debugger
         adminDataView = await this.httpService.postPapiApiCall('/meta_data/data_views', adminDataView).toPromise();
         return {repDataView, adminDataView};
     }
