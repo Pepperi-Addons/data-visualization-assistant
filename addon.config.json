@@ -23,7 +23,8 @@
     "Dependencies": {
       "papi_data_index": "1.0.11",
       "data_visualization": "0.7.3",
-      "slugs": "1.0.22"
+      "slugs": "1.0.22",
+      "slideshow": "1.0.5"
     },
     "CPISide": []
   }
