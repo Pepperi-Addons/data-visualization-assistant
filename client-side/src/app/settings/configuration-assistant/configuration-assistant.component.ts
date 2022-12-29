@@ -46,6 +46,7 @@ export class ConfigurationAssistantComponent implements OnInit {
       this.dataIsIndexed().then(dataIsIndexedFlag => {
         this.dataIsIndexedFlag = dataIsIndexedFlag;
         if(dataIsIndexedFlag) {
+          this.loaderService.show();
           this.addonService.getValuesForQueriesFilter().then(values => {
             for(const v of values.typeValues) {
               this.typeValuesOptions.push({ Key: v, Value: v });
@@ -68,12 +69,12 @@ export class ConfigurationAssistantComponent implements OnInit {
                 this.dataView = this.getDataView();
                 this.dataSource = this.getDataSource();
                 this.dataLoaded = true;
+                this.loaderService.hide();
               });
             });
           });
         }
       });
-        
     }
 
     navigateToDataIndexSettings() {

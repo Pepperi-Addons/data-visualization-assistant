@@ -1,4 +1,4 @@
-{
+[{
     "ModificationDateTime": "2022-12-06T12:49:28.804Z",
     "CreationDateTime": "2022-12-05T13:14:47.066Z",
     "Description": "Default account insights",
@@ -462,4 +462,4 @@
     "Hidden": false,
     "Name": "Account Insights",
     "Key": "00000000-0000-0001-0acc-0da511b0a12d"
-}
+}]

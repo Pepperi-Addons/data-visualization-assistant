@@ -1,4 +1,4 @@
-{
+[{
     "ModificationDateTime": "2022-12-06T12:49:29.064Z",
     "CreationDateTime": "2022-12-01T14:49:16.172Z",
     "Description": "Default rep insights",
@@ -513,4 +513,4 @@
     "Hidden": false,
     "Name": "Rep Insights",
     "Key": "00000000-0000-0001-12e9-0da511b0a12d"
-}
+}]

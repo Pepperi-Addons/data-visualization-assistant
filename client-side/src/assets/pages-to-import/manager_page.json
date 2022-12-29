@@ -1,4 +1,4 @@
-{
+[{
     "ModificationDateTime": "2022-12-06T12:49:29.313Z",
     "CreationDateTime": "2022-12-05T13:14:58.194Z",
     "Description": "Default manager insights",
@@ -66,10 +66,6 @@
                         },
                         "editSlideIndex": 2,
                         "titleWeight": "normal"
-                    },
-                    "chart": {
-                        "Key": "Gauge_c2cc9af4d7ad.js",
-                        "ScriptURI": "https://pfs.pepperi.com/15a59d52-4cc8-4e48-8745-aba0924a42e3/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/gauge_c2cc9af4d7ad.js"
                     },
                     "cards": [
                         {
@@ -728,4 +724,4 @@
     "Hidden": false,
     "Name": "Manager Insights",
     "Key": "00000000-0000-0001-3912-0da511b0a12d"
-}
+}]

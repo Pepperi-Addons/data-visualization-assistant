@@ -69,3 +69,8 @@
         background-position: center;
     }
 }
+
+::ng-deep .form-view{
+    margin-top: unset !important;
+    margin-inline: unset !important;
+}
