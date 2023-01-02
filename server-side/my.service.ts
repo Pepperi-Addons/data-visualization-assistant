@@ -88,11 +88,11 @@ class MyService {
                     }
                 ]
             }
-            console.log(body);
-            const importedPage = await this.papiClientForImport.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body);
+            console.log("BODY SENT TO RECURSIVE IMPORT: " +JSON.stringify(body));
+            const importedPage = await this.papiClient.post('/pages/import/file', body);
             importedPages.push(importedPage);
         }
-        console.log("DVAS IMPORTED PAGES RESPONSES: " + importedPages);
+        console.log("DVAS IMPORTED PAGES RESPONSES: " + JSON.stringify(importedPages));
         return importedPages;
     }
 

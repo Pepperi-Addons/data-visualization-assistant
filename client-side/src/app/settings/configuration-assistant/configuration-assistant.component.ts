@@ -46,6 +46,7 @@ export class ConfigurationAssistantComponent implements OnInit {
       this.dataIsIndexed().then(dataIsIndexedFlag => {
         this.dataIsIndexedFlag = dataIsIndexedFlag;
         if(dataIsIndexedFlag) {
+          this.loaderService.show();
           this.addonService.getValuesForQueriesFilter().then(values => {
             for(const v of values.typeValues) {
               this.typeValuesOptions.push({ Key: v, Value: v });
@@ -68,12 +69,12 @@ export class ConfigurationAssistantComponent implements OnInit {
                 this.dataView = this.getDataView();
                 this.dataSource = this.getDataSource();
                 this.dataLoaded = true;
+                this.loaderService.hide();
               });
             });
           });
         }
       });
-        
     }
 
     navigateToDataIndexSettings() {
@@ -106,8 +107,8 @@ export class ConfigurationAssistantComponent implements OnInit {
 
     defaultConfiguration() {
         return {
-            genericSlug: "dashboard",
-            accountSlug: "account_dashboard",
+            genericSlug: "insights",
+            accountSlug: "account_insights",
             transactionTotalPrice: this.getDefaultValue(this.allActivitiesFieldsOptions, "GrandTotal"),
             transactionTotalQuantity: this.getDefaultValue(this.allActivitiesFieldsOptions, "QuantitiesTotal"),
             transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
@@ -196,7 +197,7 @@ export class ConfigurationAssistantComponent implements OnInit {
           {
             FieldID: "genericSlug",
             Type: "TextBox",
-            Title: "Generic dashboard slug",
+            Title: "Generic insights slug",
             Mandatory: true,
             ReadOnly: false,
             Layout: {
@@ -223,7 +224,7 @@ export class ConfigurationAssistantComponent implements OnInit {
           {
             FieldID: "accountSlug",
             Type: "TextBox",
-            Title: "Account dashboard slug",
+            Title: "Account insights slug",
             Mandatory: true,
             ReadOnly: false,
             Layout: {

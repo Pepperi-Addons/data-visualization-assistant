@@ -1,8 +1,5 @@
 [{
-        "ModificationDateTime": "2022-09-28T09:02:45.169Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:45.169Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -81,13 +78,14 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Manager - number of activities weekly by transaction type",
-        "Key": "0a35d282-27b3-458b-b48b-6e2be63bcb2d"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:42.502Z",
         "Resource": "all_activities",
         "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:42.502Z",
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Name": "Manager - number of activities weekly by transaction type",
+        "Key": "0a35d282-27b3-458b-b48b-6e2be63bcb2d"
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -155,7 +153,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -163,13 +161,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - Card - orders today",
         "Key": "21ef3802-4850-4e21-a92e-2e3f3fbe617b"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:43.447Z",
-        "Resource": "transaction_lines",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:43.447Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -240,7 +238,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "UnitsQuantity_Placeholder"
+                        "FieldID": "TotalUnitsPriceAfterDiscount"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -248,13 +246,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "transaction_lines",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders by main category in the last year (QTY)",
         "Key": "27f826c2-e280-4b76-b705-4d655a8f1185"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:42.583Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:42.583Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -325,7 +323,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "QuantitiesTotal_Placeholder"
+                        "FieldID": "QuantitiesTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -333,13 +331,14 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Manager - orders year over year (Qty)",
-        "Key": "2fb835c7-d356-4f35-b153-5ff001e76bad"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:42.464Z",
         "Resource": "all_activities",
         "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:42.464Z",
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Name": "Manager - orders year over year (Qty)",
+        "Key": "2fb835c7-d356-4f35-b153-5ff001e76bad"
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -407,7 +406,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -415,13 +414,14 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Manager - Card - orders this month",
-        "Key": "3f3d6ae0-a9ab-488f-a122-6d3cdec70b48"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:42.094Z",
         "Resource": "all_activities",
         "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:42.094Z",
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Name": "Manager - Card - orders this month",
+        "Key": "3f3d6ae0-a9ab-488f-a122-6d3cdec70b48"
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -489,7 +489,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -497,13 +497,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders by reps this month",
         "Key": "4fedbcab-02df-41c5-9dc6-8abcbb1c9286"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:42.176Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:42.176Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -571,7 +571,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -579,13 +579,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders today",
         "Key": "508d4018-3699-4225-abd4-b6be552f0df4"
     }, {
-        "ModificationDateTime": "2022-09-29T10:35:59.150Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:43.825Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -656,7 +656,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -664,13 +664,14 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Manager - orders year over year",
-        "Key": "50eb92d7-3671-488c-b585-ca4900d0eabb"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:43.671Z",
         "Resource": "all_activities",
         "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:43.671Z",
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Name": "Manager - orders year over year",
+        "Key": "50eb92d7-3671-488c-b585-ca4900d0eabb"
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -741,7 +742,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -749,13 +750,14 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Manager - orders this year",
-        "Key": "9bb2544a-7a46-4a96-9d86-49a0f61713f8"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:45.022Z",
         "Resource": "all_activities",
         "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:45.022Z",
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Name": "Manager - orders this year",
+        "Key": "9bb2544a-7a46-4a96-9d86-49a0f61713f8"
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -826,7 +828,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -834,13 +836,14 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - Card - orders this year",
         "Key": "b7c2b6d7-e7b0-4296-b370-60cce6d4d12a"
-    }, {
-        "ModificationDateTime": "2022-09-28T09:02:45.144Z",
-        "Resource": "transaction_lines",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:45.144Z",
+    },
+    {
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -911,7 +914,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "TotalUnitsPriceAfterDiscount_Placeholder"
+                        "FieldID": "UnitsQuantity"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -919,13 +922,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "transaction_lines",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - top selling items in the last year",
         "Key": "eb776e8e-3691-4321-a041-37dd383fca16"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:45.036Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:45.036Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -996,7 +999,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -1004,13 +1007,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders by reps this year",
         "Key": "f1721774-9d35-4aec-85b2-96942719bdf5"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:43.508Z",
-        "Resource": "transaction_lines",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:43.508Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -1081,7 +1084,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "TotalUnitsPriceAfterDiscount_Placeholder"
+                        "FieldID": "UnitsQuantity"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -1089,13 +1092,13 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "transaction_lines",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders by main category in the last year",
         "Key": "f5ba275b-ccc7-40cd-b68b-43db0c4fd12b"
     }, {
-        "ModificationDateTime": "2022-09-28T09:02:45.150Z",
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-09-28T09:02:45.150Z",
+        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
         "Series": [{
                 "GroupBy": [{
@@ -1163,7 +1166,7 @@
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "GrandTotal_Placeholder"
+                        "FieldID": "GrandTotal"
                     }
                 ],
                 "DynamicFilterFields": [],
@@ -1171,6 +1174,9 @@
                 "Name": "Series 1"
             }
         ],
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - orders this month",
         "Key": "faeb5559-a752-4202-8a40-66a82fe81643"
     }
