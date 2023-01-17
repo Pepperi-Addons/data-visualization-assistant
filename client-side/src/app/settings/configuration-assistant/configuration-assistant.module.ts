@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { PepNgxLibModule } from '@pepperi-addons/ngx-lib';
+import { PepNgxCompositeLibModule } from '@pepperi-addons/ngx-composite-lib';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepSizeDetectorModule } from '@pepperi-addons/ngx-lib/size-detector';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
@@ -34,11 +35,9 @@ export const routes: Routes = [
     ],
     imports: [
         CommonModule,
-        // FormsModule,
-        // ReactiveFormsModule,
         HttpClientModule,
-        // PepNgxCompositeLibModule,
         PepNgxLibModule,
+        PepNgxCompositeLibModule,
         PepSizeDetectorModule,
         PepIconModule,
         PepTopBarModule,
@@ -54,7 +53,7 @@ export const routes: Routes = [
     ],
     exports:[ConfigurationAssistantComponent],
     providers:[
-        TranslateStore,
+        // TranslateStore,
         AddonService
     ]
 })
