@@ -1,10 +1,14 @@
 import { DoBootstrap, Injector, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PepAddonService } from '@pepperi-addons/ngx-lib';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
 import { SettingsComponent, SettingsModule } from './settings';
+import { ConfigurationAssistantModule } from './settings/configuration-assistant/configuration-assistant.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { config } from './app.config';
 
 @NgModule({
@@ -13,7 +17,10 @@ import { config } from './app.config';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
         SettingsModule,
+        ConfigurationAssistantModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

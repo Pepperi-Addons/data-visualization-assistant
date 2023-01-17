@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PepAddonService, PepLayoutService, PepLoaderService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
 import { config } from '../../addon.config';
 import { AddonService } from "src/app/services/addon.service";
-import { PepDialogActionButton, PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
+import { PepDialogData, PepDialogService } from "@pepperi-addons/ngx-lib/dialog";
 
 @Component({
     selector: 'configuration-assistant',
