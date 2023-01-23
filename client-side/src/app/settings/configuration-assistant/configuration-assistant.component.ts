@@ -21,6 +21,7 @@ export class ConfigurationAssistantComponent implements OnInit {
     transactionLinesFieldsOptions = [];
     typeValuesOptions = [];
     statusValuesOptions = [];
+    itemCategoryOptions = [];
     imagePath;
     dataLoaded = false;
     formValid;
@@ -98,6 +99,8 @@ export class ConfigurationAssistantComponent implements OnInit {
           for(const name in transaction_lines_scheme.Fields) {
             if(transaction_lines_scheme.Fields[name].Type == 'Integer' || transaction_lines_scheme.Fields[name].Type == 'Double')
               this.transactionLinesFieldsOptions.push({ Key: name, Value: name });
+            if(name.includes('Item.'))
+              this.itemCategoryOptions.push({ Key: name, Value: name });
           }
           return true;
         }
@@ -113,6 +116,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionTotalQuantity: this.getDefaultValue(this.allActivitiesFieldsOptions, "QuantitiesTotal"),
             transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
             transactionLineTotalQuantity: this.getDefaultValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
+            itemCategory: 'Item.MainCategory',
             transactionType: this.createMultiSelectString(this.typeValuesOptions),
             transactionStatus: this.createMultiSelectString(this.statusValuesOptions),
             slugsText: this.translate.instant('SLUGS_TEXT'),
@@ -153,7 +157,7 @@ export class ConfigurationAssistantComponent implements OnInit {
              Layout: {
                Origin: {
                  X: 0,
-                 Y: 0,
+                 Y: 9,
                },
                Size: {
                  Width: 2,
@@ -180,7 +184,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 1,
+                Y: 10,
               },
               Size: {
                 Width: 1,
@@ -203,7 +207,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 2,
+                Y: 11,
               },
               Size: {
                 Width: 1,
@@ -230,7 +234,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 3,
+                Y: 12,
               },
               Size: {
                 Width: 1,
@@ -257,7 +261,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 4,
+                Y: 0,
               },
               Size: {
                 Width: 2,
@@ -280,7 +284,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 5,
+                Y: 1,
               },
               Size: {
                 Width: 1,
@@ -307,7 +311,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 6,
+                Y: 2,
               },
               Size: {
                 Width: 1,
@@ -331,7 +335,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 1,
-                Y: 6,
+                Y: 2,
               },
               Size: {
                 Width: 1,
@@ -355,7 +359,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 7,
+                Y: 3,
               },
               Size: {
                 Width: 1,
@@ -379,7 +383,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 1,
-                Y: 7,
+                Y: 3,
               },
               Size: {
                 Width: 1,
@@ -395,6 +399,30 @@ export class ConfigurationAssistantComponent implements OnInit {
             OptionalValues: this.transactionLinesFieldsOptions
           },
           {
+            FieldID: "itemCategory",
+            Type: "ComboBox",
+            Title: "item category",
+            Mandatory: true,
+            ReadOnly: false,
+            Layout: {
+              Origin: {
+                X: 0,
+                Y: 4,
+              },
+              Size: {
+                Width: 1,
+                Height: 0,
+              },
+            },
+            Style: {
+              Alignment: {
+                Horizontal: "Stretch",
+                Vertical: "Stretch",
+              },
+            },
+            OptionalValues: this.itemCategoryOptions
+          },
+          {
             FieldID: "",
             Type: "Separator",
             Title: "Queries filter",
@@ -403,7 +431,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 8,
+                Y: 5,
               },
               Size: {
                 Width: 2,
@@ -430,7 +458,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 9,
+                Y: 6,
               },
               Size: {
                 Width: 1,
@@ -453,7 +481,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 10,
+                Y: 7,
               },
               Size: {
                 Width: 1,
@@ -477,7 +505,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 11,
+                Y: 8,
               },
               Size: {
                 Width: 1,
@@ -501,7 +529,7 @@ export class ConfigurationAssistantComponent implements OnInit {
             Layout: {
               Origin: {
                 X: 0,
-                Y: 12,
+                Y: 13,
               },
               Size: {
                 Width: 2,
