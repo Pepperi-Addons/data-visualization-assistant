@@ -55,7 +55,6 @@ export class AddonService {
         return { typeValues: schemaData.Fields["Type"].OptionalValues, statusValues: schemaData.Fields["StatusName"].OptionalValues };
     }
 
-    //TODO: add slug to page mapping
     async createSlug(slugName) {
         const slugBody = {
             slug : {
