@@ -11,6 +11,7 @@ The error Message is importent! it will be written in the audit log and help the
 import { Client, Request } from '@pepperi-addons/debug-server';
 import MyService from './my.service';
 import { AddonVersion, AddonUUID } from '../addon.config.json'
+import semver from 'semver';
 
 export async function install(client: Client, request: Request): Promise<any> {
     try {
@@ -43,22 +44,19 @@ export async function install(client: Client, request: Request): Promise<any> {
 }
 
 export async function uninstall(client: Client, request: Request): Promise<any> {
-    try {
-        const service = new MyService(client);
-        await service.papiClient.post(`/user_defined_collection/schemes/UserTarget/hard_delete`);
-        await service.papiClient.post(`/user_defined_collection/schemes/AccountTarget/hard_delete`);
-    } catch (err) {
-        throw new Error(`Failed to delete UDCs. error - ${err}`);
-    }
-    
-    return {success:true,resultObject:{}}
+    const service = new MyService(client);
+    await createUDCs(service);
+    return {success:true,resultObject:{}};
 }
 
 export async function upgrade(client: Client, request: Request): Promise<any> {
     try {
-        const service = new MyService(client);
-        await createAbstractSchemes(service);
-        await createUDCs(service);
+        // versions earlier than 0.6.17 don't have abstracts and udcs
+        if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.17') < 0) {
+            const service = new MyService(client);
+            await createAbstractSchemes(service);
+            await createUDCs(service);
+        }
     } catch (err) {
         throw new Error(`Failed to create Schemes. error - ${err}`);
     }
@@ -70,9 +68,9 @@ export async function downgrade(client: Client, request: Request): Promise<any> 
 }
 
 
-async function createAbstractSchemes(service) {
+async function createAbstractSchemes(service: MyService) {
     await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
-        Name: "userTarget",
+        Name: "user_target",
         Type: "abstract",
         Fields: {
             User: {
@@ -95,7 +93,7 @@ async function createAbstractSchemes(service) {
         }
     });
     await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
-        Name: "accountTarget",
+        Name: "account_target",
         Type: "abstract",
         Fields: {
             Account: {
@@ -119,26 +117,36 @@ async function createAbstractSchemes(service) {
     });
 }
 
-async function createUDCs(service) {
-    const allUdcsNames = (await service.papiClient.get(`/user_defined_collection/schemes`)).map(udc => udc.Name);
+async function createUDCs(service: MyService) {
+    const allUdcsNames = (await service.papiClient.get(`/user_defined_collections/schemes`)).map(udc => udc.Name);
     if(!allUdcsNames.includes("UserTarget")) {
-        await service.papiClient.post(`/user_defined_collection/schemes`, {
+        await service.papiClient.post(`/user_defined_collections/schemes`, {
             Name: "UserTarget",
             Extends: {
                 AddonUUID: AddonUUID,
-                Name: "userTarget"
+                Name: "user_target"
             },
             Description: "Target for user"
         });
     }
     if(!allUdcsNames.includes("AccountTarget")) {
-        await service.papiClient.post(`/user_defined_collection/schemes`, {
+        await service.papiClient.post(`/user_defined_collections/schemes`, {
             Name: "AccountTarget",
             Extends: {
                 AddonUUID: AddonUUID,
-                Name: "accountTarget"
+                Name: "account_target"
             },
             Description: "Target for account"
         });
     }
 }
+
+async function deleteUDCs(service: MyService) {
+    try {
+        await service.papiClient.post(`/user_defined_collections/schemes/UserTarget/hard_delete`);
+        await service.papiClient.post(`/user_defined_collections/schemes/AccountTarget/hard_delete`);
+    } catch (err) {
+        throw new Error(`Failed to delete UDCs. error - ${err}`);
+    }
+}
+    

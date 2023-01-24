@@ -99,7 +99,7 @@ export class ConfigurationAssistantComponent implements OnInit {
           for(const name in transaction_lines_scheme.Fields) {
             if(transaction_lines_scheme.Fields[name].Type == 'Integer' || transaction_lines_scheme.Fields[name].Type == 'Double')
               this.transactionLinesFieldsOptions.push({ Key: name, Value: name });
-            if(name.includes('Item.'))
+            if(name.startsWith('Item.'))
               this.itemCategoryOptions.push({ Key: name, Value: name });
           }
           return true;
