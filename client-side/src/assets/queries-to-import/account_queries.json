@@ -1,7 +1,9 @@
-[{
-        "ModificationDateTime": "2022-12-05T12:07:16.703Z",
+[
+    {
+        "ModificationDateTime": "2023-01-12T12:49:23.195Z",
         "Resource": "all_activities",
-        "Variables": [{
+        "Variables": [
+            {
                 "DefaultValue": "0",
                 "Type": "String",
                 "PreviewValue": "10357e57-76e1-4198-8029-4f48184403d8",
@@ -11,8 +13,10 @@
         ],
         "CreationDateTime": "2022-12-01T14:08:10.659Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -81,7 +85,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -89,7 +94,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -103,14 +109,17 @@
         ],
         "Name": "Account - Card - orders current account (last year)",
         "Key": "0bc14d7e-3dab-45be-8afb-afa8df09fc65"
-    }, {
-        "ModificationDateTime": "2022-12-05T12:09:19.495Z",
+    },
+    {
+        "ModificationDateTime": "2023-01-12T12:48:54.162Z",
         "Resource": "all_activities",
         "Variables": [],
         "CreationDateTime": "2022-12-05T12:08:37.877Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -166,7 +175,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -174,7 +184,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Average",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -188,10 +199,12 @@
         ],
         "Name": "Account - Card - average order all accounts (last year)",
         "Key": "34e556f1-2c0e-4097-92c5-8b4a0f5d11f6"
-    }, {
-        "ModificationDateTime": "2022-12-05T12:03:37.012Z",
+    },
+    {
+        "ModificationDateTime": "2023-01-25T15:22:21.448Z",
         "Resource": "all_activities",
-        "Variables": [{
+        "Variables": [
+            {
                 "DefaultValue": "0",
                 "Type": "String",
                 "PreviewValue": "0",
@@ -201,8 +214,10 @@
         ],
         "CreationDateTime": "2022-12-01T14:08:10.659Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -268,7 +283,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -276,7 +292,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -290,10 +307,12 @@
         ],
         "Name": "Account - Card - orders current account (this month)",
         "Key": "427e1502-3b1e-4175-9782-d539b00353c7"
-    }, {
-        "ModificationDateTime": "2022-12-05T13:07:19.936Z",
+    },
+    {
+        "ModificationDateTime": "2023-01-25T15:23:52.743Z",
         "Resource": "all_activities",
-        "Variables": [{
+        "Variables": [
+            {
                 "DefaultValue": "0",
                 "Type": "String",
                 "PreviewValue": "10357e57-76e1-4198-8029-4f48184403d8",
@@ -303,8 +322,10 @@
         ],
         "CreationDateTime": "2022-12-01T14:08:10.659Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "MMM",
                         "Alias": "ActionDateTime",
                         "FieldID": "ActionDateTime",
@@ -373,7 +394,8 @@
                     "Interval": "Year",
                     "Format": "yyyy"
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -381,7 +403,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -397,9 +420,10 @@
         "Key": "676131d0-429e-4a69-9002-288bf1f5db67"
     },
     {
-        "ModificationDateTime": "2022-12-06T12:14:12.796Z",
+        "ModificationDateTime": "2023-01-12T12:42:52.218Z",
         "Resource": "transaction_lines",
-        "Variables": [{
+        "Variables": [
+            {
                 "DefaultValue": "0",
                 "Type": "String",
                 "PreviewValue": "10357e57-76e1-4198-8029-4f48184403d8",
@@ -409,8 +433,10 @@
         ],
         "CreationDateTime": "2022-12-01T14:08:10.659Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -479,7 +505,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -487,7 +514,8 @@
                 ],
                 "Resource": "transaction_lines",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -499,16 +527,101 @@
                 "Name": "Current"
             }
         ],
-        "Name": "Account - current account orders by brand (last month)",
+        "Name": "Account - current account orders by category (last month)",
         "Key": "76213dab-8865-436c-b7d8-306ecd77629c"
-    }, {
-        "ModificationDateTime": "2022-12-06T12:13:41.811Z",
+    },
+    {
+        "ModificationDateTime": "2023-01-24T12:21:01.306Z",
+        "Resource": "AccountTarget",
+        "Variables": [
+            {
+                "DefaultValue": "0",
+                "Type": "String",
+                "PreviewValue": "0",
+                "Key": "ec8398ce-f202-4421-8d76-919e38b3ae1e",
+                "Name": "account"
+            }
+        ],
+        "CreationDateTime": "2023-01-12T12:32:03.869Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "yyyy MMM",
+                        "Alias": "",
+                        "FieldID": "",
+                        "Interval": "Month"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "AllUsers"
+                },
+                "Filter": {
+                    "ComplexId": "1",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "Values": [
+                            "account"
+                        ],
+                        "Operation": "IsEqualVariable",
+                        "ApiName": "Account.Key",
+                        "ExpressionId": "1",
+                        "FieldType": "String"
+                    },
+                    "RightNode": {
+                        "Values": [],
+                        "Operation": "ThisMonth",
+                        "ApiName": "Date",
+                        "ExpressionId": "2",
+                        "FieldType": "DateTime"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "",
+                    "Interval": "None",
+                    "Format": ""
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "AccountTarget",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "Target"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "63eaa565-becd-45ae-8653-6b033e5be809",
+                "Name": "Target"
+            }
+        ],
+        "Name": "Account - Card - target current account (this month)",
+        "Key": "b7e9d340-4fe7-463b-993b-7d41742c0076"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T15:24:11.347Z",
         "Resource": "transaction_lines",
         "Variables": [],
         "CreationDateTime": "2022-12-05T13:12:53.080Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -564,7 +677,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -572,7 +686,8 @@
                 ],
                 "Resource": "transaction_lines",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Average",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -584,17 +699,19 @@
                 "Name": "Series 1"
             }
         ],
-        "Name": "Account - average orders by brand (last month)",
+        "Name": "Account - average orders by category (last month)",
         "Key": "bb0366c7-7381-4175-80a1-12bd3726d724"
     },
     {
-        "ModificationDateTime": "2022-12-05T12:08:15.640Z",
+        "ModificationDateTime": "2023-01-12T12:49:10.059Z",
         "Resource": "all_activities",
         "Variables": [],
         "CreationDateTime": "2022-12-05T12:06:20.332Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -647,7 +764,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -655,7 +773,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Average",
                         "Script": "params.Var1",
                         "Alias": "",

@@ -1,8 +1,14 @@
-[{
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
+[
+    {
+        "ModificationDateTime": "2023-01-15T11:05:21.591Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "MMM",
                         "Alias": "ActionDateTime",
                         "FieldID": "ActionDateTime",
@@ -15,7 +21,7 @@
                 },
                 "Scope": {
                     "Account": "AllAccounts",
-                    "User": "AllUsers"
+                    "User": "UsersUnderMyRole"
                 },
                 "Filter": {
                     "ComplexId": "2",
@@ -58,7 +64,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -66,7 +73,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Count",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -78,17 +86,19 @@
                 "Name": "Series 1"
             }
         ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - number of activities weekly by transaction type",
+        "Name": "Manager - number of activities weekly by transaction type (last year)",
         "Key": "0a35d282-27b3-458b-b48b-6e2be63bcb2d"
     },
     {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
+        "ModificationDateTime": "2023-01-15T11:03:42.909Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -101,7 +111,7 @@
                 },
                 "Scope": {
                     "Account": "AllAccounts",
-                    "User": "AllUsers"
+                    "User": "UsersUnderMyRole"
                 },
                 "Filter": {
                     "ComplexId": "2",
@@ -141,7 +151,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -149,7 +160,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -161,696 +173,23 @@
                 "Name": "Series 1"
             }
         ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Name": "Manager - Card - orders today",
         "Key": "21ef3802-4850-4e21-a92e-2e3f3fbe617b"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:10:09.675Z",
+        "Resource": "transaction_lines",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "",
                         "Alias": "",
                         "FieldID": "",
                         "Interval": "None"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "1",
-                                "Years"
-                            ],
-                            "Operation": "InTheLast",
-                            "ApiName": "Transaction.ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Transaction.Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "Transaction.StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "Item.MainCategory",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "transaction_lines",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "TotalUnitsPriceAfterDiscount"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "a31313e3-273d-4476-9f90-6ab3e8fabe2e",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "transaction_lines",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders by main category in the last year (QTY)",
-        "Key": "27f826c2-e280-4b76-b705-4d655a8f1185"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "MMM",
-                        "Alias": "ActionDateTime",
-                        "FieldID": "ActionDateTime",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "3",
-                                "Years"
-                            ],
-                            "Operation": "InTheLastCalendar",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "ActionDateTime",
-                    "Interval": "Year",
-                    "Format": "yyyy"
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "QuantitiesTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "9b17d3fa-08a4-451e-9835-f7872b4fbf0c",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders year over year (Qty)",
-        "Key": "2fb835c7-d356-4f35-b153-5ff001e76bad"
-    },
-    {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [],
-                            "Operation": "ThisMonth",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "87d2cbce-7613-42e9-87ec-289399cfdab6",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - Card - orders this month",
-        "Key": "3f3d6ae0-a9ab-488f-a122-6d3cdec70b48"
-    },
-    {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [],
-                            "Operation": "ThisMonth",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "Agent.Name",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "a49f51be-49b0-47b6-aeba-3ff5147f0401",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders by reps this month",
-        "Key": "4fedbcab-02df-41c5-9dc6-8abcbb1c9286"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [],
-                            "Operation": "Today",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "4eb5a270-3dda-4ca7-943f-21692fda34f4",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders today",
-        "Key": "508d4018-3699-4225-abd4-b6be552f0df4"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "MMM",
-                        "Alias": "ActionDateTime",
-                        "FieldID": "ActionDateTime",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "3",
-                                "Years"
-                            ],
-                            "Operation": "InTheLastCalendar",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "ActionDateTime",
-                    "Interval": "Year",
-                    "Format": "yyyy"
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "a379714e-3d8f-46f6-974a-0b9995b62a8a",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders year over year",
-        "Key": "50eb92d7-3671-488c-b585-ca4900d0eabb"
-    },
-    {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "0",
-                                "Years"
-                            ],
-                            "Operation": "InTheLastCalendar",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "1d63875b-c50f-46fe-b6f7-35c3af7ab811",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders this year",
-        "Key": "9bb2544a-7a46-4a96-9d86-49a0f61713f8"
-    },
-    {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "0",
-                                "Years"
-                            ],
-                            "Operation": "InTheLastCalendar",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "2c2e4036-4111-49bf-b06c-6a976759f23c",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - Card - orders this year",
-        "Key": "b7c2b6d7-e7b0-4296-b370-60cce6d4d12a"
-    },
-    {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
                     }
                 ],
                 "Top": {
@@ -859,7 +198,7 @@
                 },
                 "Scope": {
                     "Account": "AllAccounts",
-                    "User": "AllUsers"
+                    "User": "UsersUnderMyRole"
                 },
                 "Filter": {
                     "ComplexId": "2",
@@ -869,8 +208,8 @@
                         "Operation": "AND",
                         "LeftNode": {
                             "Values": [
-                                "1",
-                                "Years"
+                                "3",
+                                "Months"
                             ],
                             "Operation": "InTheLast",
                             "ApiName": "Transaction.ActionDateTime",
@@ -902,7 +241,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -910,116 +250,35 @@
                 ],
                 "Resource": "transaction_lines",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "UnitsQuantity"
+                        "FieldID": "TotalUnitsPriceAfterDiscount"
                     }
                 ],
                 "DynamicFilterFields": [],
-                "Key": "5f4d2905-7bca-48a1-babb-7727bd3108fa",
+                "Key": "a31313e3-273d-4476-9f90-6ab3e8fabe2e",
                 "Name": "Series 1"
             }
         ],
+        "Name": "Manager - top selling items (last 3 months)",
+        "Key": "27f826c2-e280-4b76-b705-4d655a8f1185"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:05:43.669Z",
         "Resource": "transaction_lines",
         "Variables": [],
         "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - top selling items in the last year",
-        "Key": "eb776e8e-3691-4321-a041-37dd383fca16"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
-                        "Format": "yyyy MMM",
-                        "Alias": "",
-                        "FieldID": "",
-                        "Interval": "Month"
-                    }
-                ],
-                "Top": {
-                    "Max": 0,
-                    "Ascending": false
-                },
-                "Scope": {
-                    "Account": "AllAccounts",
-                    "User": "AllUsers"
-                },
-                "Filter": {
-                    "ComplexId": "2",
-                    "Operation": "AND",
-                    "LeftNode": {
-                        "ComplexId": "1",
-                        "Operation": "AND",
-                        "LeftNode": {
-                            "Values": [
-                                "0",
-                                "Years"
-                            ],
-                            "Operation": "InTheLastCalendar",
-                            "ApiName": "ActionDateTime",
-                            "ExpressionId": "1",
-                            "FieldType": "DateTime"
-                        },
-                        "RightNode": {
-                            "Values": [
-                                "SalesOrder_Placeholder"
-                            ],
-                            "Operation": "IsEqual",
-                            "ApiName": "Type",
-                            "ExpressionId": "2",
-                            "FieldType": "MultipleStringValues"
-                        }
-                    },
-                    "RightNode": {
-                        "Values": [
-                            "Submitted_Placeholder"
-                        ],
-                        "Operation": "IsEqual",
-                        "ApiName": "StatusName",
-                        "ExpressionId": "3",
-                        "FieldType": "MultipleStringValues"
-                    }
-                },
-                "BreakBy": {
-                    "FieldID": "Agent.Name",
-                    "Interval": "None",
-                    "Format": ""
-                },
-                "AggregatedParams": [{
-                        "Aggregator": "Sum",
-                        "FieldID": "",
-                        "Name": "Var1"
-                    }
-                ],
-                "Resource": "all_activities",
-                "Label": "${label}",
-                "AggregatedFields": [{
-                        "Aggregator": "Sum",
-                        "Script": "params.Var1",
-                        "Alias": "",
-                        "FieldID": "GrandTotal"
-                    }
-                ],
-                "DynamicFilterFields": [],
-                "Key": "7d16b323-7c58-4345-8ed4-578ba39cbe02",
-                "Name": "Series 1"
-            }
-        ],
-        "Resource": "all_activities",
-        "Variables": [],
-        "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders by reps this year",
-        "Key": "f1721774-9d35-4aec-85b2-96942719bdf5"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
-        "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "",
-                        "Alias": "",
-                        "FieldID": "",
+                        "Alias": "Category_Placeholder",
+                        "FieldID": "Item.MainCategory",
                         "Interval": "None"
                     }
                 ],
@@ -1029,7 +288,7 @@
                 },
                 "Scope": {
                     "Account": "AllAccounts",
-                    "User": "AllUsers"
+                    "User": "UsersUnderMyRole"
                 },
                 "Filter": {
                     "ComplexId": "2",
@@ -1039,10 +298,10 @@
                         "Operation": "AND",
                         "LeftNode": {
                             "Values": [
-                                "1",
+                                "2",
                                 "Years"
                             ],
-                            "Operation": "InTheLast",
+                            "Operation": "InTheLastCalendar",
                             "ApiName": "Transaction.ActionDateTime",
                             "ExpressionId": "1",
                             "FieldType": "DateTime"
@@ -1068,11 +327,12 @@
                     }
                 },
                 "BreakBy": {
-                    "FieldID": "Item.MainCategory",
-                    "Interval": "None",
-                    "Format": ""
+                    "FieldID": "Transaction.ActionDateTime",
+                    "Interval": "Year",
+                    "Format": "yyyy"
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -1080,28 +340,32 @@
                 ],
                 "Resource": "transaction_lines",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
-                        "FieldID": "UnitsQuantity"
+                        "FieldID": "TotalUnitsPriceAfterDiscount"
                     }
                 ],
                 "DynamicFilterFields": [],
-                "Key": "6fe87917-455e-44bf-b541-90d10a9d2d46",
+                "Key": "4fb42991-ce99-42d5-bcc1-85b15b0d14de",
                 "Name": "Series 1"
             }
         ],
-        "Resource": "transaction_lines",
+        "Name": "Manager - orders by category (year over year)",
+        "Key": "2fb835c7-d356-4f35-b153-5ff001e76bad"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:02:44.873Z",
+        "Resource": "all_activities",
         "Variables": [],
         "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders by main category in the last year",
-        "Key": "f5ba275b-ccc7-40cd-b68b-43db0c4fd12b"
-    }, {
-        "ModificationDateTime": "2022-12-01T14:08:15.360Z",
         "Hidden": false,
-        "Series": [{
-                "GroupBy": [{
+        "Series": [
+            {
+                "GroupBy": [
+                    {
                         "Format": "yyyy MMM",
                         "Alias": "",
                         "FieldID": "",
@@ -1114,7 +378,7 @@
                 },
                 "Scope": {
                     "Account": "AllAccounts",
-                    "User": "AllUsers"
+                    "User": "UsersUnderMyRole"
                 },
                 "Filter": {
                     "ComplexId": "2",
@@ -1154,7 +418,8 @@
                     "Interval": "None",
                     "Format": ""
                 },
-                "AggregatedParams": [{
+                "AggregatedParams": [
+                    {
                         "Aggregator": "Sum",
                         "FieldID": "",
                         "Name": "Var1"
@@ -1162,7 +427,8 @@
                 ],
                 "Resource": "all_activities",
                 "Label": "${label}",
-                "AggregatedFields": [{
+                "AggregatedFields": [
+                    {
                         "Aggregator": "Sum",
                         "Script": "params.Var1",
                         "Alias": "",
@@ -1170,14 +436,522 @@
                     }
                 ],
                 "DynamicFilterFields": [],
-                "Key": "00d75e75-8e11-4c55-8904-7268bab837a6",
+                "Key": "87d2cbce-7613-42e9-87ec-289399cfdab6",
                 "Name": "Series 1"
             }
         ],
+        "Name": "Manager - Card - orders this month",
+        "Key": "3f3d6ae0-a9ab-488f-a122-6d3cdec70b48"
+    },
+    {
+        "ModificationDateTime": "2023-01-25T14:48:32.289Z",
+        "Resource": "UserTarget",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "",
+                        "Alias": "Name",
+                        "FieldID": "User.Name.cs",
+                        "Interval": "None"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "Values": [
+                        "2",
+                        "Months"
+                    ],
+                    "Operation": "InTheLastCalendar",
+                    "ApiName": "Date",
+                    "ExpressionId": "1",
+                    "FieldType": "DateTime"
+                },
+                "BreakBy": {
+                    "FieldID": "Date",
+                    "Interval": "Month",
+                    "Format": "MMM"
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "UserTarget",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "Target"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "4356f399-23c2-4270-9427-c3f4aab1f4df",
+                "Name": "Target"
+            }
+        ],
+        "Name": "Manager - target by reps (last 2 months)",
+        "Key": "4fedbcab-02df-41c5-9dc6-8abcbb1c9286"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:08:34.143Z",
         "Resource": "all_activities",
         "Variables": [],
         "CreationDateTime": "2022-12-01T14:08:15.360Z",
-        "Name": "Manager - orders this month",
-        "Key": "faeb5559-a752-4202-8a40-66a82fe81643"
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "MMM",
+                        "Alias": "ActionDateTime",
+                        "FieldID": "ActionDateTime",
+                        "Interval": "Month"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "ComplexId": "2",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "ComplexId": "1",
+                        "Operation": "AND",
+                        "LeftNode": {
+                            "Values": [
+                                "3",
+                                "Years"
+                            ],
+                            "Operation": "InTheLastCalendar",
+                            "ApiName": "ActionDateTime",
+                            "ExpressionId": "1",
+                            "FieldType": "DateTime"
+                        },
+                        "RightNode": {
+                            "Values": [
+                                "SalesOrder_Placeholder"
+                            ],
+                            "Operation": "IsEqual",
+                            "ApiName": "Type",
+                            "ExpressionId": "2",
+                            "FieldType": "MultipleStringValues"
+                        }
+                    },
+                    "RightNode": {
+                        "Values": [
+                            "Submitted_Placeholder"
+                        ],
+                        "Operation": "IsEqual",
+                        "ApiName": "StatusName",
+                        "ExpressionId": "3",
+                        "FieldType": "MultipleStringValues"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "ActionDateTime",
+                    "Interval": "Year",
+                    "Format": "yyyy"
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "all_activities",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "GrandTotal"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "a379714e-3d8f-46f6-974a-0b9995b62a8a",
+                "Name": "Series 1"
+            }
+        ],
+        "Name": "Manager - orders year over year",
+        "Key": "50eb92d7-3671-488c-b585-ca4900d0eabb"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:03:09.857Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "yyyy MMM",
+                        "Alias": "",
+                        "FieldID": "",
+                        "Interval": "Month"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "ComplexId": "2",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "ComplexId": "1",
+                        "Operation": "AND",
+                        "LeftNode": {
+                            "Values": [
+                                "0",
+                                "Years"
+                            ],
+                            "Operation": "InTheLastCalendar",
+                            "ApiName": "ActionDateTime",
+                            "ExpressionId": "1",
+                            "FieldType": "DateTime"
+                        },
+                        "RightNode": {
+                            "Values": [
+                                "SalesOrder_Placeholder"
+                            ],
+                            "Operation": "IsEqual",
+                            "ApiName": "Type",
+                            "ExpressionId": "2",
+                            "FieldType": "MultipleStringValues"
+                        }
+                    },
+                    "RightNode": {
+                        "Values": [
+                            "Submitted_Placeholder"
+                        ],
+                        "Operation": "IsEqual",
+                        "ApiName": "StatusName",
+                        "ExpressionId": "3",
+                        "FieldType": "MultipleStringValues"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "",
+                    "Interval": "None",
+                    "Format": ""
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "all_activities",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "GrandTotal"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "2c2e4036-4111-49bf-b06c-6a976759f23c",
+                "Name": "Series 1"
+            }
+        ],
+        "Name": "Manager - Card - orders this year",
+        "Key": "b7c2b6d7-e7b0-4296-b370-60cce6d4d12a"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:04:25.127Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2023-01-12T16:15:33.230Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "yyyy MMM",
+                        "Alias": "",
+                        "FieldID": "",
+                        "Interval": "Month"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "ComplexId": "2",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "ComplexId": "1",
+                        "Operation": "AND",
+                        "LeftNode": {
+                            "Values": [],
+                            "Operation": "Today",
+                            "ApiName": "ActionDateTime",
+                            "ExpressionId": "1",
+                            "FieldType": "DateTime"
+                        },
+                        "RightNode": {
+                            "Values": [
+                                "SalesOrder_Placeholder"
+                            ],
+                            "Operation": "IsEqual",
+                            "ApiName": "Type",
+                            "ExpressionId": "2",
+                            "FieldType": "MultipleStringValues"
+                        }
+                    },
+                    "RightNode": {
+                        "Values": [
+                            "Submitted_Placeholder"
+                        ],
+                        "Operation": "IsEqual",
+                        "ApiName": "StatusName",
+                        "ExpressionId": "3",
+                        "FieldType": "MultipleStringValues"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "",
+                    "Interval": "None",
+                    "Format": ""
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "all_activities",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Count",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": ""
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "0e7d2456-a712-4bee-9735-4e7faa2b459e",
+                "Name": "Series 1"
+            }
+        ],
+        "Name": "Manager - Card - orders today (count)",
+        "Key": "d64d90af-b81c-4a60-8c84-2c280c033e76"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:06:01.531Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "",
+                        "Alias": "Name",
+                        "FieldID": "Agent.Name",
+                        "Interval": "None"
+                    }
+                ],
+                "Top": {
+                    "Max": 0,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "ComplexId": "2",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "ComplexId": "1",
+                        "Operation": "AND",
+                        "LeftNode": {
+                            "Values": [
+                                "2",
+                                "Months"
+                            ],
+                            "Operation": "InTheLastCalendar",
+                            "ApiName": "ActionDateTime",
+                            "ExpressionId": "1",
+                            "FieldType": "DateTime"
+                        },
+                        "RightNode": {
+                            "Values": [
+                                "SalesOrder_Placeholder"
+                            ],
+                            "Operation": "IsEqual",
+                            "ApiName": "Type",
+                            "ExpressionId": "2",
+                            "FieldType": "MultipleStringValues"
+                        }
+                    },
+                    "RightNode": {
+                        "Values": [
+                            "Submitted_Placeholder"
+                        ],
+                        "Operation": "IsEqual",
+                        "ApiName": "StatusName",
+                        "ExpressionId": "3",
+                        "FieldType": "MultipleStringValues"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "ActionDateTime",
+                    "Interval": "Month",
+                    "Format": "MMM"
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "all_activities",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "GrandTotal"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "7d16b323-7c58-4345-8ed4-578ba39cbe02",
+                "Name": "Series 1"
+            }
+        ],
+        "Name": "Manager - orders by reps (last 2 months)",
+        "Key": "f1721774-9d35-4aec-85b2-96942719bdf5"
+    },
+    {
+        "ModificationDateTime": "2023-01-15T11:09:24.655Z",
+        "Resource": "all_activities",
+        "Variables": [],
+        "CreationDateTime": "2022-12-01T14:08:15.360Z",
+        "Hidden": false,
+        "Series": [
+            {
+                "GroupBy": [
+                    {
+                        "Format": "yyyy MMM",
+                        "Alias": "",
+                        "FieldID": "",
+                        "Interval": "Month"
+                    }
+                ],
+                "Top": {
+                    "Max": 10,
+                    "Ascending": false
+                },
+                "Scope": {
+                    "Account": "AllAccounts",
+                    "User": "UsersUnderMyRole"
+                },
+                "Filter": {
+                    "ComplexId": "2",
+                    "Operation": "AND",
+                    "LeftNode": {
+                        "ComplexId": "1",
+                        "Operation": "AND",
+                        "LeftNode": {
+                            "Values": [
+                                "3",
+                                "Months"
+                            ],
+                            "Operation": "InTheLast",
+                            "ApiName": "ActionDateTime",
+                            "ExpressionId": "1",
+                            "FieldType": "DateTime"
+                        },
+                        "RightNode": {
+                            "Values": [
+                                "SalesOrder_Placeholder"
+                            ],
+                            "Operation": "IsEqual",
+                            "ApiName": "Type",
+                            "ExpressionId": "2",
+                            "FieldType": "MultipleStringValues"
+                        }
+                    },
+                    "RightNode": {
+                        "Values": [
+                            "Submitted_Placeholder"
+                        ],
+                        "Operation": "IsEqual",
+                        "ApiName": "StatusName",
+                        "ExpressionId": "3",
+                        "FieldType": "MultipleStringValues"
+                    }
+                },
+                "BreakBy": {
+                    "FieldID": "Account.Name",
+                    "Interval": "None",
+                    "Format": ""
+                },
+                "AggregatedParams": [
+                    {
+                        "Aggregator": "Sum",
+                        "FieldID": "",
+                        "Name": "Var1"
+                    }
+                ],
+                "Resource": "all_activities",
+                "Label": "${label}",
+                "AggregatedFields": [
+                    {
+                        "Aggregator": "Sum",
+                        "Script": "params.Var1",
+                        "Alias": "",
+                        "FieldID": "GrandTotal"
+                    }
+                ],
+                "DynamicFilterFields": [],
+                "Key": "fc3fde57-36ba-4caf-90f4-06977fa8144e",
+                "Name": "Series 1"
+            }
+        ],
+        "Name": "Manager - top selling accounts (last 3 months)",
+        "Key": "f5ba275b-ccc7-40cd-b68b-43db0c4fd12b"
     }
 ]
