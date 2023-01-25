@@ -118,8 +118,14 @@ async function createAbstractSchemes(service: MyService) {
 
 async function deleteUDCs(service: MyService) {
     try {
-        await service.papiClient.post(`/user_defined_collections/schemes/UserTarget/hard_delete`);
-        await service.papiClient.post(`/user_defined_collections/schemes/AccountTarget/hard_delete`);
+        await service.papiClient.post(`/user_defined_collections/schemes`, {
+            Name: "UserTarget",
+            Hidden: true
+        });
+        await service.papiClient.post(`/user_defined_collections/schemes`, {
+            Name: "AccountTarget",
+            Hidden: true
+        });
     } catch (err) {
         throw new Error(`Failed to delete UDCs. error - ${err}`);
     }
