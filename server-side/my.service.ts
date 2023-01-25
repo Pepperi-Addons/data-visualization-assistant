@@ -71,6 +71,7 @@ class MyService {
                         .replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
                         .replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
                         .replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
+                        .replace(this.toRegex('Category_Placeholder'), configuration.itemCategory)
                         .replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
                         .replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
             // then uploading the queries file to PFS

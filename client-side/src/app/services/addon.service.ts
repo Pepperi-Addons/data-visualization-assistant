@@ -122,4 +122,46 @@ export class AddonService {
     replaceFields(configuration) {
         return this.papiClient.post("/addons/api/948219c4-b9a6-4fb2-814d-153d3b359a70/api/replace_fields", configuration);
     }
+
+    async createUDCs() {
+        const allUdcsNames = (await this.papiClient.get(`/user_defined_collections/schemes`)).map(udc => udc.Name);
+        if(!allUdcsNames.includes("UserTarget")) {
+            await this.papiClient.post(`/user_defined_collections/schemes`, {
+                Name: "UserTarget",
+                Extends: {
+                    AddonUUID: this.addonUUID,
+                    Name: "user_target"
+                },
+                Description: "Target for user",
+                DocumentKey: {
+                    Delimiter: "@",
+                    Type: "AutoGenerate",
+                    Fields: []
+                },
+                SyncData: {
+                    Sync: false,
+                    SyncFieldLevel: false
+                }
+            });
+        }
+        if(!allUdcsNames.includes("AccountTarget")) {
+            await this.papiClient.post(`/user_defined_collections/schemes`, {
+                Name: "AccountTarget",
+                Extends: {
+                    AddonUUID: this.addonUUID,
+                    Name: "account_target"
+                },
+                Description: "Target for account",
+                DocumentKey: {
+                    Delimiter: "@",
+                    Type: "AutoGenerate",
+                    Fields: []
+                },
+                SyncData: {
+                    Sync: false,
+                    SyncFieldLevel: false
+                }
+            });
+        }
+    }
 }

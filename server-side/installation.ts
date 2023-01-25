@@ -10,7 +10,7 @@ The error Message is importent! it will be written in the audit log and help the
 
 import { Client, Request } from '@pepperi-addons/debug-server';
 import MyService from './my.service';
-import { AddonVersion, AddonUUID } from '../addon.config.json'
+import { AddonUUID } from '../addon.config.json'
 import semver from 'semver';
 
 export async function install(client: Client, request: Request): Promise<any> {
@@ -35,7 +35,6 @@ export async function install(client: Client, request: Request): Promise<any> {
             Type: 'pfs'
         });
         await createAbstractSchemes(service);
-        await createUDCs(service);
     } catch (err) {
         throw new Error(`Failed to create ADAL Tables. error - ${err}`);
     }
@@ -45,7 +44,7 @@ export async function install(client: Client, request: Request): Promise<any> {
 
 export async function uninstall(client: Client, request: Request): Promise<any> {
     const service = new MyService(client);
-    await createUDCs(service);
+    await deleteUDCs(service);
     return {success:true,resultObject:{}};
 }
 
@@ -55,7 +54,6 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
         if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.17') < 0) {
             const service = new MyService(client);
             await createAbstractSchemes(service);
-            await createUDCs(service);
         }
     } catch (err) {
         throw new Error(`Failed to create Schemes. error - ${err}`);
@@ -117,29 +115,6 @@ async function createAbstractSchemes(service: MyService) {
     });
 }
 
-async function createUDCs(service: MyService) {
-    const allUdcsNames = (await service.papiClient.get(`/user_defined_collections/schemes`)).map(udc => udc.Name);
-    if(!allUdcsNames.includes("UserTarget")) {
-        await service.papiClient.post(`/user_defined_collections/schemes`, {
-            Name: "UserTarget",
-            Extends: {
-                AddonUUID: AddonUUID,
-                Name: "user_target"
-            },
-            Description: "Target for user"
-        });
-    }
-    if(!allUdcsNames.includes("AccountTarget")) {
-        await service.papiClient.post(`/user_defined_collections/schemes`, {
-            Name: "AccountTarget",
-            Extends: {
-                AddonUUID: AddonUUID,
-                Name: "account_target"
-            },
-            Description: "Target for account"
-        });
-    }
-}
 
 async function deleteUDCs(service: MyService) {
     try {
