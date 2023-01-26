@@ -78,7 +78,8 @@ async function createAbstractSchemes(service: MyService) {
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
                     ExternalID: {Type: "String", Indexed: true}
-                }
+                },
+                ApplySystemFilter: true
             },
             Date: {
                 Type: "DateTime",
@@ -101,7 +102,8 @@ async function createAbstractSchemes(service: MyService) {
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
                     ExternalID: {Type: "String", Indexed: true}
-                }
+                },
+                ApplySystemFilter: true
             },
             Date: {
                 Type: "DateTime",
