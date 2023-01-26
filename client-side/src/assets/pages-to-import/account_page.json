@@ -1,465 +1,498 @@
 [{
-    "ModificationDateTime": "2022-12-06T12:49:28.804Z",
-    "CreationDateTime": "2022-12-05T13:14:47.066Z",
-    "Description": "Default account insights",
-    "Blocks": [
-        {
-            "Relation": {
-                "Type": "NgComponent",
-                "SubType": "NG14",
-                "ModuleName": "ScorecardsModule",
-                "RelationName": "PageBlock",
-                "ComponentName": "ScorecardsComponent",
-                "AddonRelativeURL": "scorecards",
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
-                "Name": "Scorecards"
-            },
-            "PageConfiguration": {
-                "Parameters": [
-                    {
-                        "Type": "String",
-                        "Consume": true,
-                        "Key": "AccountUUID",
-                        "Produce": false
-                    }
-                ]
-            },
-            "Configuration": {
-                "Resource": "Scorecards",
-                "Data": {
-                    "scorecardsConfig": {
-                        "groupTitleAndDescription": "ungrouped",
-                        "useRoundCorners": false,
-                        "titleSize": "xl",
-                        "maxColumns": 1,
-                        "useTitle": true,
-                        "cardTextColor": "system-primary",
-                        "horizontalAlign": "center",
-                        "gap": "sm",
-                        "useDescription": true,
-                        "roundCornersSize": "md",
-                        "useDropShadow": true,
-                        "descriptionSize": "sm",
-                        "dropShadow": {
-                            "type": "Regular",
-                            "intensity": 5
-                        },
-                        "border": {
-                            "color": "hsl(0, 0%, 57%)",
-                            "opacity": "50"
-                        },
-                        "verticalAlign": "center",
-                        "textPosition": "overlyed",
-                        "overlay": {
-                            "opacity": 50,
-                            "value": "hsl(0, 0%, 57%)",
-                            "use": false
-                        },
-                        "useBorder": false,
-                        "cardHeight": 16,
-                        "descriptionMaxNumOfLines": 1,
-                        "useText": true,
-                        "gradientOverlay": {
-                            "opacity": 50,
-                            "value": "hsl(0, 0%, 57%)",
-                            "use": false
-                        },
-                        "editSlideIndex": 1,
-                        "titleWeight": "normal"
-                    },
-                    "cards": [
-                        {
-                            "imageURL": "",
-                            "query": "427e1502-3b1e-4175-9782-d539b00353c7",
-                            "chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Value and change_c2cc9af4d7ad.js",
-                            "description": "Description",
-                            "secondQuery": "cf21afb1-fac4-4662-8e14-504d307a61a7",
-                            "id": 0,
-                            "title": "Sales vs Average (this month)",
-                            "benchmarkVariablesData": {},
-                            "chart": "Value and change_c2cc9af4d7ad.js",
-                            "variablesData": {
-                                "account": {
-                                    "value": "AccountUUID",
-                                    "source": "Variable"
-                                }
-                            }
-                        },
-                        {
-                            "imageURL": "",
-                            "query": "0bc14d7e-3dab-45be-8afb-afa8df09fc65",
-                            "chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Value and change_c2cc9af4d7ad.js",
-                            "description": "Description",
-                            "secondQuery": "34e556f1-2c0e-4097-92c5-8b4a0f5d11f6",
-                            "id": 1,
-                            "title": "Sales vs Average (last year)",
-                            "benchmarkVariablesData": {},
-                            "chart": "Value and change_c2cc9af4d7ad.js",
-                            "variablesData": {
-                                "account": {
-                                    "value": "AccountUUID",
-                                    "source": "Variable"
-                                }
-                            }
-                        }
-                    ]
-                },
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
-            },
-            "Key": "17654c75-6925-e081-e98e-36a042b9fc7d"
-        },
-        {
-            "Relation": {
-                "Type": "NgComponent",
-                "SubType": "NG14",
-                "ModuleName": "ChartModule",
-                "RelationName": "PageBlock",
-                "ComponentName": "ChartComponent",
-                "AddonRelativeURL": "chart",
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
-                "Name": "Chart"
-            },
-            "PageConfiguration": {
-                "Parameters": [
-                    {
-                        "Type": "String",
-                        "Consume": true,
-                        "Key": "AccountUUID",
-                        "Produce": false
-                    }
-                ]
-            },
-            "Configuration": {
-                "Resource": "Chart",
-                "Data": {
-                    "dropShadow": {
-                        "type": "Regular",
-                        "intensity": 5
-                    },
-                    "border": {
-                        "color": "hsl(0, 0%, 57%)",
-                        "opacity": "50"
-                    },
-                    "useLabel": true,
-                    "query": "676131d0-429e-4a69-9002-288bf1f5db67",
-                    "useBorder": false,
-                    "label": "Sales year over year",
-                    "horizontalAlign": "left",
-                    "chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Column_c2cc9af4d7ad.js",
-                    "secondQuery": null,
-                    "useDropShadow": true,
-                    "chart": "Column_c2cc9af4d7ad.js",
-                    "variablesData": {
-                        "account": {
-                            "value": "AccountUUID",
-                            "source": "Variable"
-                        }
-                    },
-                    "height": 22
-                },
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
-            },
-            "Key": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7"
-        },
-        {
-            "Relation": {
-                "Type": "NgComponent",
-                "SubType": "NG14",
-                "ModuleName": "SlideshowModule",
-                "Schema": {
-                    "Fields": {
-                        "slideshowConfig": {
-                            "Type": "Object",
-                            "Fields": {
-                                "innerPadding": {
-                                    "Type": "String",
-                                    "ConfigurationPerScreenSize": true
-                                },
-                                "heightUnit": {
-                                    "Type": "String",
-                                    "ConfigurationPerScreenSize": true
-                                },
-                                "height": {
-                                    "Type": "String",
-                                    "ConfigurationPerScreenSize": true
-                                }
-                            }
-                        },
-                        "slides": {
-                            "Type": "Array",
-                            "Items": {
-                                "Type": "Object",
-                                "Fields": {
-                                    "verticalAlign": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    },
-                                    "image": {
-                                        "Type": "Object",
-                                        "Fields": {
-                                            "verticalPosition": {
-                                                "Type": "String",
-                                                "ConfigurationPerScreenSize": true
-                                            },
-                                            "useImage": {
-                                                "Type": "Bool",
-                                                "ConfigurationPerScreenSize": false
-                                            },
-                                            "horizontalPosition": {
-                                                "Type": "String",
-                                                "ConfigurationPerScreenSize": true
-                                            },
-                                            "asset": {
-                                                "Type": "Resource",
-                                                "Fields": {
-                                                    "url": {
-                                                        "Type": "String"
-                                                    },
-                                                    "key": {
-                                                        "Type": "String"
-                                                    }
-                                                },
-                                                "ConfigurationPerScreenSize": false
-                                            }
-                                        }
-                                    },
-                                    "contentWidth": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    },
-                                    "horizontalAlign": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    },
-                                    "titleSize": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    },
-                                    "subTitleSize": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    },
-                                    "buttonsSize": {
-                                        "Type": "String",
-                                        "ConfigurationPerScreenSize": true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "RelationName": "PageBlock",
-                "ComponentName": "SlideshowComponent",
-                "AddonRelativeURL": "slideshow",
-                "AddonUUID": "f93658be-17b6-4c92-9df3-4e6c7151e038",
-                "Name": "Slideshow"
-            },
-            "ConfigurationPerScreenSize": {
-                "Mobile": {
-                    "slideshowConfig": {
-                        "height": "7"
-                    },
-                    "slides": [
-                        {
-                            "subTitleSize": "sm"
-                        }
-                    ]
-                }
-            },
-            "Configuration": {
-                "Resource": "Slideshow",
-                "Data": {
-                    "slideshowConfig": {
-                        "isUseArrows": false,
-                        "dropShadow": {
-                            "size": "md",
-                            "intensity": "soft",
-                            "use": false
-                        },
-                        "arrowShape": "round",
-                        "arrowsStyle": "weak",
-                        "usePauseButton": true,
-                        "showControllersInSlider": true,
-                        "innerPadding": "sm",
-                        "arrowsColor": "system",
-                        "showOnMobile": false,
-                        "useInverStyle": true,
-                        "controllerSize": "md",
-                        "transitionTime": "0.75",
-                        "fillHeight": false,
-                        "isTransition": false,
-                        "arrowType": "arrow_right",
-                        "editSlideIndex": 0,
-                        "transitionDuration": 5,
-                        "transitionType": "fade",
-                        "heightUnit": "REM",
-                        "height": "5"
-                    },
-                    "slides": [
-                        {
-                            "verticalAlign": "start",
-                            "image": {
-                                "verticalPosition": "50",
-                                "useImage": false,
-                                "horizontalPosition": "50",
-                                "asset": "",
-                                "assetURL": ""
-                            },
-                            "overlay": {
-                                "opacity": 75,
-                                "value": "hsl(0, 0%, 0%)",
-                                "use": false
-                            },
-                            "buttonColor": "system-primary",
-                            "titleSize": "md",
-                            "subTitleSize": "md",
-                            "textColor": "strong",
-                            "buttonsSize": "md",
-                            "useTitle": true,
-                            "innerSpacing": "sm",
-                            "contentWidth": "Wide",
-                            "secondButton": {
-                                "style": "strong",
-                                "label": "Noo",
-                                "useButton": false,
-                                "script": {}
-                            },
-                            "useSubTitle": true,
-                            "horizontalAlign": "left",
-                            "titleContent": "Insights - trial mode",
-                            "gradientOverlay": {
-                                "opacity": 75,
-                                "value": "hsl(0, 100%, 50%)",
-                                "use": false
-                            },
-                            "subTitleContent": "The data might be inaccurate due to configuration. Please contact your customer success manager for more information.",
-                            "firstButton": {
-                                "style": "weak-invert",
-                                "label": "Yess",
-                                "useButton": false,
-                                "script": {}
-                            },
-                            "id": 0,
-                            "titleWeight": "normal"
-                        }
-                    ]
-                },
-                "AddonUUID": "f93658be-17b6-4c92-9df3-4e6c7151e038"
-            },
-            "Key": "cf76cb10-ff27-86e3-b999-2ecb810bad52"
-        },
-        {
-            "Relation": {
-                "Type": "NgComponent",
-                "SubType": "NG14",
-                "ModuleName": "BenchmarkChartModule",
-                "RelationName": "PageBlock",
-                "ComponentName": "BenchmarkChartComponent",
-                "AddonRelativeURL": "benchmark_chart",
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
-                "Name": "BenchmarkChart"
-            },
-            "PageConfiguration": {
-                "Parameters": [
-                    {
-                        "Type": "String",
-                        "Consume": true,
-                        "Key": "AccountUUID",
-                        "Produce": false
-                    }
-                ]
-            },
-            "Configuration": {
-                "Resource": "BenchmarkChart",
-                "Data": {
-                    "dropShadow": {
-                        "type": "Regular",
-                        "intensity": 5
-                    },
-                    "border": {
-                        "color": "hsl(0, 0%, 57%)",
-                        "opacity": "50"
-                    },
-                    "useLabel": true,
-                    "query": "76213dab-8865-436c-b7d8-306ecd77629c",
-                    "useBorder": false,
-                    "label": "Sales by brand (last month)",
-                    "horizontalAlign": "left",
-                    "chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Benchmark column_c2cc9af4d7ad.js",
-                    "secondQuery": "bb0366c7-7381-4175-80a1-12bd3726d724",
-                    "benchmarkVariablesData": {},
-                    "useDropShadow": true,
-                    "chart": "Benchmark column_c2cc9af4d7ad.js",
-                    "variablesData": {
-                        "account": {
-                            "value": "AccountUUID",
-                            "source": "Variable"
-                        }
-                    },
-                    "height": "22"
-                },
-                "AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
-            },
-            "Key": "36101678-f5a2-2c41-cfea-ff54b8b07c6e"
-        }
-    ],
-    "Layout": {
-        "ColumnsGap": "sm",
-        "SectionsGap": "sm",
-        "HorizontalSpacing": "sm",
-        "Sections": [
-            {
-                "Hide": [],
-                "Columns": [
-                    {
-                        "BlockContainer": {
-                            "BlockKey": "cf76cb10-ff27-86e3-b999-2ecb810bad52"
-                        }
-                    }
-                ],
-                "Key": "6f690c37-e560-0f07-292f-fcb512efe7aa"
-            },
-            {
-                "Hide": [],
-                "Columns": [
-                    {
-                        "BlockContainer": {
-                            "BlockKey": "17654c75-6925-e081-e98e-36a042b9fc7d"
-                        }
-                    }
-                ],
-                "Key": "8ae61b30-ee07-3425-0ef4-96943d8827f1"
-            },
-            {
-                "Hide": [],
-                "Columns": [
-                    {
-                        "BlockContainer": {
-                            "BlockKey": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7"
-                        }
-                    }
-                ],
-                "FillHeight": false,
-                "Height": 0,
-                "Key": "a3ed8a67-4a88-b949-6aa4-653fcaee8fb0",
-                "Name": ""
-            },
-            {
-                "Hide": [],
-                "Columns": [
-                    {
-                        "BlockContainer": {
-                            "BlockKey": "36101678-f5a2-2c41-cfea-ff54b8b07c6e"
-                        }
-                    }
-                ],
-                "Key": "295365f6-7f1c-0693-51be-0bffcd1f4c3d"
-            }
-        ],
-        "VerticalSpacing": "sm",
-        "MaxWidth": 0
-    },
-    "Hidden": false,
-    "Name": "Account Insights",
-    "Key": "00000000-0000-0001-0acc-0da511b0a12d"
+	"ModificationDateTime": "2023-01-12T15:48:08.949Z",
+	"CreationDateTime": "2022-12-05T13:14:47.066Z",
+	"Description": "Default account insights",
+	"Blocks": [
+		{
+			"Relation": {
+				"Type": "NgComponent",
+				"SubType": "NG14",
+				"ModuleName": "ScorecardsModule",
+				"RelationName": "PageBlock",
+				"ComponentName": "ScorecardsComponent",
+				"AddonRelativeURL": "scorecards",
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+				"Name": "Scorecards"
+			},
+			"PageConfiguration": {
+				"Parameters": [
+					{
+						"Type": "String",
+						"Consume": true,
+						"Key": "AccountUUID",
+						"Produce": false
+					}
+				]
+			},
+			"Configuration": {
+				"Resource": "Scorecards",
+				"Data": {
+					"scorecardsConfig": {
+						"groupTitleAndDescription": "ungrouped",
+						"useRoundCorners": false,
+						"titleSize": "xl",
+						"maxColumns": 1,
+						"useTitle": true,
+						"cardTextColor": "system-primary",
+						"horizontalAlign": "center",
+						"gap": "sm",
+						"useDescription": true,
+						"roundCornersSize": "md",
+						"useDropShadow": true,
+						"descriptionSize": "sm",
+						"dropShadow": {
+							"type": "Regular",
+							"intensity": 5
+						},
+						"border": {
+							"color": "hsl(0, 0%, 57%)",
+							"opacity": "50"
+						},
+						"verticalAlign": "center",
+						"textPosition": "overlyed",
+						"overlay": {
+							"opacity": 50,
+							"value": "hsl(0, 0%, 57%)",
+							"use": false
+						},
+						"useBorder": false,
+						"cardHeight": 16,
+						"descriptionMaxNumOfLines": 1,
+						"useText": true,
+						"gradientOverlay": {
+							"opacity": 50,
+							"value": "hsl(0, 0%, 57%)",
+							"use": false
+						},
+						"editSlideIndex": 2,
+						"titleWeight": "normal"
+					},
+					"cards": [
+						{
+							"imageURL": "",
+							"query": "427e1502-3b1e-4175-9782-d539b00353c7",
+							"chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Value and change_c2cc9af4d7ad.js",
+							"description": "Description",
+							"secondQuery": "cf21afb1-fac4-4662-8e14-504d307a61a7",
+							"id": 0,
+							"title": "Sales vs average (this month)",
+							"benchmarkVariablesData": {},
+							"chart": "Value and change_c2cc9af4d7ad.js",
+							"variablesData": {
+								"account": {
+									"value": "AccountUUID",
+									"source": "Variable"
+								}
+							}
+						},
+						{
+							"imageURL": "",
+							"query": "0bc14d7e-3dab-45be-8afb-afa8df09fc65",
+							"chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Value and change_c2cc9af4d7ad.js",
+							"description": "Description",
+							"secondQuery": "34e556f1-2c0e-4097-92c5-8b4a0f5d11f6",
+							"id": 1,
+							"title": "Sales vs average (last year)",
+							"benchmarkVariablesData": {},
+							"chart": "Value and change_c2cc9af4d7ad.js",
+							"variablesData": {
+								"account": {
+									"value": "AccountUUID",
+									"source": "Variable"
+								}
+							}
+						},
+						{
+							"query": "427e1502-3b1e-4175-9782-d539b00353c7",
+							"chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Progress bar_c2cc9af4d7ad.js",
+							"description": "Description",
+							"secondQuery": "b7e9d340-4fe7-463b-993b-7d41742c0076",
+							"id": 2,
+							"title": "Sales vs target (this month)",
+							"benchmarkVariablesData": {
+								"account": {
+									"value": "AccountUUID",
+									"source": "Variable"
+								}
+							},
+							"chart": "Progress bar_c2cc9af4d7ad.js",
+							"variablesData": {
+								"account": {
+									"value": "AccountUUID",
+									"source": "Variable"
+								}
+							}
+						}
+					]
+				},
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
+			},
+			"Key": "17654c75-6925-e081-e98e-36a042b9fc7d"
+		},
+		{
+			"Relation": {
+				"Type": "NgComponent",
+				"SubType": "NG14",
+				"ModuleName": "ChartModule",
+				"RelationName": "PageBlock",
+				"ComponentName": "ChartComponent",
+				"AddonRelativeURL": "chart",
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+				"Name": "Chart"
+			},
+			"PageConfiguration": {
+				"Parameters": [
+					{
+						"Type": "String",
+						"Consume": true,
+						"Key": "AccountUUID",
+						"Produce": false
+					}
+				]
+			},
+			"Configuration": {
+				"Resource": "Chart",
+				"Data": {
+					"dropShadow": {
+						"type": "Regular",
+						"intensity": 5
+					},
+					"border": {
+						"color": "hsl(0, 0%, 57%)",
+						"opacity": "50"
+					},
+					"useLabel": true,
+					"query": "676131d0-429e-4a69-9002-288bf1f5db67",
+					"useBorder": false,
+					"label": "Sales year over year",
+					"horizontalAlign": "left",
+					"chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Column_c2cc9af4d7ad.js",
+					"secondQuery": null,
+					"useDropShadow": true,
+					"chart": "Column_c2cc9af4d7ad.js",
+					"variablesData": {
+						"account": {
+							"value": "AccountUUID",
+							"source": "Variable"
+						}
+					},
+					"height": 22
+				},
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
+			},
+			"Key": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7"
+		},
+		{
+			"Relation": {
+				"Type": "NgComponent",
+				"SubType": "NG14",
+				"ModuleName": "SlideshowModule",
+				"Schema": {
+					"Fields": {
+						"slideshowConfig": {
+							"Type": "Object",
+							"Fields": {
+								"controllersDisplay": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								},
+								"innerPadding": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								},
+								"arrowsDisplay": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								},
+								"heightUnit": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								},
+								"height": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								},
+								"controllerSize": {
+									"Type": "String",
+									"ConfigurationPerScreenSize": true
+								}
+							}
+						},
+						"slides": {
+							"Type": "Array",
+							"Items": {
+								"Type": "Object",
+								"Fields": {
+									"verticalAlign": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									},
+									"image": {
+										"Type": "Object",
+										"Fields": {
+											"verticalPosition": {
+												"Type": "String",
+												"ConfigurationPerScreenSize": true
+											},
+											"useImage": {
+												"Type": "Bool",
+												"ConfigurationPerScreenSize": false
+											},
+											"horizontalPosition": {
+												"Type": "String",
+												"ConfigurationPerScreenSize": true
+											},
+											"asset": {
+												"Type": "Resource",
+												"Fields": {
+													"url": {
+														"Type": "String"
+													},
+													"key": {
+														"Type": "String"
+													}
+												},
+												"ConfigurationPerScreenSize": false
+											}
+										}
+									},
+									"contentWidth": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									},
+									"horizontalAlign": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									},
+									"titleSize": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									},
+									"subTitleSize": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									},
+									"buttonsSize": {
+										"Type": "String",
+										"ConfigurationPerScreenSize": true
+									}
+								}
+							}
+						}
+					}
+				},
+				"RelationName": "PageBlock",
+				"ComponentName": "SlideshowComponent",
+				"AddonRelativeURL": "slideshow",
+				"AddonUUID": "f93658be-17b6-4c92-9df3-4e6c7151e038",
+				"Name": "Slideshow"
+			},
+			"ConfigurationPerScreenSize": {
+				"Mobile": {
+					"slideshowConfig": {
+						"height": "7"
+					},
+					"slides": [
+						{
+							"subTitleSize": "sm"
+						}
+					]
+				}
+			},
+			"Configuration": {
+				"Resource": "Slideshow",
+				"Data": {
+					"slideshowConfig": {
+						"isUseArrows": false,
+						"dropShadow": {
+							"size": "md",
+							"intensity": "soft",
+							"use": false
+						},
+						"arrowShape": "round",
+						"arrowsStyle": "weak",
+						"usePauseButton": true,
+						"showControllersInSlider": true,
+						"innerPadding": "sm",
+						"arrowsColor": "system",
+						"showOnMobile": false,
+						"useInverStyle": true,
+						"controllerSize": "md",
+						"transitionTime": "0.75",
+						"fillHeight": false,
+						"isTransition": false,
+						"arrowType": "arrow_right",
+						"editSlideIndex": 0,
+						"transitionDuration": 5,
+						"transitionType": "fade",
+						"heightUnit": "REM",
+						"height": "6"
+					},
+					"slides": [
+						{
+							"verticalAlign": "start",
+							"image": {
+								"verticalPosition": "50",
+								"useImage": false,
+								"horizontalPosition": "50",
+								"asset": "",
+								"assetURL": ""
+							},
+							"overlay": {
+								"opacity": 75,
+								"value": "hsl(0, 0%, 0%)",
+								"use": false
+							},
+							"buttonColor": "system-primary",
+							"titleSize": "sm",
+							"subTitleSize": "sm",
+							"textColor": "strong",
+							"buttonsSize": "md",
+							"useTitle": true,
+							"innerSpacing": "sm",
+							"contentWidth": "Wide",
+							"secondButton": {
+								"style": "strong",
+								"label": "Noo",
+								"useButton": false,
+								"script": {}
+							},
+							"useSubTitle": true,
+							"horizontalAlign": "left",
+							"titleContent": "Insights - trial mode",
+							"gradientOverlay": {
+								"opacity": 75,
+								"value": "hsl(0, 100%, 50%)",
+								"use": false
+							},
+							"subTitleContent": "The data might be inaccurate due to configuration. Please contact your customer success manager for more information.",
+							"firstButton": {
+								"style": "weak-invert",
+								"label": "Yess",
+								"useButton": false,
+								"script": {}
+							},
+							"id": 0,
+							"titleWeight": "normal"
+						}
+					]
+				},
+				"AddonUUID": "f93658be-17b6-4c92-9df3-4e6c7151e038"
+			},
+			"Key": "cf76cb10-ff27-86e3-b999-2ecb810bad52"
+		},
+		{
+			"Relation": {
+				"Type": "NgComponent",
+				"SubType": "NG14",
+				"ModuleName": "BenchmarkChartModule",
+				"RelationName": "PageBlock",
+				"ComponentName": "BenchmarkChartComponent",
+				"AddonRelativeURL": "benchmark_chart",
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5",
+				"Name": "BenchmarkChart"
+			},
+			"PageConfiguration": {
+				"Parameters": [
+					{
+						"Type": "String",
+						"Consume": true,
+						"Key": "AccountUUID",
+						"Produce": false
+					}
+				]
+			},
+			"Configuration": {
+				"Resource": "BenchmarkChart",
+				"Data": {
+					"dropShadow": {
+						"type": "Regular",
+						"intensity": 5
+					},
+					"border": {
+						"color": "hsl(0, 0%, 57%)",
+						"opacity": "50"
+					},
+					"useLabel": true,
+					"query": "76213dab-8865-436c-b7d8-306ecd77629c",
+					"useBorder": false,
+					"label": "Sales by category (last month)",
+					"horizontalAlign": "left",
+					"chartCache": "https://pfs.pepperi.com/a4d22c90-f34b-4b6a-b877-9adcc5487533/3d118baf-f576-4cdb-a81e-c2cc9af4d7ad/ChartsPFS/Benchmark column_c2cc9af4d7ad.js",
+					"secondQuery": "bb0366c7-7381-4175-80a1-12bd3726d724",
+					"benchmarkVariablesData": {},
+					"useDropShadow": true,
+					"chart": "Benchmark column_c2cc9af4d7ad.js",
+					"variablesData": {
+						"account": {
+							"value": "AccountUUID",
+							"source": "Variable"
+						}
+					},
+					"height": "22"
+				},
+				"AddonUUID": "00000000-0000-0000-0000-0da1a0de41e5"
+			},
+			"Key": "36101678-f5a2-2c41-cfea-ff54b8b07c6e"
+		}
+	],
+	"Layout": {
+		"ColumnsGap": "sm",
+		"SectionsGap": "sm",
+		"HorizontalSpacing": "sm",
+		"Sections": [
+			{
+				"Hide": [],
+				"Columns": [
+					{
+						"BlockContainer": {
+							"BlockKey": "cf76cb10-ff27-86e3-b999-2ecb810bad52"
+						}
+					}
+				],
+				"Key": "6f690c37-e560-0f07-292f-fcb512efe7aa"
+			},
+			{
+				"Hide": [],
+				"Columns": [
+					{
+						"BlockContainer": {
+							"BlockKey": "17654c75-6925-e081-e98e-36a042b9fc7d"
+						}
+					}
+				],
+				"Key": "8ae61b30-ee07-3425-0ef4-96943d8827f1"
+			},
+			{
+				"Hide": [],
+				"Columns": [
+					{
+						"BlockContainer": {
+							"BlockKey": "1869315a-02e3-4c1e-6ac1-04bd19bc9ed7"
+						}
+					}
+				],
+				"FillHeight": false,
+				"Height": 0,
+				"Key": "a3ed8a67-4a88-b949-6aa4-653fcaee8fb0",
+				"Name": ""
+			},
+			{
+				"Hide": [],
+				"Columns": [
+					{
+						"BlockContainer": {
+							"BlockKey": "36101678-f5a2-2c41-cfea-ff54b8b07c6e"
+						}
+					}
+				],
+				"Key": "295365f6-7f1c-0693-51be-0bffcd1f4c3d"
+			}
+		],
+		"VerticalSpacing": "sm",
+		"MaxWidth": 0
+	},
+	"Hidden": false,
+	"Name": "Account Insights",
+	"Key": "00000000-0000-0001-0acc-0da511b0a12d"
 }]

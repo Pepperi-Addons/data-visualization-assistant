@@ -550,7 +550,7 @@ export class ConfigurationAssistantComponent implements OnInit {
 
    async onRunClicked() {
     this.loaderService.show();
-    console.log(this.configuration)
+    console.log(this.configuration);
     const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
     const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
     if(genericSlugExists || accountSlugExists) {
@@ -569,6 +569,7 @@ export class ConfigurationAssistantComponent implements OnInit {
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
         const savedConf = await this.addonService.saveConfiguration(this.configuration);
+        await this.addonService.createUDCs();
         console.log('pages and queries imported, slugs created and mapped successfully')
         const dataMsg = new PepDialogData({
           title: this.translate.instant('SUCCESS_TITLE'),
