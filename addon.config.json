@@ -25,7 +25,9 @@
       "data_visualization": "0.7.3",
       "slugs": "1.0.22",
       "slideshow": "1.0.5",
-      "udc": "0.8.1"
+      "udc": "0.8.19",
+      "adal": "1.4.107",
+      "data_index": "1.1.29"
     },
     "CPISide": []
   }
