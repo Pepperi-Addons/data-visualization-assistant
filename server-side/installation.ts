@@ -74,6 +74,7 @@ async function createAbstractSchemes(service: MyService) {
             User: {
                 Type: "Resource",
                 Resource: "users",
+                AddonUUID: AddonUUID,
                 Indexed: true,
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
@@ -98,6 +99,7 @@ async function createAbstractSchemes(service: MyService) {
             Account: {
                 Type: "Resource",
                 Resource: "accounts",
+                AddonUUID: AddonUUID,
                 Indexed: true,
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
