@@ -27,7 +27,8 @@
       "slideshow": "1.0.5",
       "udc": "0.8.19",
       "adal": "1.4.107",
-      "data_index": "1.1.29"
+      "data_index": "1.1.29",
+      "core_resources": "0.6.35"
     },
     "CPISide": []
   }
