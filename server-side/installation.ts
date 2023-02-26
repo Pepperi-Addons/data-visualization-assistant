@@ -67,6 +67,7 @@ export async function downgrade(client: Client, request: Request): Promise<any> 
 
 
 async function createAbstractSchemes(service: MyService) {
+    const coreResourcesUUID = "fc5a5974-3b30-4430-8feb-7d5b9699bc9f";
     await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
         Name: "user_target",
         Type: "abstract",
@@ -74,7 +75,7 @@ async function createAbstractSchemes(service: MyService) {
             User: {
                 Type: "Resource",
                 Resource: "users",
-                AddonUUID: AddonUUID,
+                AddonUUID: coreResourcesUUID,
                 Indexed: true,
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
@@ -99,7 +100,7 @@ async function createAbstractSchemes(service: MyService) {
             Account: {
                 Type: "Resource",
                 Resource: "accounts",
-                AddonUUID: AddonUUID,
+                AddonUUID: coreResourcesUUID,
                 Indexed: true,
                 IndexedFields: {
                     Name: {Type: "String", Indexed: true},
