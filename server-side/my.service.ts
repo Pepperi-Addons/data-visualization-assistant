@@ -202,5 +202,12 @@ class MyService {
         return this.papiClient.addons.installedAddons.find({});
     }
 
+    async deleteTargetScheme(schemeName: string) {
+        const targetScheme = await this.papiClient.addons.data.schemes.get({where: `Name='${schemeName}'`}); // returns an array
+        if(targetScheme.length > 0) {
+            await this.papiClient.post(`/addons/data/schemes/${schemeName}/purge`);
+        }
+    }
+
 }
 export default MyService;

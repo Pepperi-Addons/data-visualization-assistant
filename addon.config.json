@@ -28,7 +28,8 @@
       "udc": "0.8.19",
       "adal": "1.4.107",
       "data_index": "1.1.29",
-      "core_resources": "0.6.35"
+      "core_resources": "0.6.35",
+      "targets": "0.0.1"
     },
     "CPISide": []
   }
