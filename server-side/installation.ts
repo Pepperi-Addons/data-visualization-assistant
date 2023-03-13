@@ -53,8 +53,8 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
         if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.28') < 0 &&
             semver.compare(request.body.FromVersion, '0.6.0') > 0) {
             const service = new MyService(client);
-            await service.papiClient.post(`/addons/data/schemes/user_target/purge`);
-            await service.papiClient.post(`/addons/data/schemes/account_target/purge`);
+            await service.deleteTargetScheme("user_target");
+            await service.deleteTargetScheme("account_target");
         }
     } catch (err) {
         throw new Error(`Failed to delete abstract schemes. error - ${err}`);
@@ -65,9 +65,6 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
 export async function downgrade(client: Client, request: Request): Promise<any> {
     return {success:true,resultObject:{}}
 }
-
-
-
 
 async function deleteUDCs(service: MyService) {
     try {
