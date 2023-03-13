@@ -34,7 +34,6 @@ export async function install(client: Client, request: Request): Promise<any> {
             Name: 'confAssistantFiles',
             Type: 'pfs'
         });
-        await createAbstractSchemes(service);
     } catch (err) {
         throw new Error(`Failed to create ADAL Tables. error - ${err}`);
     }
@@ -50,13 +49,15 @@ export async function uninstall(client: Client, request: Request): Promise<any> 
 
 export async function upgrade(client: Client, request: Request): Promise<any> {
     try {
-        // versions earlier than 0.6.17 don't have abstracts and udcs
-        if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.17') < 0) {
+        // versions earlier than 0.6.28 create abstracts (which moved to targets addon), so we need to delete them.
+        if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.28') < 0 &&
+            semver.compare(request.body.FromVersion, '0.6.0') > 0) {
             const service = new MyService(client);
-            await createAbstractSchemes(service);
+            await service.papiClient.post(`/addons/data/schemes/user_target/purge`);
+            await service.papiClient.post(`/addons/data/schemes/account_target/purge`);
         }
     } catch (err) {
-        throw new Error(`Failed to create Schemes. error - ${err}`);
+        throw new Error(`Failed to delete abstract schemes. error - ${err}`);
     }
     return {success:true,resultObject:{}}
 }
@@ -66,59 +67,6 @@ export async function downgrade(client: Client, request: Request): Promise<any> 
 }
 
 
-async function createAbstractSchemes(service: MyService) {
-    const coreResourcesUUID = "fc5a5974-3b30-4430-8feb-7d5b9699bc9f";
-    await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
-        Name: "user_target",
-        Type: "abstract",
-        Fields: {
-            User: {
-                Type: "Resource",
-                Resource: "users",
-                AddonUUID: coreResourcesUUID,
-                Indexed: true,
-                IndexedFields: {
-                    Name: {Type: "String", Indexed: true},
-                    ExternalID: {Type: "String", Indexed: true}
-                },
-                ApplySystemFilter: true
-            },
-            Date: {
-                Type: "DateTime",
-                Indexed: true
-            },
-            Target: {
-                Type: "Double",
-                Indexed: true
-            }
-        }
-    });
-    await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
-        Name: "account_target",
-        Type: "abstract",
-        Fields: {
-            Account: {
-                Type: "Resource",
-                Resource: "accounts",
-                AddonUUID: coreResourcesUUID,
-                Indexed: true,
-                IndexedFields: {
-                    Name: {Type: "String", Indexed: true},
-                    ExternalID: {Type: "String", Indexed: true}
-                },
-                ApplySystemFilter: true
-            },
-            Date: {
-                Type: "DateTime",
-                Indexed: true
-            },
-            Target: {
-                Type: "Double",
-                Indexed: true
-            }
-        }
-    });
-}
 
 
 async function deleteUDCs(service: MyService) {
