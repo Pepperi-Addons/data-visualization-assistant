@@ -55,6 +55,7 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
             const service = new MyService(client);
             await service.deleteTargetScheme("user_target");
             await service.deleteTargetScheme("account_target");
+            await deleteUDCs(service);
         }
     } catch (err) {
         throw new Error(`Failed to delete abstract schemes. error - ${err}`);
