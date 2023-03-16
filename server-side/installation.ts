@@ -53,9 +53,9 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
         if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.28') < 0 &&
             semver.compare(request.body.FromVersion, '0.6.0') > 0) {
             const service = new MyService(client);
+            await deleteUDCs(service);
             await service.deleteTargetScheme("user_target");
             await service.deleteTargetScheme("account_target");
-            await deleteUDCs(service);
         }
     } catch (err) {
         throw new Error(`Failed to delete abstract schemes. error - ${err}`);
