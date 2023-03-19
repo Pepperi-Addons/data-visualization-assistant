@@ -42,8 +42,6 @@ export async function install(client: Client, request: Request): Promise<any> {
 }
 
 export async function uninstall(client: Client, request: Request): Promise<any> {
-    const service = new MyService(client);
-    await deleteUDCs(service);
     return {success:true,resultObject:{}};
 }
 
@@ -53,7 +51,6 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
         if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.28') < 0 &&
             semver.compare(request.body.FromVersion, '0.6.0') > 0) {
             const service = new MyService(client);
-            await deleteUDCs(service);
             await service.deleteTargetScheme("user_target");
             await service.deleteTargetScheme("account_target");
         }
@@ -65,20 +62,5 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
 
 export async function downgrade(client: Client, request: Request): Promise<any> {
     return {success:true,resultObject:{}}
-}
-
-async function deleteUDCs(service: MyService) {
-    try {
-        await service.papiClient.post(`/user_defined_collections/schemes`, {
-            Name: "UserTarget",
-            Hidden: true
-        });
-        await service.papiClient.post(`/user_defined_collections/schemes`, {
-            Name: "AccountTarget",
-            Hidden: true
-        });
-    } catch (err) {
-        throw new Error(`Failed to delete UDCs. error - ${err}`);
-    }
 }
     
