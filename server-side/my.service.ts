@@ -71,6 +71,7 @@ class MyService {
                         .replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
                         .replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
                         .replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
+                        .replace(this.toRegex('Category_Placeholder'), configuration.itemCategory)
                         .replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
                         .replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
             // then uploading the queries file to PFS
@@ -88,11 +89,11 @@ class MyService {
                     }
                 ]
             }
-            console.log(body);
-            const importedPage = await this.papiClientForImport.post('/addons/data/import/file/recursive/50062e0c-9967-4ed4-9102-f2bc50602d41/PagesDrafts', body);
+            console.log("BODY SENT TO RECURSIVE IMPORT: " +JSON.stringify(body));
+            const importedPage = await this.papiClient.post('/pages/import/file', body);
             importedPages.push(importedPage);
         }
-        console.log("DVAS IMPORTED PAGES RESPONSES: " + importedPages);
+        console.log("DVAS IMPORTED PAGES RESPONSES: " + JSON.stringify(importedPages));
         return importedPages;
     }
 
@@ -199,6 +200,13 @@ class MyService {
 
     getAddons(): Promise<InstalledAddon[]> {
         return this.papiClient.addons.installedAddons.find({});
+    }
+
+    async deleteTargetScheme(schemeName: string) {
+        const targetScheme = await this.papiClient.addons.data.schemes.get({where: `Name='${schemeName}'`}); // returns an array
+        if(targetScheme.length > 0) {
+            await this.papiClient.post(`/addons/data/schemes/${schemeName}/purge`);
+        }
     }
 
 }

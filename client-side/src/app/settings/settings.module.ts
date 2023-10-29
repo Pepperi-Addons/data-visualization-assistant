@@ -9,7 +9,6 @@ import { SettingsRoutingModule } from './settings.routes';
 import { SettingsComponent } from './settings.component';
 
 import { config } from '../app.config';
-import { ConfigurationAssistantModule } from './configuration-assistant/configuration-assistant.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +17,6 @@ import { ConfigurationAssistantModule } from './configuration-assistant/configur
     imports: [
         CommonModule,
         PepNgxLibModule,
-        ConfigurationAssistantModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

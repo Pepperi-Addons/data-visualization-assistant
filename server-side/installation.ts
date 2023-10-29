@@ -10,7 +10,8 @@ The error Message is importent! it will be written in the audit log and help the
 
 import { Client, Request } from '@pepperi-addons/debug-server';
 import MyService from './my.service';
-import { AddonVersion, AddonUUID } from '../addon.config.json'
+import { AddonUUID } from '../addon.config.json'
+import semver from 'semver';
 
 export async function install(client: Client, request: Request): Promise<any> {
     try {
@@ -41,13 +42,25 @@ export async function install(client: Client, request: Request): Promise<any> {
 }
 
 export async function uninstall(client: Client, request: Request): Promise<any> {
-    return {success:true,resultObject:{}}
+    return {success:true,resultObject:{}};
 }
 
 export async function upgrade(client: Client, request: Request): Promise<any> {
+    try {
+        // versions earlier than 0.6.28 create abstracts (which moved to targets addon), so we need to delete them.
+        if (request.body.FromVersion && semver.compare(request.body.FromVersion, '0.6.28') < 0 &&
+            semver.compare(request.body.FromVersion, '0.6.0') > 0) {
+            const service = new MyService(client);
+            await service.deleteTargetScheme("user_target");
+            await service.deleteTargetScheme("account_target");
+        }
+    } catch (err) {
+        throw new Error(`Failed to delete abstract schemes. error - ${err}`);
+    }
     return {success:true,resultObject:{}}
 }
 
 export async function downgrade(client: Client, request: Request): Promise<any> {
     return {success:true,resultObject:{}}
 }
+    
