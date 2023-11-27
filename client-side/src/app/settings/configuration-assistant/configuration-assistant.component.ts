@@ -564,12 +564,19 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
     else {
       try {
+		const savedConf = await this.addonService.saveConfiguration(this.configuration);
+		console.log("done saving configuration");
+
+        await this.addonService.createUDCs();
+		console.log("done creating UDCs");
+
         const importedPages = await this.addonService.replaceFields(this.configuration);
+		console.log("done importing pages");
+		
         const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
-        const savedConf = await this.addonService.saveConfiguration(this.configuration);
-        await this.addonService.createUDCs();
+        
         console.log('pages and queries imported, slugs created and mapped successfully')
         const dataMsg = new PepDialogData({
           title: this.translate.instant('SUCCESS_TITLE'),
