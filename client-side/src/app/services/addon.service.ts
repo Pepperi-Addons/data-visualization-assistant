@@ -106,9 +106,14 @@ export class AddonService {
         const managerPageUUID = "00000000-0000-0001-3912-0da511b0a12d";
         const repPageUUID = "00000000-0000-0001-12e9-0da511b0a12d";
 
+		//removing existing rep mappings
+		repDataView.Fields = repDataView.Fields.filter(field => field.FieldID !== configuration.genericSlug && field.FieldID !== configuration.accountSlug);
         //updating rep data view
         repDataView.Fields.push({FieldID: configuration.genericSlug, Title: repPageUUID});
         repDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});
+
+		//removing existing admin mappings
+		adminDataView.Fields = adminDataView.Fields.filter(field => field.FieldID !== configuration.genericSlug && field.FieldID !== configuration.accountSlug);
         //updating admin data view
         adminDataView.Fields.push({FieldID: configuration.genericSlug, Title: managerPageUUID});
         adminDataView.Fields.push({FieldID: configuration.accountSlug, Title: accountPageUUID});

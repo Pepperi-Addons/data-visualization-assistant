@@ -221,8 +221,8 @@ export class ConfigurationAssistantComponent implements OnInit {
               },
             },
             AdditionalProps: {
-              regex: /^\S*$/,
-              regexError: "White spaces are not allowed"
+				regex: /^[^\sA-Z]*$/,
+				regexError: "White spaces and capital letters are not allowed"
             }
           },
           {
@@ -248,8 +248,8 @@ export class ConfigurationAssistantComponent implements OnInit {
               },
             },
             AdditionalProps: {
-              regex: /^\S*$/,
-              regexError: "White spaces are not allowed"
+				regex: /^[^\sA-Z]*$/,
+				regexError: "White spaces and capital letters are not allowed"
             }
           },
           {
@@ -553,17 +553,29 @@ export class ConfigurationAssistantComponent implements OnInit {
     console.log(this.configuration);
     const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
     const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
+	
     if(genericSlugExists || accountSlugExists) {
-      const badName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
+      const usedName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
       const dataMsg = new PepDialogData({
-        title: this.translate.instant('SLUG_EXISTS_ERROR_TITLE',{name: badName}),
-        content: this.translate.instant('SLUG_EXISTS_ERROR')
+        title: this.translate.instant('SLUG_EXISTS_TITLE',{name: usedName}),
+        content: this.translate.instant('SLUG_EXISTS_MESSAGE'),
+		actionsType: 'cancel-continue'
       });
       this.loaderService.hide();
-      this.dialogService.openDefaultDialog(dataMsg);
+      this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(async res => {
+		if(res) {
+			this.loaderService.show();
+			await this.runLogic();
+		}
+	  });
     }
     else {
-      try {
+      await this.runLogic();
+    }
+   }
+
+   async runLogic() {
+	try {
 		const savedConf = await this.addonService.saveConfiguration(this.configuration);
 		console.log("done saving configuration");
 
@@ -572,7 +584,7 @@ export class ConfigurationAssistantComponent implements OnInit {
 
         const importedPages = await this.addonService.replaceFields(this.configuration);
 		console.log("done importing pages");
-		
+
         const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
@@ -595,7 +607,6 @@ export class ConfigurationAssistantComponent implements OnInit {
         this.loaderService.hide();
         this.dialogService.openDefaultDialog(dataMsg);
       }
-    }
    }
 
     formValidationChange(e) {
