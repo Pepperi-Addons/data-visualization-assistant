@@ -109,6 +109,9 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
 
     defaultConfiguration() {
+		const transactionTypeDefault = this.getDefaultValue(this.typeValuesOptions, "sales order");
+		const transactionStatusDefault = this.getDefaultValue(this.statusValuesOptions, "submitted");
+
         return {
             genericSlug: "insights",
             accountSlug: "account_insights",
@@ -117,8 +120,8 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
             transactionLineTotalQuantity: this.getDefaultValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
             itemCategory: 'Item.MainCategory',
-            transactionType: this.createMultiSelectString(this.typeValuesOptions),
-            transactionStatus: this.createMultiSelectString(this.statusValuesOptions),
+            transactionType: (transactionTypeDefault != "") ? transactionTypeDefault : this.createMultiSelectString(this.typeValuesOptions),
+            transactionStatus: (transactionStatusDefault != "") ? transactionStatusDefault : this.createMultiSelectString(this.statusValuesOptions),
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -621,8 +624,9 @@ export class ConfigurationAssistantComponent implements OnInit {
       return str;
     }
 
-    getDefaultValue(options, defaultValue) {
-      const res = (options.filter(op => op.Value==defaultValue)).length > 0 ? defaultValue : "";
+    getDefaultValue(options: {Key: string, Value: string}[], defaultValue: string): string {
+	  const filteredOptions = options.filter(op => op.Value.toLowerCase() == defaultValue.toLowerCase()); // case insensitive comparison
+      const res = filteredOptions.length > 0 ? filteredOptions[0].Value : "";
       return res;
     }
 }
