@@ -13,8 +13,8 @@
     "QUERIES_FILTER_TEXT": "Define filter which should be applied to all the generated queries. <br/> You can change the filter later on per query in the Data Queries settings screen.",
     "SLUG_NAME_ERROR_TITLE": "Slug name is not valid",
     "SLUG_NAME_ERROR": "White spaces are not allowed",
-    "SLUG_EXISTS_ERROR_TITLE": "Slug '{{name}}' already exists",
-    "SLUG_EXISTS_ERROR": "Please select a different name.",
+    "SLUG_EXISTS_TITLE": "Slug '{{name}}' already exists",
+    "SLUG_EXISTS_MESSAGE": "Existing slugs, pages and data queries will be overwritten. Are you sure you want to continue?",
     "SUCCESS_TITLE": "Success",
     "SUCCESS_CONTENT": "The data queries, pages and slugs were created. <br/> You can change them using the relevant settings screens. <br/> <br/> To see the dashboards, you need to: <br/> * Publish the pages <br/> * Add the slugs to the home screen or to the account dashboard tabs. <br/> <br/> You will now be redirected to the dashboard page so you can review and publish it."
 

@@ -109,6 +109,9 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
 
     defaultConfiguration() {
+		const transactionTypeDefault = this.getDefaultValue(this.typeValuesOptions, "sales order");
+		const transactionStatusDefault = this.getDefaultValue(this.statusValuesOptions, "submitted");
+
         return {
             genericSlug: "insights",
             accountSlug: "account_insights",
@@ -117,8 +120,8 @@ export class ConfigurationAssistantComponent implements OnInit {
             transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
             transactionLineTotalQuantity: this.getDefaultValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
             itemCategory: 'Item.MainCategory',
-            transactionType: this.createMultiSelectString(this.typeValuesOptions),
-            transactionStatus: this.createMultiSelectString(this.statusValuesOptions),
+            transactionType: (transactionTypeDefault != "") ? transactionTypeDefault : this.createMultiSelectString(this.typeValuesOptions),
+            transactionStatus: (transactionStatusDefault != "") ? transactionStatusDefault : this.createMultiSelectString(this.statusValuesOptions),
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -221,8 +224,8 @@ export class ConfigurationAssistantComponent implements OnInit {
               },
             },
             AdditionalProps: {
-              regex: /^\S*$/,
-              regexError: "White spaces are not allowed"
+				regex: /^[^\sA-Z]*$/,
+				regexError: "White spaces and capital letters are not allowed"
             }
           },
           {
@@ -248,8 +251,8 @@ export class ConfigurationAssistantComponent implements OnInit {
               },
             },
             AdditionalProps: {
-              regex: /^\S*$/,
-              regexError: "White spaces are not allowed"
+				regex: /^[^\sA-Z]*$/,
+				regexError: "White spaces and capital letters are not allowed"
             }
           },
           {
@@ -553,23 +556,42 @@ export class ConfigurationAssistantComponent implements OnInit {
     console.log(this.configuration);
     const genericSlugExists = await this.addonService.slugExists(this.configuration.genericSlug);
     const accountSlugExists = await this.addonService.slugExists(this.configuration.accountSlug);
+	
     if(genericSlugExists || accountSlugExists) {
-      const badName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
+      const usedName = genericSlugExists ? this.configuration.genericSlug : this.configuration.accountSlug;
       const dataMsg = new PepDialogData({
-        title: this.translate.instant('SLUG_EXISTS_ERROR_TITLE',{name: badName}),
-        content: this.translate.instant('SLUG_EXISTS_ERROR')
+        title: this.translate.instant('SLUG_EXISTS_TITLE',{name: usedName}),
+        content: this.translate.instant('SLUG_EXISTS_MESSAGE'),
+		actionsType: 'cancel-continue'
       });
       this.loaderService.hide();
-      this.dialogService.openDefaultDialog(dataMsg);
+      this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(async res => {
+		if(res) {
+			this.loaderService.show();
+			await this.runLogic();
+		}
+	  });
     }
     else {
-      try {
+      await this.runLogic();
+    }
+   }
+
+   async runLogic() {
+	try {
+		const savedConf = await this.addonService.saveConfiguration(this.configuration);
+		console.log("done saving configuration");
+
+        await this.addonService.createUDCs();
+		console.log("done creating UDCs");
+
         const importedPages = await this.addonService.replaceFields(this.configuration);
+		console.log("done importing pages");
+
         const gSlug = await this.addonService.createSlug(this.configuration.genericSlug);
         const accSlug = await this.addonService.createSlug(this.configuration.accountSlug);
         const slugsDataViews = await this.addonService.upsertSlugsDataViews(this.configuration);
-        const savedConf = await this.addonService.saveConfiguration(this.configuration);
-        await this.addonService.createUDCs();
+        
         console.log('pages and queries imported, slugs created and mapped successfully')
         const dataMsg = new PepDialogData({
           title: this.translate.instant('SUCCESS_TITLE'),
@@ -588,7 +610,6 @@ export class ConfigurationAssistantComponent implements OnInit {
         this.loaderService.hide();
         this.dialogService.openDefaultDialog(dataMsg);
       }
-    }
    }
 
     formValidationChange(e) {
@@ -603,8 +624,9 @@ export class ConfigurationAssistantComponent implements OnInit {
       return str;
     }
 
-    getDefaultValue(options, defaultValue) {
-      const res = (options.filter(op => op.Value==defaultValue)).length > 0 ? defaultValue : "";
+    getDefaultValue(options: {Key: string, Value: string}[], defaultValue: string): string {
+	  const filteredOptions = options.filter(op => op.Value.toLowerCase() == defaultValue.toLowerCase()); // case insensitive comparison
+      const res = filteredOptions.length > 0 ? filteredOptions[0].Value : "";
       return res;
     }
 }
