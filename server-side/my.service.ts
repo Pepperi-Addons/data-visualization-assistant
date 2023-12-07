@@ -48,7 +48,7 @@ class MyService {
 
     async replaceFieldsAndImportFiles(configuration, assetsBaseUrl) {
         const basePath = `${assetsBaseUrl}/assets`;
-        // const basePath = `../publish/assets` // for debugging
+        // const basePath = `${assetsBaseUrl}` // for debugging
         console.log(`ASSETS BASE URL: ${basePath}`);
         var importedPages: any[] = [];
         const pageAndQueryFilesNames = [
@@ -94,6 +94,10 @@ class MyService {
             importedPages.push(importedPage);
         }
         console.log("DVAS IMPORTED PAGES RESPONSES: " + JSON.stringify(importedPages));
+
+		await this.publishPages(importedPages);
+		console.log("DVAS PAGES SUCCESSFULLY PUBLISHED");
+
         return importedPages;
     }
 
@@ -208,6 +212,12 @@ class MyService {
             await this.papiClient.post(`/addons/data/schemes/${schemeName}/purge`);
         }
     }
+
+	async publishPages(pages) {
+		await Promise.all(pages.map(page => 
+			this.papiClient.post(`/addons/api/50062e0c-9967-4ed4-9102-f2bc50602d41/internal_api/publish_page`, page)
+		));
+	}
 
 }
 export default MyService;
