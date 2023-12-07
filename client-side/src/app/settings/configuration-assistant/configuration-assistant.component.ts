@@ -109,16 +109,19 @@ export class ConfigurationAssistantComponent implements OnInit {
     }
 
     defaultConfiguration() {
+		const transactionTypeDefault = this.tryGetValue(this.typeValuesOptions, "sales order");
+		const transactionStatusDefault = this.tryGetValue(this.statusValuesOptions, "submitted");
+
         return {
             genericSlug: "insights",
             accountSlug: "account_insights",
-            transactionTotalPrice: this.getDefaultValue(this.allActivitiesFieldsOptions, "GrandTotal"),
-            transactionTotalQuantity: this.getDefaultValue(this.allActivitiesFieldsOptions, "QuantitiesTotal"),
-            transactionLineTotalPrice: this.getDefaultValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
-            transactionLineTotalQuantity: this.getDefaultValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
+            transactionTotalPrice: this.tryGetValue(this.allActivitiesFieldsOptions, "GrandTotal"),
+            transactionTotalQuantity: this.tryGetValue(this.allActivitiesFieldsOptions, "QuantitiesTotal"),
+            transactionLineTotalPrice: this.tryGetValue(this.transactionLinesFieldsOptions, "TotalUnitsPriceAfterDiscount"),
+            transactionLineTotalQuantity: this.tryGetValue(this.transactionLinesFieldsOptions, "UnitsQuantity"),
             itemCategory: 'Item.MainCategory',
-            transactionType: this.createMultiSelectString(this.typeValuesOptions),
-            transactionStatus: this.createMultiSelectString(this.statusValuesOptions),
+            transactionType: transactionTypeDefault ? transactionTypeDefault : this.createMultiSelectString(this.typeValuesOptions),
+            transactionStatus: transactionStatusDefault ? transactionStatusDefault : this.createMultiSelectString(this.statusValuesOptions),
             slugsText: this.translate.instant('SLUGS_TEXT'),
             fieldsText: this.translate.instant('FIELDS_TEXT'),
             queriesText: this.translate.instant('QUERIES_FILTER_TEXT')
@@ -621,8 +624,10 @@ export class ConfigurationAssistantComponent implements OnInit {
       return str;
     }
 
-    getDefaultValue(options, defaultValue) {
-      const res = (options.filter(op => op.Value==defaultValue)).length > 0 ? defaultValue : "";
+	// search the given value in the options array and return it if found, otherwise return empty string
+    tryGetValue(options: {Key: string, Value: string}[], defaultValue: string): string {
+	  const filteredOptions = options.filter(op => op.Value.toLowerCase() == defaultValue.toLowerCase()); // case insensitive comparison
+      const res = filteredOptions.length > 0 ? filteredOptions[0].Value : "";
       return res;
     }
 }
