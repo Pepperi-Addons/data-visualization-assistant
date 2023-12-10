@@ -30,7 +30,7 @@ export async function install(client: Client, request: Request): Promise<any> {
                 }
             }
         });
-        await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`,{
+        await service.papiClient.post(`/addons/data/schemes/${AddonUUID}`, {
             Name: 'confAssistantFiles',
             Type: 'pfs'
         });
@@ -42,7 +42,7 @@ export async function install(client: Client, request: Request): Promise<any> {
 }
 
 export async function uninstall(client: Client, request: Request): Promise<any> {
-    return {success:true,resultObject:{}};
+    return {success: true, resultObject: {}};
 }
 
 export async function upgrade(client: Client, request: Request): Promise<any> {
@@ -57,10 +57,10 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
     } catch (err) {
         throw new Error(`Failed to delete abstract schemes. error - ${err}`);
     }
-    return {success:true,resultObject:{}}
+    return {success: true, resultObject: {}}
 }
 
 export async function downgrade(client: Client, request: Request): Promise<any> {
-    return {success:true,resultObject:{}}
+    return {success: true, resultObject: {}}
 }
-    
+

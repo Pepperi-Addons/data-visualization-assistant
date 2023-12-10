@@ -1,7 +1,8 @@
-import { PapiClient, InstalledAddon, Relation } from '@pepperi-addons/papi-sdk'
+import { PapiClient, InstalledAddon, Relation, AddonFile } from '@pepperi-addons/papi-sdk'
 import { Client } from '@pepperi-addons/debug-server';
 import config from '../addon.config.json'
 import fetch from 'node-fetch';
+import { AssistantConfiguration } from './models/configuration';
 
 class MyService {
 
@@ -26,74 +27,60 @@ class MyService {
         });
         this.bundleFileName = `file_${this.client.AddonUUID}`;
     }
-    
+
     // For page block template
     private upsertRelation(relation): Promise<any> {
         return this.papiClient.post('/addons/data/relations', relation);
     }
 
-    async updateConfiguration(conf) {
+    async updateConfiguration(conf: AssistantConfiguration): Promise<AssistantConfiguration | undefined> {
         const confTable = this.papiClient.addons.data.uuid(config.AddonUUID).table("configurationAssistant");
         const savedConf = await confTable.upsert({Key: "1", Configuration: conf});
-        return savedConf;
+        return savedConf as AssistantConfiguration;
     }
 
-    async getConfiguration() {
+    async getConfiguration(): Promise<AssistantConfiguration | undefined> {
         const confTable = this.papiClient.addons.data.uuid(config.AddonUUID).table("configurationAssistant");
         const conf = await confTable.find();
-        if(conf.length > 0)
-            return conf[0].Configuration;
-        return null;
+        if (conf.length > 0) {
+			return conf[0].Configuration;
+		}
     }
 
-    async replaceFieldsAndImportFiles(configuration, assetsBaseUrl) {
+    async replaceFieldsAndImportFiles(configuration: AssistantConfiguration, assetsBaseUrl: string): Promise<any[]> {
         const basePath = `${assetsBaseUrl}/assets`;
         // const basePath = `${assetsBaseUrl}` // for debugging
         console.log(`ASSETS BASE URL: ${basePath}`);
-        var importedPages: any[] = [];
+        const importedPages: any[] = [];
         const pageAndQueryFilesNames = [
             {page: 'account_page', query: 'account_queries'},
             {page: 'manager_page', query: 'manager_queries'},
             {page: 'rep_page', query: 'rep_queries'}
         ];
-        
-        for(const names of pageAndQueryFilesNames) {
+
+        for (const names of pageAndQueryFilesNames) {
             // uploading the page file to PFS
             const pageResponse = await fetch(`${basePath}/pages-to-import/${names.page}.json`);
             const pageData = await pageResponse.text();
             const pfsPageFile = await this.uploadDataToPFS(pageData, names.page);
-            console.log("PFS PAGE FILE: " + JSON.stringify(pfsPageFile));
+            console.log(`PFS PAGE FILE: ${ JSON.stringify(pfsPageFile)}`);
 
-            // manipulating the queries of the page 
+            // manipulating the queries of the page
             const queryResponse = await fetch(`${basePath}/queries-to-import/${names.query}.json`);
             const queryData = await queryResponse.text();
-            var result = queryData.replace(this.toRegex('GrandTotal_Placeholder'), configuration.transactionTotalPrice)
-                        .replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
-                        .replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
-                        .replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
-                        .replace(this.toRegex('Category_Placeholder'), configuration.itemCategory)
-                        .replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
-                        .replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
+            const result = this.replacePlaceholders(queryData, configuration);
             // then uploading the queries file to PFS
             const pfsQueryFile = await this.uploadDataToPFS(result, names.query);
-            console.log("PFS QUERY FILE: " + JSON.stringify(pfsQueryFile));
-            
+            console.log(`PFS QUERY FILE: ${ JSON.stringify(pfsQueryFile)}`);
+
             // building the body for the recursive-import request
-            const body = {
-                URI: pfsPageFile.URL,
-                Resources: [
-                    {
-                        URI: pfsQueryFile.URL,
-                        AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
-                        Resource: "DataQueries"
-                    }
-                ]
-            }
-            console.log("BODY SENT TO RECURSIVE IMPORT: " +JSON.stringify(body));
+            const body = this.buildRecursiveImportBody(pfsPageFile, pfsQueryFile);
+
+            console.log(`BODY SENT TO RECURSIVE IMPORT: ${ JSON.stringify(body)}`);
             const importedPage = await this.papiClient.post('/pages/import/file', body);
             importedPages.push(importedPage);
         }
-        console.log("DVAS IMPORTED PAGES RESPONSES: " + JSON.stringify(importedPages));
+        console.log(`DVAS IMPORTED PAGES RESPONSES: ${ JSON.stringify(importedPages)}`);
 
 		await this.publishPages(importedPages);
 		console.log("DVAS PAGES SUCCESSFULLY PUBLISHED");
@@ -101,10 +88,33 @@ class MyService {
         return importedPages;
     }
 
-    async uploadDataToPFS(data, fileName) {
+	replacePlaceholders(queryData: string, configuration: AssistantConfiguration): string {
+		return queryData.replace(this.toRegex('GrandTotal_Placeholder'), configuration.transactionTotalPrice)
+		.replace(this.toRegex('QuantitiesTotal_Placeholder'), configuration.transactionTotalQuantity)
+		.replace(this.toRegex('UnitsQuantity_Placeholder'), configuration.transactionLineTotalPrice)
+		.replace(this.toRegex('TotalUnitsPriceAfterDiscount_Placeholder'), configuration.transactionLineTotalQuantity)
+		.replace(this.toRegex('Category_Placeholder'), configuration.itemCategory)
+		.replace(this.toRegex('"SalesOrder_Placeholder"'), this.arrayToString(configuration.transactionType.split(";")))
+		.replace(this.toRegex('"Submitted_Placeholder"'), this.arrayToString(configuration.transactionStatus.split(";")));
+	}
+
+	buildRecursiveImportBody(pfsPageFile: AddonFile, pfsQueryFile: AddonFile): any {
+		return {
+			URI: pfsPageFile.URL,
+			Resources: [
+				{
+					URI: pfsQueryFile.URL,
+					AddonUUID: "c7544a9d-7908-40f9-9814-78dc9c03ae77",
+					Resource: "DataQueries"
+				}
+			]
+		}
+	}
+
+    async uploadDataToPFS(data: any, fileName: string): Promise<AddonFile> {
         const base64QueryFile = btoa(data);
         const base64URI = `data:application/json;base64,${base64QueryFile}`
-        let file: any = {
+        const file: any = {
             Key: `${fileName}.json`,
             Name: fileName,
             Description: '',
@@ -112,16 +122,16 @@ class MyService {
             URI: base64URI,
             Cache: false
         };
-        return this.papiClient.post(`/addons/pfs/${this.client.AddonUUID}/confAssistantFiles`,file);
+        return this.papiClient.post(`/addons/pfs/${this.client.AddonUUID}/confAssistantFiles`, file);
     }
 
-    toRegex(str) {
-        return new RegExp(str,"g");
+    toRegex(str: string): RegExp {
+        return new RegExp(str, "g");
     }
 
-    arrayToString(arr) {
+    arrayToString(arr: string[]): string {
         let str = ''
-        for(let obj of arr) {
+        for (const obj of arr) {
             str += `"${obj}",`
         }
         str = str.slice(0, -1);
@@ -129,7 +139,7 @@ class MyService {
     }
 
     private getCommonRelationProperties(
-        relationName: 'SettingsBlock' | 'PageBlock' | 'AddonBlock', 
+        relationName: 'SettingsBlock' | 'PageBlock' | 'AddonBlock',
         blockRelationName: string,
         blockRelationDescription: string,
         blockName: string
@@ -149,7 +159,7 @@ class MyService {
         };
     }
 
-    private upsertSettingsRelation(blockRelationSlugName: string, blockRelationGroupName: string, blockRelationName: string, blockRelationDescription: string) {
+    private upsertSettingsRelation(blockRelationSlugName: string, blockRelationGroupName: string, blockRelationName: string, blockRelationDescription: string): Promise<any> {
         const blockName = 'Settings';
 
         const blockRelation: Relation = this.getCommonRelationProperties(
@@ -160,7 +170,7 @@ class MyService {
 
         blockRelation['SlugName'] = blockRelationSlugName;
         blockRelation['GroupName'] = blockRelationGroupName;
-        
+
         return this.upsertRelation(blockRelation);
     }
 
@@ -179,11 +189,11 @@ class MyService {
             blockRelation['EditorModuleName'] = `${blockName}EditorModule`; // This is should be the block editor module name (from the client-side)}
             blockRelation['EditorElementName'] = `${blockName.toLocaleLowerCase()}-editor-element-${this.client.AddonUUID}`;
         }
-        
+
         return this.upsertRelation(blockRelation);
     }
 
-    upsertRelations() {
+    upsertRelations(): void {
         // For settings block use this.
         const blockRelationSlugName = 'configuration_assistant';
         const blockRelationGroupName = 'CHANGE_TO_SETTINGS_GROUP_NAME';
@@ -206,15 +216,15 @@ class MyService {
         return this.papiClient.addons.installedAddons.find({});
     }
 
-    async deleteTargetScheme(schemeName: string) {
+    async deleteTargetScheme(schemeName: string): Promise<void> {
         const targetScheme = await this.papiClient.addons.data.schemes.get({where: `Name='${schemeName}'`}); // returns an array
-        if(targetScheme.length > 0) {
+        if (targetScheme.length > 0) {
             await this.papiClient.post(`/addons/data/schemes/${schemeName}/purge`);
         }
     }
 
-	async publishPages(pages) {
-		await Promise.all(pages.map(page => 
+	async publishPages(pages: any[]): Promise<void> {
+		await Promise.all(pages.map(page =>
 			this.papiClient.post(`/addons/api/50062e0c-9967-4ed4-9102-f2bc50602d41/internal_api/publish_page`, page)
 		));
 	}
