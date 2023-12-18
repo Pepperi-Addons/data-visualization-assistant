@@ -599,9 +599,7 @@ export class ConfigurationAssistantComponent implements OnInit {
           content: this.translate.instant('SUCCESS_CONTENT')
         });
         this.loaderService.hide();
-        this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(res => {
-          this.navigateToPages();
-        });
+        this.dialogService.openDefaultDialog(dataMsg).afterClosed().subscribe(res => {});
       } catch(err) {
           const dataMsg = new PepDialogData({
           title: this.translate.instant('Run failed'),
