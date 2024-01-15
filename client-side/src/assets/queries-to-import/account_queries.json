@@ -2,6 +2,23 @@
     {
         "ModificationDateTime": "2023-01-12T12:49:23.195Z",
         "Resource": "all_activities",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:01.472Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema",
+			"CreationDateTime": "2022-07-31T12:22:39.697Z",
+			"Description": "all_activities relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/all_activities",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "all_activities",
+			"Key": "all_activities_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [
             {
                 "DefaultValue": "0",
@@ -113,6 +130,23 @@
     {
         "ModificationDateTime": "2023-01-12T12:48:54.162Z",
         "Resource": "all_activities",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:01.472Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema",
+			"CreationDateTime": "2022-07-31T12:22:39.697Z",
+			"Description": "all_activities relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/all_activities",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "all_activities",
+			"Key": "all_activities_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [],
         "CreationDateTime": "2022-12-05T12:08:37.877Z",
         "Hidden": false,
@@ -203,6 +237,23 @@
     {
         "ModificationDateTime": "2023-01-25T15:22:21.448Z",
         "Resource": "all_activities",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:01.472Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema",
+			"CreationDateTime": "2022-07-31T12:22:39.697Z",
+			"Description": "all_activities relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/all_activities",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "all_activities",
+			"Key": "all_activities_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [
             {
                 "DefaultValue": "0",
@@ -311,6 +362,23 @@
     {
         "ModificationDateTime": "2023-01-25T15:23:52.743Z",
         "Resource": "all_activities",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:01.472Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema",
+			"CreationDateTime": "2022-07-31T12:22:39.697Z",
+			"Description": "all_activities relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/all_activities",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "all_activities",
+			"Key": "all_activities_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [
             {
                 "DefaultValue": "0",
@@ -422,6 +490,23 @@
     {
         "ModificationDateTime": "2023-01-12T12:42:52.218Z",
         "Resource": "transaction_lines",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:02.183Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/transaction_lines_schema",
+			"CreationDateTime": "2022-07-31T12:22:40.124Z",
+			"Description": "transaction_lines relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/transaction_lines",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Transaction.Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Transaction.Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "transaction_lines",
+			"Key": "transaction_lines_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [
             {
                 "DefaultValue": "0",
@@ -533,6 +618,23 @@
     {
         "ModificationDateTime": "2023-01-24T12:21:01.306Z",
         "Resource": "AccountTarget",
+		"ResourceData": {
+			"ModificationDateTime": "2024-01-14T14:04:00.903Z",
+			"SchemaRelativeURL": "/addons/api/122c0e9d-c240-4865-b446-f37ece866c22/api/collection_fields?collection_name=AccountTarget",
+			"CreationDateTime": "2024-01-14T14:04:00.903Z",
+			"Description": "relation for Data queries addon",
+			"AddonRelativeURL": "/addons/shared_index/index/122c0e9d-c240-4865-b446-f37ece866c22_data/search/00000000-0000-0000-0000-00000000ada1/122c0e9d-c240-4865-b446-f37ece866c22~AccountTarget",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.Key",
+			"Hidden": false,
+			"AddonUUID": "122c0e9d-c240-4865-b446-f37ece866c22",
+			"IndexedUserFieldID": "User.Key",
+			"AccountFieldID": "UUID",
+			"Name": "AccountTarget",
+			"Key": "AccountTarget_122c0e9d-c240-4865-b446-f37ece866c22_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [
             {
                 "DefaultValue": "0",
@@ -615,6 +717,23 @@
     {
         "ModificationDateTime": "2023-01-15T15:24:11.347Z",
         "Resource": "transaction_lines",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:02.183Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/transaction_lines_schema",
+			"CreationDateTime": "2022-07-31T12:22:40.124Z",
+			"Description": "transaction_lines relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/transaction_lines",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Transaction.Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Transaction.Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "transaction_lines",
+			"Key": "transaction_lines_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [],
         "CreationDateTime": "2022-12-05T13:12:53.080Z",
         "Hidden": false,
@@ -705,6 +824,23 @@
     {
         "ModificationDateTime": "2023-01-12T12:49:10.059Z",
         "Resource": "all_activities",
+		"ResourceData": {
+			"ModificationDateTime": "2023-11-09T10:46:01.472Z",
+			"SchemaRelativeURL": "/addons/api/10979a11-d7f4-41df-8993-f06bfd778304/data_index_meta_data/all_activities_schema",
+			"CreationDateTime": "2022-07-31T12:22:39.697Z",
+			"Description": "all_activities relation data",
+			"AddonRelativeURL": "/addons/shared_index/index/papi_data_index/search/10979a11-d7f4-41df-8993-f06bfd778304/all_activities",
+			"Type": "AddonAPI",
+			"UserFieldID": "UUID",
+			"IndexedAccountFieldID": "Account.UUID",
+			"Hidden": false,
+			"AddonUUID": "10979a11-d7f4-41df-8993-f06bfd778304",
+			"IndexedUserFieldID": "Agent.UUID",
+			"AccountFieldID": "UUID",
+			"Name": "all_activities",
+			"Key": "all_activities_10979a11-d7f4-41df-8993-f06bfd778304_DataQueries",
+			"RelationName": "DataQueries"
+		},
         "Variables": [],
         "CreationDateTime": "2022-12-05T12:06:20.332Z",
         "Hidden": false,
